@@ -4,8 +4,8 @@
 CC=g++
 LIBS=-lSDL2
 
-all : main.cpp
-	$(CC) main.cpp -o subtra $(LIBS)
+all : src/main.cpp
+	$(CC) src/main.cpp -o subtra $(LIBS)
 
 clean :
 	rm subtra *.o
