@@ -1,11 +1,19 @@
 # SUBTRA makefile
 # 2019 Matthias Scherba @szczm_
 
-CC=g++
-LIBS=-lSDL2
+CC = g++
+LIBS = -lSDL2
+FLAGS = -Iinclude
 
-all : src/main.cpp
-	$(CC) src/main.cpp -o subtra $(LIBS)
+OBJ = \
+	Window.o \
+	Engine.o
+
+%.o : src/%.cpp
+	$(CC) $(FLAGS) -c $< $(LIBS) -o $@
+
+all : src/main.cpp $(OBJ)
+	$(CC) $(FLAGS) $(OBJ) src/main.cpp $(LIBS) -o subtra
 
 clean :
-	rm subtra *.o
+	rm subtra $(OBJ)
