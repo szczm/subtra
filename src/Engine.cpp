@@ -5,11 +5,14 @@
 
 #include <SDL2/SDL.h>
 
+#include "Exception.hpp"
+
+
 void sub::Engine::init()
 {
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-        throw "Could not initialize SDL";
+        throw sub::Exception("Could not initialize SDL");
     }
 
 	m_mainWindow.init("SUBTRA", 800, 600);
@@ -27,7 +30,7 @@ void sub::Engine::run()
         while (SDL_PollEvent(&event))
         {
             if (event.type == SDL_QUIT ||
-                ((event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE))
+                (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE))
             {
                 running = false;
             }

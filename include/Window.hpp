@@ -1,6 +1,8 @@
 // SUBTRA Window class header
 // 2019 Matthias Scherba @szczm_
 
+#pragma once
+
 #include <memory>
 
 #include <SDL2/SDL.h>

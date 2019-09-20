@@ -1,6 +1,8 @@
 // SUBTRA Engine class header
 // 2019 Matthias Scherba @szczm_
 
+#pragma once
+
 #include "Window.hpp"
 
 namespace sub

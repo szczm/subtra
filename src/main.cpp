@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "Engine.hpp"
+#include "SUBTRA.hpp"
 
 using namespace sub;
 
@@ -16,9 +16,9 @@ int main(int argc, char* args[])
 		engine.init();
 		engine.run();
 	}
-	catch (const char* ex)
+	catch (Exception& ex)
 	{
-		std::cerr << "CRITICAL ERR: " << ex << std::endl;
+		// Printing has been taken care off by the exception
 	}
 
 	engine.shutdown();

@@ -6,6 +6,7 @@ LIBS = -lSDL2
 FLAGS = -Iinclude
 
 OBJ = \
+	Exception.o \
 	Window.o \
 	Engine.o
 
