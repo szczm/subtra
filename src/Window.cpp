@@ -31,9 +31,20 @@ void sub::Window::init(const char* a_title, int a_width, int a_height)
     {
         throw sub::Exception("Could not open window");
     }
+
+    m_SDLContext.reset
+    (
+        SDL_GL_CreateContext(m_SDLWindow.get()),
+        SDL_GL_DeleteContext
+    );
+
+    if (!m_SDLContext)
+    {
+        throw sub::Exception("Could not open context");
+    }
 }
 
-void sub::Window::maximize()
+void sub::Window::maximize() const
 {
     SDL_MaximizeWindow(m_SDLWindow.get());
 }

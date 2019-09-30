@@ -2,7 +2,7 @@
 # 2019 Matthias Scherba @szczm_
 
 CC = g++
-LIBS = -lSDL2
+LIBS = -lSDL2 -lGL
 FLAGS = -Iinclude
 
 OBJ = \

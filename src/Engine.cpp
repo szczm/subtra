@@ -4,12 +4,17 @@
 #include "Engine.hpp"
 
 #include <SDL2/SDL.h>
+#include <GL/gl.h>
 
 #include "Exception.hpp"
-
+#include "Log.hpp"
 
 void sub::Engine::init()
 {
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
         throw sub::Exception("Could not initialize SDL");
@@ -35,8 +40,15 @@ void sub::Engine::run()
                 running = false;
             }
         }
-    }
 
+        glClearColor(1.0, 0.0f, 1.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        if (auto window = m_mainWindow.getSDLWindow().lock())
+        {
+            SDL_GL_SwapWindow(window.get());
+        }
+    }
 }
 
 void sub::Engine::shutdown()
