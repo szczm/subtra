@@ -10,6 +10,7 @@ sub::Window::Window(const char* a_title, int a_width, int a_height)
     init(a_title, a_width, a_height);
 }
 
+// Extracted to allow deferred window initialization
 void sub::Window::init(const char* a_title, int a_width, int a_height)
 {
     m_SDLWindow.reset
@@ -22,7 +23,7 @@ void sub::Window::init(const char* a_title, int a_width, int a_height)
             SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL
 	    ),
 
-        // Passing to automatically destroy SDL_Window* inside
+        // Passing to automatically destroy SDL_Window* inside the smart pointer
         SDL_DestroyWindow
     );
 

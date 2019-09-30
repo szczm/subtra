@@ -13,8 +13,8 @@ namespace sub
 
         public:
 
-        Engine() {};
-        ~Engine() {};
+        inline Engine() {};
+        inline ~Engine() { shutdown(); };
 
         void init();
         void run();

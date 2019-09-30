@@ -7,7 +7,7 @@
 
 using namespace sub;
 
-int main(int argc, char* args[])
+int main(int, char**)
 {
 	Engine engine;
 
@@ -18,7 +18,7 @@ int main(int argc, char* args[])
 	}
 	catch (Exception& ex)
 	{
-		// Printing has been taken care off by the exception
+		// Printing is done by the exceptions themselves
 	}
 
 	engine.shutdown();
