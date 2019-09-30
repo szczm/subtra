@@ -44,6 +44,13 @@ void sub::Window::init(const char* a_title, int a_width, int a_height)
     {
         throw sub::Exception("Could not open context");
     }
+
+    // Try enabling adaptive vsync
+    if (SDL_GL_SetSwapInterval(-1) < 0)
+    {
+        // If failed, fallback to vsync
+        SDL_GL_SetSwapInterval(1);
+    }
 }
 
 void sub::Window::maximize() const
