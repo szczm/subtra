@@ -9,8 +9,6 @@ namespace sub
 {
     class Engine
     {
-        Window m_mainWindow;
-
         public:
 
         inline Engine() {};
@@ -19,5 +17,10 @@ namespace sub
         void init();
         void run();
         void shutdown();
+
+
+        private:
+
+        Window m_mainWindow;
     };
 }

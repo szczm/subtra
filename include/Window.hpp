@@ -12,11 +12,6 @@ namespace sub
 {
     class Window
     {
-        private:
-
-        std::shared_ptr<SDL_Window> m_SDLWindow;
-        std::shared_ptr<std::remove_pointer<SDL_GLContext>::type> m_SDLContext;
-
         public:
 
         Window() {};
@@ -27,5 +22,11 @@ namespace sub
         void maximize() const;
 
         inline std::weak_ptr<SDL_Window> getSDLWindow() const { return m_SDLWindow; };
+
+
+        private:
+
+        std::shared_ptr<SDL_Window> m_SDLWindow;
+        std::shared_ptr<std::remove_pointer<SDL_GLContext>::type> m_SDLContext;
     };
 }
