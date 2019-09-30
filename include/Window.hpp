@@ -7,6 +7,7 @@
 #include <type_traits>
 
 #include <SDL2/SDL.h>
+#include <GL/gl.h>
 
 namespace sub
 {
@@ -19,7 +20,10 @@ namespace sub
         ~Window() {};
 
         void init(const char* a_title, int a_width, int a_height);
+
         void maximize() const;
+        void clear() const;
+        void swap() const;
 
         inline std::weak_ptr<SDL_Window> getSDLWindow() const { return m_SDLWindow; };
 

@@ -21,6 +21,9 @@ namespace sub
 
         private:
 
+        void initOpenGL();
+        void initSDL();
+
         Window m_mainWindow;
     };
 }

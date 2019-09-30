@@ -13,6 +13,7 @@ sub::Window::Window(const char* a_title, int a_width, int a_height)
 // Extracted to allow deferred window initialization
 void sub::Window::init(const char* a_title, int a_width, int a_height)
 {
+    // Create window
     m_SDLWindow.reset
     (
         SDL_CreateWindow
@@ -32,6 +33,7 @@ void sub::Window::init(const char* a_title, int a_width, int a_height)
         throw sub::Exception("Could not open window");
     }
 
+    // ...and create context
     m_SDLContext.reset
     (
         SDL_GL_CreateContext(m_SDLWindow.get()),
@@ -47,4 +49,15 @@ void sub::Window::init(const char* a_title, int a_width, int a_height)
 void sub::Window::maximize() const
 {
     SDL_MaximizeWindow(m_SDLWindow.get());
+}
+
+void sub::Window::clear() const
+{
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void sub::Window::swap() const
+{
+    SDL_GL_SwapWindow(m_SDLWindow.get());
 }
