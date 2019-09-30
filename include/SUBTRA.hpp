@@ -5,6 +5,9 @@
 #include "Exception.hpp"
 #include "Log.hpp"
 
+// Objects
+#include "Mesh.hpp"
+
 // Modules
 #include "Window.hpp"
 

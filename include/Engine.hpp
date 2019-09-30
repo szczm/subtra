@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Window.hpp"
+#include "Mesh.hpp"
 
 namespace sub
 {
@@ -25,5 +26,7 @@ namespace sub
         void initSDL();
 
         Window m_mainWindow;
+        Mesh m_testMesh;
+        GLuint ProgramID;
     };
 }

@@ -7,7 +7,8 @@
 #include <type_traits>
 
 #include <SDL2/SDL.h>
-#include <GL/gl.h>
+
+#include "GLCommon.hpp"
 
 namespace sub
 {
@@ -15,9 +16,10 @@ namespace sub
     {
         public:
 
-        Window() {};
+        inline Window() {};
+        inline ~Window() {};
+        
         Window(const char* a_title, int a_width, int a_height);
-        ~Window() {};
 
         void init(const char* a_title, int a_width, int a_height);
 
