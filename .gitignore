@@ -1,5 +1,6 @@
 # SUBTRA specific
 .*.swp
+imgui.ini
 
 # Prerequisites
 *.d
