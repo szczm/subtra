@@ -3,8 +3,9 @@
 
 #pragma once
 
-#include "Window.hpp"
 #include "Mesh.hpp"
+#include "Shader.hpp"
+#include "Window.hpp"
 
 namespace sub
 {
@@ -27,6 +28,6 @@ namespace sub
 
         Window m_mainWindow;
         Mesh m_testMesh;
-        GLuint ProgramID;
+        Shader m_testShader;
     };
 }

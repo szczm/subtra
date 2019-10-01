@@ -6,8 +6,9 @@ LIBS = -lSDL2 -lGL
 FLAGS = -Iinclude
 
 OBJ = \
-	Mesh.o \
 	Exception.o \
+	Mesh.o \
+	Shader.o \
 	Window.o \
 	Engine.o
 
