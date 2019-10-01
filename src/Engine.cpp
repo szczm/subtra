@@ -120,6 +120,11 @@ void sub::Engine::run()
             {
                 running = false;
             }
+
+			if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_RESIZED)
+			{
+				m_mainWindow.resizeViewport(event.window.data1, event.window.data2);
+			}
         }
 
         m_mainWindow.clear();

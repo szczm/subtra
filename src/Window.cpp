@@ -58,10 +58,17 @@ void sub::Window::maximize() const
     SDL_MaximizeWindow(m_SDLWindow.get());
 }
 
+// TODO: Assumes single window and context
 void sub::Window::clear() const
 {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+// TODO: Assumes single window and context
+void sub::Window::resizeViewport(int a_width, int a_height) const
+{
+    glViewport(0, 0, a_width, a_height);
 }
 
 void sub::Window::swap() const

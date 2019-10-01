@@ -27,7 +27,9 @@ namespace sub
         void clear() const;
         void swap() const;
 
-        inline std::weak_ptr<SDL_Window> getSDLWindow() const { return m_SDLWindow; };
+        void resizeViewport(int a_width, int a_height) const;
+
+        // inline std::weak_ptr<SDL_Window> getSDLWindow() const { return m_SDLWindow; };
 
 
         private:
