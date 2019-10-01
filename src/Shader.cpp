@@ -7,16 +7,16 @@
 
 #include "Log.hpp"
 
-sub::Shader::Shader(const char* a_name, const char* a_vertexPath, const char* a_fragmentPath)
+SUBTRA::Shader::Shader(const char* a_name, const char* a_vertexPath, const char* a_fragmentPath)
  : m_name(a_name)
 {
     init(a_name, a_vertexPath, a_fragmentPath);
 }
 
-void sub::Shader::init(const char* a_name, const char* a_vertexPath, const char* a_fragmentPath)
+void SUBTRA::Shader::init(const char* a_name, const char* a_vertexPath, const char* a_fragmentPath)
 {
     // TODO: "Shader: name"
-    sub::Log::Print("Compiling shader");
+    SUBTRA::Log::Print("Compiling shader");
 
     GLuint vertexID = glCreateShader(GL_VERTEX_SHADER);
 	GLuint fragmentID = glCreateShader(GL_FRAGMENT_SHADER);
@@ -27,7 +27,7 @@ void sub::Shader::init(const char* a_name, const char* a_vertexPath, const char*
 
 	int infoLogLength;
 
-	sub::Log::Print("Compiling vertex shader");
+	SUBTRA::Log::Print("Compiling vertex shader");
 	glShaderSource(vertexID, 1, &vertexSource, NULL);
 	glCompileShader(vertexID);
 
@@ -37,10 +37,10 @@ void sub::Shader::init(const char* a_name, const char* a_vertexPath, const char*
     {
 		std::vector<char> vertexShaderErrorMessage(infoLogLength + 1);
 		glGetShaderInfoLog(vertexID, infoLogLength, NULL, &vertexShaderErrorMessage[0]);
-		sub::Log::Error(&vertexShaderErrorMessage[0]);
+		SUBTRA::Log::Error(&vertexShaderErrorMessage[0]);
 	}
 
-	sub::Log::Print("Compiling fragment shader");
+	SUBTRA::Log::Print("Compiling fragment shader");
 	glShaderSource(fragmentID, 1, &fragmentSource, NULL);
 	glCompileShader(fragmentID);
 
@@ -51,10 +51,10 @@ void sub::Shader::init(const char* a_name, const char* a_vertexPath, const char*
     {
 		std::vector<char> fragmentShaderErrorMessage(infoLogLength + 1);
 		glGetShaderInfoLog(fragmentID, infoLogLength, NULL, &fragmentShaderErrorMessage[0]);
-		sub::Log::Error(&fragmentShaderErrorMessage[0]);
+		SUBTRA::Log::Error(&fragmentShaderErrorMessage[0]);
 	}
 
-	sub::Log::Print("Linking program");
+	SUBTRA::Log::Print("Linking program");
 	m_programID = glCreateProgram();
 	glAttachShader(m_programID, vertexID);
 	glAttachShader(m_programID, fragmentID);
@@ -66,7 +66,7 @@ void sub::Shader::init(const char* a_name, const char* a_vertexPath, const char*
     {
 		std::vector<char> programErrorMessage(infoLogLength + 1);
 		glGetProgramInfoLog(m_programID, infoLogLength, NULL, &programErrorMessage[0]);
-		sub::Log::Error(&programErrorMessage[0]);
+		SUBTRA::Log::Error(&programErrorMessage[0]);
 	}
 	
 	glDetachShader(m_programID, vertexID);
@@ -76,7 +76,7 @@ void sub::Shader::init(const char* a_name, const char* a_vertexPath, const char*
 	glDeleteShader(fragmentID);
 }
 
-void sub::Shader::use()
+void SUBTRA::Shader::use()
 {
     glUseProgram(m_programID);
 }

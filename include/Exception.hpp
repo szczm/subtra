@@ -5,7 +5,7 @@
 
 #include <stdexcept>
 
-namespace sub
+namespace SUBTRA
 {
     struct Exception : public std::runtime_error
     {

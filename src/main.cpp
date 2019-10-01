@@ -5,7 +5,7 @@
 
 #include "SUBTRA.hpp"
 
-using namespace sub;
+using namespace SUBTRA;
 
 int main(int, char**)
 {

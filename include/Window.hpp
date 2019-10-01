@@ -10,7 +10,7 @@
 
 #include "GLCommon.hpp"
 
-namespace sub
+namespace SUBTRA
 {
     class Window
     {

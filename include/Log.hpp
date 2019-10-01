@@ -7,7 +7,7 @@
 
 #include "Exception.hpp"
 
-namespace sub
+namespace SUBTRA
 {
     namespace Log
     {
@@ -26,7 +26,7 @@ namespace sub
             std::cerr << "! ERROR: " << a_what << std::endl;
         }
 
-        inline void Error(sub::Exception& a_what)
+        inline void Error(SUBTRA::Exception& a_what)
         {
             std::cerr << "! ERROR: " << a_what.what() << std::endl;
         }

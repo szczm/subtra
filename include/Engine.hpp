@@ -7,7 +7,7 @@
 #include "Shader.hpp"
 #include "Window.hpp"
 
-namespace sub
+namespace SUBTRA
 {
     class Engine
     {

@@ -16,7 +16,7 @@
 #include "Exception.hpp"
 #include "Log.hpp"
 
-void sub::Engine::init()
+void SUBTRA::Engine::init()
 {
     // Init... stuff
     initSDL();
@@ -37,15 +37,15 @@ void sub::Engine::init()
     // std::cout << glGetString(GL_VERSION) << std::endl;
 }
 
-void sub::Engine::initSDL()
+void SUBTRA::Engine::initSDL()
 {
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-        throw sub::Exception("Could not initialize SDL");
+        throw SUBTRA::Exception("Could not initialize SDL");
     }
 }
 
-void sub::Engine::initOpenGL()
+void SUBTRA::Engine::initOpenGL()
 {
     // Require OpenGL 3.3
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -58,15 +58,15 @@ void sub::Engine::initOpenGL()
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 }
 
-void sub::Engine::initGLAD()
+void SUBTRA::Engine::initGLAD()
 {
     if (!gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress))
     {
-        throw sub::Exception("Could not initialize GLAD");
+        throw SUBTRA::Exception("Could not initialize GLAD");
     }
 }
 
-void sub::Engine::initIMGUI()
+void SUBTRA::Engine::initIMGUI()
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -88,7 +88,7 @@ void sub::Engine::initIMGUI()
     ImGui_ImplOpenGL3_Init("#version 330 core");
 }
 
-void sub::Engine::run()
+void SUBTRA::Engine::run()
 {
     bool running = true;
     bool show_demo = true;
@@ -148,7 +148,7 @@ void sub::Engine::run()
     }
 }
 
-void sub::Engine::shutdown()
+void SUBTRA::Engine::shutdown()
 {
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL2_Shutdown();

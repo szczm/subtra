@@ -5,13 +5,13 @@
 
 #include "Exception.hpp"
 
-sub::Window::Window(const char* a_title, int a_width, int a_height)
+SUBTRA::Window::Window(const char* a_title, int a_width, int a_height)
 {
     init(a_title, a_width, a_height);
 }
 
 // Extracted to allow deferred window initialization
-void sub::Window::init(const char* a_title, int a_width, int a_height)
+void SUBTRA::Window::init(const char* a_title, int a_width, int a_height)
 {
     // Create window
     m_SDLWindow.reset
@@ -30,7 +30,7 @@ void sub::Window::init(const char* a_title, int a_width, int a_height)
 
     if (!m_SDLWindow)
     {
-        throw sub::Exception("Could not open window");
+        throw SUBTRA::Exception("Could not open window");
     }
 
     // ...and create context
@@ -42,7 +42,7 @@ void sub::Window::init(const char* a_title, int a_width, int a_height)
 
     if (!m_SDLContext)
     {
-        throw sub::Exception("Could not open context");
+        throw SUBTRA::Exception("Could not open context");
     }
 
     SDL_GL_MakeCurrent(m_SDLWindow.get(), m_SDLContext.get());
@@ -55,25 +55,25 @@ void sub::Window::init(const char* a_title, int a_width, int a_height)
     }
 }
 
-void sub::Window::maximize() const
+void SUBTRA::Window::maximize() const
 {
     SDL_MaximizeWindow(m_SDLWindow.get());
 }
 
 // TODO: Assumes single window and context
-void sub::Window::clear() const
+void SUBTRA::Window::clear() const
 {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 // TODO: Assumes single window and context
-void sub::Window::resizeViewport(int a_width, int a_height) const
+void SUBTRA::Window::resizeViewport(int a_width, int a_height) const
 {
     glViewport(0, 0, a_width, a_height);
 }
 
-void sub::Window::swap() const
+void SUBTRA::Window::swap() const
 {
     SDL_GL_SwapWindow(m_SDLWindow.get());
 }

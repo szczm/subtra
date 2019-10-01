@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-void sub::Mesh::init()
+void SUBTRA::Mesh::init()
 {
     glGenVertexArrays(1, &m_VAO);
     glBindVertexArray(m_VAO);
@@ -31,7 +31,7 @@ void sub::Mesh::init()
     glBindVertexArray(0);
 }
 
-void sub::Mesh::bind()
+void SUBTRA::Mesh::bind()
 {
     glBindVertexArray(m_VAO);
 }
