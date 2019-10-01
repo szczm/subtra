@@ -11,8 +11,8 @@ namespace SUBTRA
     {
         public:
 
-        inline Shader() {};
-        inline ~Shader() {};
+        Shader();
+        ~Shader();
         
         Shader(const char* a_name, const char* a_vertexPath, const char* a_fragmentPath);
 

@@ -7,6 +7,9 @@
 
 #include "Log.hpp"
 
+SUBTRA::Shader::Shader() {}
+SUBTRA::Shader::~Shader() {}
+
 SUBTRA::Shader::Shader(const char* a_name, const char* a_vertexPath, const char* a_fragmentPath)
  : m_name(a_name)
 {

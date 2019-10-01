@@ -16,6 +16,13 @@
 #include "Exception.hpp"
 #include "Log.hpp"
 
+SUBTRA::Engine::Engine() {}
+
+SUBTRA::Engine::~Engine()
+{
+    shutdown();
+}
+
 void SUBTRA::Engine::init()
 {
     // Init... stuff

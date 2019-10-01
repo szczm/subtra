@@ -13,8 +13,8 @@ namespace SUBTRA
     {
         public:
 
-        inline Engine() {};
-        inline ~Engine() { shutdown(); };
+        Engine();
+        ~Engine();
 
         void init();
         void run();

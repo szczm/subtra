@@ -10,14 +10,17 @@
 
 #include "GLCommon.hpp"
 
+
+typedef std::remove_pointer<SDL_GLContext>::type SDL_GLContext_;
+
 namespace SUBTRA
 {
     class Window
     {
         public:
 
-        inline Window() {};
-        inline ~Window() {};
+        Window();
+        ~Window();
         
         Window(const char* a_title, int a_width, int a_height);
 
@@ -29,13 +32,13 @@ namespace SUBTRA
 
         void resizeViewport(int a_width, int a_height) const;
 
-        inline std::weak_ptr<SDL_Window> getSDLWindow() const { return m_SDLWindow; };
-        inline std::weak_ptr<std::remove_pointer<SDL_GLContext>::type> getContext() const { return m_SDLContext; };
+        std::weak_ptr<SDL_Window> getSDLWindow() const;
+        std::weak_ptr<SDL_GLContext_> getContext() const;
 
 
         private:
 
         std::shared_ptr<SDL_Window> m_SDLWindow;
-        std::shared_ptr<std::remove_pointer<SDL_GLContext>::type> m_SDLContext;
+        std::shared_ptr<SDL_GLContext_> m_SDLContext;
     };
 }

@@ -5,6 +5,9 @@
 
 #include "Exception.hpp"
 
+SUBTRA::Window::Window() {}
+SUBTRA::Window::~Window() {}
+
 SUBTRA::Window::Window(const char* a_title, int a_width, int a_height)
 {
     init(a_title, a_width, a_height);
@@ -77,3 +80,13 @@ void SUBTRA::Window::swap() const
 {
     SDL_GL_SwapWindow(m_SDLWindow.get());
 }
+
+std::weak_ptr<SDL_Window> SUBTRA::Window::getSDLWindow() const
+{
+    return m_SDLWindow;
+}
+
+std::weak_ptr<SDL_GLContext_> SUBTRA::Window::getContext() const
+{
+    return m_SDLContext;
+};

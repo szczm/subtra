@@ -3,10 +3,12 @@
 
 // Utilities
 #include "Exception.hpp"
+#include "GLCommon.hpp"
 #include "Log.hpp"
 
 // Objects
 #include "Mesh.hpp"
+#include "Shader.hpp"
 
 // Modules
 #include "Window.hpp"

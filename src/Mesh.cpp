@@ -5,6 +5,9 @@
 
 #include <iostream>
 
+SUBTRA::Mesh::Mesh() {}
+SUBTRA::Mesh::~Mesh() {}
+
 void SUBTRA::Mesh::init()
 {
     glGenVertexArrays(1, &m_VAO);

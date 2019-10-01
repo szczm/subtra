@@ -11,8 +11,8 @@ namespace SUBTRA
     {
         public:
 
-        inline Mesh() {};
-        inline ~Mesh() {};
+        Mesh();
+        ~Mesh();
 
         void init();
         void bind();
