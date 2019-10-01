@@ -7,8 +7,14 @@
 
 namespace SUBTRA
 {
+    enum VertexAttrib
+    {
+        Position = 0
+    };
+
     class Mesh
     {
+
         public:
 
         Mesh();

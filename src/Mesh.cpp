@@ -28,8 +28,8 @@ void SUBTRA::Mesh::init()
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
     // Bind position vertex attrib
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, static_cast<void*>(0));
+    glEnableVertexAttribArray(VertexAttrib::Position);
+    glVertexAttribPointer(VertexAttrib::Position, 3, GL_FLOAT, GL_FALSE, 0, static_cast<void*>(0));
 
     glBindVertexArray(0);
 }
