@@ -20,8 +20,15 @@ void sub::Mesh::init()
         0.0f,  1.0f, 0.0f,
     };
 
+    // Bind vertex array
     glBindBuffer(GL_ARRAY_BUFFER, m_VAO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
+    // Bind position vertex attrib
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, static_cast<void*>(0));
+
+    glBindVertexArray(0);
 }
 
 void sub::Mesh::bind()

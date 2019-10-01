@@ -65,23 +65,12 @@ void sub::Engine::run()
         }
 
         m_mainWindow.clear();
-m_testShader.use();
-        glEnableVertexAttribArray(0);
+
+        m_testShader.use();
         m_testMesh.bind();
-glVertexAttribPointer(
-   0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-   3,                  // size
-   GL_FLOAT,           // type
-   GL_FALSE,           // normalized?
-   0,                  // stride
-   (void*)0            // array buffer offset
-);
-// Draw the triangle !
-glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
-glDisableVertexAttribArray(0);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
         m_mainWindow.swap();
-
     }
 }
 
