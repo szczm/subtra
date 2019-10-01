@@ -45,6 +45,8 @@ void sub::Window::init(const char* a_title, int a_width, int a_height)
         throw sub::Exception("Could not open context");
     }
 
+    SDL_GL_MakeCurrent(m_SDLWindow.get(), m_SDLContext.get());
+
     // Try enabling adaptive vsync
     if (SDL_GL_SetSwapInterval(-1) < 0)
     {

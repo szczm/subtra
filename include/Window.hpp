@@ -29,7 +29,8 @@ namespace sub
 
         void resizeViewport(int a_width, int a_height) const;
 
-        // inline std::weak_ptr<SDL_Window> getSDLWindow() const { return m_SDLWindow; };
+        inline std::weak_ptr<SDL_Window> getSDLWindow() const { return m_SDLWindow; };
+        inline std::weak_ptr<std::remove_pointer<SDL_GLContext>::type> getContext() const { return m_SDLContext; };
 
 
         private:

@@ -1,11 +1,17 @@
 // SUBTRA Engine class source
 // 2019 Matthias Scherba @szczm_
 
+#include <glad/glad.h>
+
 #include "Engine.hpp"
 
 #include <SDL2/SDL.h>
 #include <vector>
 #include "GLCommon.hpp"
+
+#include "imgui.h"
+#include "imgui_impl_sdl.h"
+#include "imgui_impl_opengl3.h"
 
 #include "Exception.hpp"
 #include "Log.hpp"
@@ -20,11 +26,23 @@ void sub::Engine::init()
 	m_mainWindow.init("SUBTRA", 800, 600);
 	m_mainWindow.maximize();
 
+    // GLAD requires a current context
+    initGLAD();
+    initIMGUI();
+
     m_testMesh.init();
 
     m_testShader.init("a", "b", "c");
 
     // std::cout << glGetString(GL_VERSION) << std::endl;
+}
+
+void sub::Engine::initSDL()
+{
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	{
+        throw sub::Exception("Could not initialize SDL");
+    }
 }
 
 void sub::Engine::initOpenGL()
@@ -40,17 +58,40 @@ void sub::Engine::initOpenGL()
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 }
 
-void sub::Engine::initSDL()
+void sub::Engine::initGLAD()
 {
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-        throw sub::Exception("Could not initialize SDL");
+    if (!gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress))
+    {
+        throw sub::Exception("Could not initialize GLAD");
     }
+}
+
+void sub::Engine::initIMGUI()
+{
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+
+    // antisocial energy saving club
+    ImGui::StyleColorsDark();
+
+    // TODO: Rewrite? Too smart-y
+    {
+        auto window = m_mainWindow.getSDLWindow().lock();
+        auto context = m_mainWindow.getContext().lock();
+
+        if (window && context)
+        {
+            ImGui_ImplSDL2_InitForOpenGL(window.get(), context.get());
+        }
+    }
+
+    ImGui_ImplOpenGL3_Init("#version 330 core");
 }
 
 void sub::Engine::run()
 {
     bool running = true;
+    bool show_demo = true;
 
     while (running)
     {
@@ -58,11 +99,22 @@ void sub::Engine::run()
 
         while (SDL_PollEvent(&event))
         {
-            if (event.type == SDL_QUIT ||
-                (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE))
+            ImGui_ImplSDL2_ProcessEvent(&event);
+
+            if (event.type == SDL_QUIT)
             {
                 running = false;
             }
+
+            if (ImGui::GetIO().WantCaptureKeyboard == false)
+            {
+                if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
+                {
+                    running = false;
+                }
+            }
+
+            // if (ImGui::GetIO().WantCaptureMouse == false)
 
 			if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_RESIZED)
 			{
@@ -70,11 +122,27 @@ void sub::Engine::run()
 			}
         }
 
+
+        ImGui_ImplOpenGL3_NewFrame();
+
+        if (auto window = m_mainWindow.getSDLWindow().lock())
+        {
+            ImGui_ImplSDL2_NewFrame(window.get());
+        }
+
+        ImGui::NewFrame();
+
+        ImGui::ShowDemoWindow(&show_demo);
+
+        ImGui::Render();
+
         m_mainWindow.clear();
 
         m_testShader.use();
         m_testMesh.bind();
         glDrawArrays(GL_TRIANGLES, 0, 3);
+
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         m_mainWindow.swap();
     }
@@ -82,5 +150,9 @@ void sub::Engine::run()
 
 void sub::Engine::shutdown()
 {
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplSDL2_Shutdown();
+    ImGui::DestroyContext();
+
 	SDL_Quit();
 }

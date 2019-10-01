@@ -2,21 +2,32 @@
 # 2019 Matthias Scherba @szczm_
 
 CC = g++
-LIBS = -lSDL2 -lGL
-FLAGS = -Iinclude
+LIBS = -ldl -lSDL2 -lGL
+FLAGS = -Iinclude -Ilibs/glad/include -Ilibs/imgui
 
 OBJ = \
-	Exception.o \
-	Mesh.o \
-	Shader.o \
-	Window.o \
-	Engine.o
+	glad.o \
+	imgui.o imgui_demo.o imgui_draw.o imgui_widgets.o imgui_impl_sdl.o imgui_impl_opengl3.o \
+	Exception.o Mesh.o Shader.o Window.o Engine.o
+
+
+all : src/main.cpp $(OBJ)
+	$(CC) $(FLAGS) $(OBJ) src/main.cpp $(LIBS) -o subtra
+
+debug : src/main.cpp $(OBJ)
+	$(CC) $(FLAGS) $(OBJ) src/main.cpp $(LIBS) -g -o subtra
 
 %.o : src/%.cpp
 	$(CC) $(FLAGS) -c $< $(LIBS) -o $@
 
-all : src/main.cpp $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) src/main.cpp $(LIBS) -o subtra
+glad.o : libs/glad/src/glad.c
+	$(CC) $(FLAGS) -c $< $(LIBS) -o $@
+
+imgui%.o : libs/imgui/imgui%.cpp
+	$(CC) $(FLAGS) -c $< $(LIBS) -o $@
+
+imgui.o : libs/imgui/imgui.cpp
+	$(CC) $(FLAGS) -c $< $(LIBS) -o $@
 
 clean :
 	rm subtra $(OBJ)

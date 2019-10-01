@@ -23,8 +23,10 @@ namespace sub
 
         private:
 
-        void initOpenGL();
+        void initGLAD();
         void initSDL();
+        void initOpenGL();
+        void initIMGUI();
 
         Window m_mainWindow;
         Mesh m_testMesh;
