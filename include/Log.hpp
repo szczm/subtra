@@ -9,27 +9,21 @@
 
 namespace SUBTRA
 {
+    // I never really liked C++ streams. I wanted to have a print("a", 1, new Object) function
+    // that is equivalent to std::cout << "a" << 1 << new Object << std::endl; (take note of the
+    // implicit std::endl at the end), which is very easy to do with C++17 fold expressions! \o/
     namespace Log
     {
-        inline void Print(const char* a_what)
+        template<typename ...Args>
+        void Print(Args&&... args)
         {
-            std::cout << "  " << a_what << std::endl;
+            (std::cout << ... << args) << std::endl;
         }
 
-        inline void Debug(const char* a_what)
+        template<typename ...Args>
+        void Error(Args&&... args)
         {
-            std::cerr << "? DEBUG: " << a_what << std::endl;
+            (std::cerr << ... << args) << std::endl;
         }
-
-        inline void Error(const char* a_what)
-        {
-            std::cerr << "! ERROR: " << a_what << std::endl;
-        }
-
-        inline void Error(SUBTRA::Exception& a_what)
-        {
-            std::cerr << "! ERROR: " << a_what.what() << std::endl;
-        }
-
     }
 }

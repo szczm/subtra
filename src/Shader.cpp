@@ -18,8 +18,7 @@ SUBTRA::Shader::Shader(const char* a_name, const char* a_vertexPath, const char*
 
 void SUBTRA::Shader::init(const char* a_name, const char* a_vertexPath, const char* a_fragmentPath)
 {
-    // TODO: "Shader: name"
-    SUBTRA::Log::Print("Compiling shader");
+    SUBTRA::Log::Print("Compiling shader: ", a_name);
 
     GLuint vertexID = glCreateShader(GL_VERTEX_SHADER);
 	GLuint fragmentID = glCreateShader(GL_FRAGMENT_SHADER);

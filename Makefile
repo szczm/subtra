@@ -3,7 +3,8 @@
 
 CC = g++
 LIBS = -ldl -lSDL2 -lGL
-FLAGS = -Iinclude -Ilibs/glad/include -Ilibs/imgui
+FLAGS = -Iinclude -Ilibs/glad/include -Ilibs/imgui \
+	-std=c++1z
 
 OBJ = \
 	glad.o \

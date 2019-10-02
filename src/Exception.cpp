@@ -7,6 +7,7 @@
 
 #include "Log.hpp"
 
+
 SUBTRA::Exception::Exception(const char* a_what) : std::runtime_error(a_what)
 {
     SUBTRA::Log::Error(a_what);
