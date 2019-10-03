@@ -28,6 +28,7 @@ This is an early WIP version of a README, which will be updated accordingly in t
 - Soft shadows,
 - A plethora of post processing effects,
 - Timeline/sequencing + interactive controls,
+- Vulkan support?
 - **???**
 
 ## Languages used
