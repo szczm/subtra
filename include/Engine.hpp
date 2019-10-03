@@ -3,9 +3,7 @@
 
 #pragma once
 
-#include "Mesh.hpp"
-#include "Shader.hpp"
-#include "Window.hpp"
+#include "WindowManager.hpp"
 
 namespace SUBTRA
 {
@@ -23,13 +21,6 @@ namespace SUBTRA
 
         private:
 
-        void initGLAD();
-        void initSDL();
-        void initOpenGL();
-        void initIMGUI();
-
-        Window m_mainWindow;
-        Mesh m_testMesh;
-        Shader m_testShader;
+        WindowManager m_windowManager;
     };
 }
