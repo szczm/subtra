@@ -6,10 +6,6 @@
 
 #include <SDL2/SDL.h>
 
-#include "imgui.h"
-#include "imgui_impl_sdl.h"
-#include "imgui_impl_opengl3.h"
-
 #include "Exception.hpp"
 
 SUBTRA::Engine::Engine() {}
@@ -53,22 +49,11 @@ void SUBTRA::Engine::shutdown()
 
 void SUBTRA::Engine::processEvent(const SDL_Event& a_event)
 {
-    ImGui_ImplSDL2_ProcessEvent(&a_event);
-
+    m_inputManager.processEvent(a_event);
     m_windowManager.processEvent(a_event);
 
     if (a_event.type == SDL_QUIT)
     {
         m_running = false;
     }
-
-    if (ImGui::GetIO().WantCaptureKeyboard == false)
-    {
-        if (a_event.type == SDL_KEYDOWN && a_event.key.keysym.sym == SDLK_ESCAPE)
-        {
-            m_running = false;
-        }
-    }
-
-    // if (ImGui::GetIO().WantCaptureMouse == false)
 }

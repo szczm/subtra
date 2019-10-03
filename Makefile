@@ -9,7 +9,7 @@ FLAGS = -Iinclude -Ilibs/glad/include -Ilibs/imgui \
 OBJ = \
 	glad.o \
 	imgui.o imgui_demo.o imgui_draw.o imgui_widgets.o imgui_impl_sdl.o imgui_impl_opengl3.o \
-	Exception.o Mesh.o Shader.o Window.o WindowManager.o Engine.o
+	Exception.o Mesh.o Shader.o Window.o InputManager.o WindowManager.o Engine.o
 
 
 all : src/main.cpp $(OBJ)
