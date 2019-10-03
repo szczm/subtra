@@ -32,8 +32,8 @@ namespace SUBTRA
 
         void resizeViewport(int a_width, int a_height) const;
 
-        std::weak_ptr<SDL_Window> getSDLWindow() const;
-        std::weak_ptr<SDL_GLContext_> getContext() const;
+        std::shared_ptr<SDL_Window> getSDLWindow() const;
+        std::shared_ptr<SDL_GLContext_> getContext() const;
 
 
         private:

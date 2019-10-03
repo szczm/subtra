@@ -81,17 +81,10 @@ void SUBTRA::Engine::initIMGUI()
     // antisocial energy saving club
     ImGui::StyleColorsDark();
 
-    // TODO: Rewrite? Too smart-y
-    {
-        auto window = m_mainWindow.getSDLWindow().lock();
-        auto context = m_mainWindow.getContext().lock();
+    auto window = m_mainWindow.getSDLWindow().get();
+    auto context = m_mainWindow.getContext().get();
 
-        if (window && context)
-        {
-            ImGui_ImplSDL2_InitForOpenGL(window.get(), context.get());
-        }
-    }
-
+    ImGui_ImplSDL2_InitForOpenGL(window, context);
     ImGui_ImplOpenGL3_Init("#version 330 core");
 }
 
@@ -131,11 +124,7 @@ void SUBTRA::Engine::run()
 
 
         ImGui_ImplOpenGL3_NewFrame();
-
-        if (auto window = m_mainWindow.getSDLWindow().lock())
-        {
-            ImGui_ImplSDL2_NewFrame(window.get());
-        }
+        ImGui_ImplSDL2_NewFrame(m_mainWindow.getSDLWindow().get());
 
         ImGui::NewFrame();
 
