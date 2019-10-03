@@ -31,32 +31,13 @@ void SUBTRA::Engine::init()
 
 void SUBTRA::Engine::run()
 {
-    bool running = true;
-
-    while (running)
+    while (m_running)
     {
         SDL_Event event;
 
         while (SDL_PollEvent(&event))
         {
-            ImGui_ImplSDL2_ProcessEvent(&event);
-
-            m_windowManager.processEvent(event);
-
-            if (event.type == SDL_QUIT)
-            {
-                running = false;
-            }
-
-            if (ImGui::GetIO().WantCaptureKeyboard == false)
-            {
-                if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
-                {
-                    running = false;
-                }
-            }
-
-            // if (ImGui::GetIO().WantCaptureMouse == false)
+            processEvent(event);
         }
 
         m_windowManager.update();
@@ -68,4 +49,26 @@ void SUBTRA::Engine::shutdown()
     m_windowManager.shutdown();
 
 	SDL_Quit();
+}
+
+void SUBTRA::Engine::processEvent(const SDL_Event& a_event)
+{
+    ImGui_ImplSDL2_ProcessEvent(&a_event);
+
+    m_windowManager.processEvent(a_event);
+
+    if (a_event.type == SDL_QUIT)
+    {
+        m_running = false;
+    }
+
+    if (ImGui::GetIO().WantCaptureKeyboard == false)
+    {
+        if (a_event.type == SDL_KEYDOWN && a_event.key.keysym.sym == SDLK_ESCAPE)
+        {
+            m_running = false;
+        }
+    }
+
+    // if (ImGui::GetIO().WantCaptureMouse == false)
 }

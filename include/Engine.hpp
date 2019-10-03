@@ -21,6 +21,10 @@ namespace SUBTRA
 
         private:
 
+        void processEvent(const SDL_Event& a_event);
+
         WindowManager m_windowManager;
+
+        bool m_running = true;
     };
 }
