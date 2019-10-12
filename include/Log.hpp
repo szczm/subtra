@@ -1,4 +1,4 @@
-// SUBTRA Log class header
+// SUBTRA Log namespace header
 // 2019 Matthias Scherba @szczm_
 
 #pragma once

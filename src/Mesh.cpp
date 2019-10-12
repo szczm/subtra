@@ -17,7 +17,7 @@ void SUBTRA::Mesh::init()
     {
         -1.0f, -1.0f, 0.0f,
         1.0f, -1.0f, 0.0f,
-        0.0f,  1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,
     };
 
     // Bind vertex array
