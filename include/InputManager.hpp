@@ -14,9 +14,7 @@ namespace SUBTRA
         InputManager() = default;
         ~InputManager() = default;
 
-        // No need to init/shutdown - no state yet
-        // void init();
-        // void shutdown();
+        void init() {};
 
         void processEvent(const SDL_Event& a_event);
 

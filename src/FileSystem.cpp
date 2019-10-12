@@ -11,7 +11,7 @@ std::optional<std::string> SUBTRA::FileSystem::readFile(const std::string& a_pat
     // No value if file could not be open
     std::optional<std::string> opt;
 
-    if (std::ifstream stream(a_path); stream.good())
+    if (std::ifstream stream{a_path}; stream.good())
     {
         auto filesize = file_size(a_path.c_str());
 

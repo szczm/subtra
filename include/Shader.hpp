@@ -14,11 +14,9 @@ namespace SUBTRA
         public:
 
         Shader() = default;
-        ~Shader() = default;
-        
-        Shader(const std::string& a_vertexPath, const std::string& a_fragmentPath);
+        explicit Shader(const std::string& a_vertexPath, const std::string& a_fragmentPath);
 
-        void init(const std::string& a_vertexPath, const std::string& a_fragmentPath);
+        ~Shader() = default;
 
         void use();
 

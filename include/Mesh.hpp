@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <string>
+
 #include "GLCommon.hpp"
 
 namespace SUBTRA
@@ -17,9 +19,10 @@ namespace SUBTRA
         public:
 
         Mesh() = default;
+        explicit Mesh(const std::string& a_path);
+
         ~Mesh() = default;
 
-        void init();
         void bind();
 
         private:

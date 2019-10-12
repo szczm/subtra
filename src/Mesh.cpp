@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-void SUBTRA::Mesh::init()
+SUBTRA::Mesh::Mesh(const std::string& a_path)
 {
     glGenVertexArrays(1, &m_VAO);
     glBindVertexArray(m_VAO);

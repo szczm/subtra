@@ -11,12 +11,14 @@ void SUBTRA::InputManager::processEvent(const SDL_Event& a_event)
     // TODO: Check if ImGui was initialized
     ImGui_ImplSDL2_ProcessEvent(&a_event);
 
-    if (ImGui::GetIO().WantCaptureKeyboard == false)
+    auto& imGuiIO = ImGui::GetIO();
+
+    if (imGuiIO.WantCaptureKeyboard == false)
     {
         processKeyboardEvent(a_event);
     }
 
-    if (ImGui::GetIO().WantCaptureMouse == false)
+    if (imGuiIO.WantCaptureMouse == false)
     {
         processMouseEvent(a_event);
     }

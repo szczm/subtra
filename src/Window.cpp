@@ -7,12 +7,6 @@
 
 SUBTRA::Window::Window(const std::string& a_title, int a_width, int a_height)
 {
-    init(a_title, a_width, a_height);
-}
-
-// Extracted to allow deferred window initialization
-void SUBTRA::Window::init(const std::string& a_title, int a_width, int a_height)
-{
     // Create window
     m_SDLWindow.reset
     (

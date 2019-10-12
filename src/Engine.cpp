@@ -20,6 +20,7 @@ void SUBTRA::Engine::init()
         throw SUBTRA::Exception("Could not initialize SDL");
     }
 
+    m_inputManager.init();
     m_windowManager.init();
 }
 

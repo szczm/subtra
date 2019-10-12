@@ -12,11 +12,6 @@
 
 SUBTRA::Shader::Shader(const std::string& a_vertexPath, const std::string& a_fragmentPath)
 {
-    init(a_vertexPath, a_fragmentPath);
-}
-
-void SUBTRA::Shader::init(const std::string& a_vertexPath, const std::string& a_fragmentPath)
-{
 	using namespace std::literals;
 
 	FileSystem fileSystem{};

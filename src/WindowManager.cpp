@@ -18,14 +18,14 @@ void SUBTRA::WindowManager::init()
 {
     initOpenGL();
 
-	m_mainWindow.init("SUBTRA", 800, 600);
+	m_mainWindow = Window{"SUBTRA", 800, 600};
 	m_mainWindow.maximize();
 
     initGLAD();
     initIMGUI();
 
-    m_testMesh.init();
-    m_testShader.init("data/shaders/test.vert", "data/shaders/test.frag");
+    m_testMesh = Mesh{"data/models/test.model"};
+    m_testShader = Shader{"data/shaders/test.vert", "data/shaders/test.frag"};
 }
 
 void SUBTRA::WindowManager::shutdown()
