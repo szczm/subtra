@@ -5,6 +5,8 @@
 
 #include "GLCommon.hpp"
 
+#include <string>
+
 namespace SUBTRA
 {
     class Shader
@@ -14,16 +16,15 @@ namespace SUBTRA
         Shader() = default;
         ~Shader() = default;
         
-        Shader(const char* a_name, const char* a_vertexPath, const char* a_fragmentPath);
+        Shader(const std::string& a_vertexPath, const std::string& a_fragmentPath);
 
-        void init(const char* a_name, const char* a_vertexPath, const char* a_fragmentPath);
+        void init(const std::string& a_vertexPath, const std::string& a_fragmentPath);
 
         void use();
 
 
         private:
 
-        const char* m_name = "";
         GLuint m_programID = 0;
     };
 }

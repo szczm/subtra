@@ -22,9 +22,9 @@ namespace SUBTRA
         Window() = default;
         ~Window() = default;
         
-        Window(const char* a_title, int a_width, int a_height);
+        Window(const std::string& a_title, int a_width, int a_height);
 
-        void init(const char* a_title, int a_width, int a_height);
+        void init(const std::string& a_title, int a_width, int a_height);
 
         void maximize() const;
         void clear() const;

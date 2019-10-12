@@ -26,7 +26,7 @@ void SUBTRA::WindowManager::init()
 
     m_testMesh.init();
 
-    m_testShader.init("a", "b", "c");
+    m_testShader.init("a", "b");
 }
 
 void SUBTRA::WindowManager::shutdown()
