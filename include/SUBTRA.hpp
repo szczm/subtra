@@ -9,9 +9,12 @@
 // Objects
 #include "Mesh.hpp"
 #include "Shader.hpp"
+#include "Window.hpp"
 
 // Modules
-#include "Window.hpp"
+#include "InputManager.hpp"
+#include "FileSystem.hpp"
+#include "WindowManager.hpp"
 
 // The Big Guns
 #include "Engine.hpp"

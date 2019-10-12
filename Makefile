@@ -8,9 +8,9 @@ CC = g++
 MKDIR = mkdir
 RM = rm -r
 
-LIBS = -ldl -lSDL2 -lGL
+LIBS = -ldl -lSDL2 -lGL -lstdc++fs
 FLAGS = -Iinclude -Ilibs/glad/include -Ilibs/imgui \
-	-std=c++1z
+	-std=c++17
 
 SOURCE_DIR = src
 BUILD_DIR = build

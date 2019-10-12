@@ -25,8 +25,7 @@ void SUBTRA::WindowManager::init()
     initIMGUI();
 
     m_testMesh.init();
-
-    m_testShader.init("a", "b");
+    m_testShader.init("data/shaders/test.vert", "data/shaders/test.frag");
 }
 
 void SUBTRA::WindowManager::shutdown()
