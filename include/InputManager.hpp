@@ -20,7 +20,6 @@ namespace SUBTRA
 
         void processEvent(const SDL_Event& a_event);
 
-
         private:
 
         void processKeyboardEvent(const SDL_Event& a_event);

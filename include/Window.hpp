@@ -35,7 +35,6 @@ namespace SUBTRA
         std::shared_ptr<SDL_Window> getSDLWindow() const;
         std::shared_ptr<SDL_GLContext_> getContext() const;
 
-
         private:
 
         std::shared_ptr<SDL_Window> m_SDLWindow {};

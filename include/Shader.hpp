@@ -22,7 +22,6 @@ namespace SUBTRA
 
         void use();
 
-
         private:
 
         GLuint m_programID = 0;
