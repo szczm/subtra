@@ -33,7 +33,7 @@ void SUBTRA::Shader::init(const std::string& a_vertexPath, const std::string& a_
 	int infoLogLength;
 
 	SUBTRA::Log::Print("Compiling vertex shader: "sv, a_vertexPath);
-	glShaderSource(vertexID, 1, &vertexCstr, NULL);
+	glShaderSource(vertexID, 1, &vertexCstr, nullptr);
 	glCompileShader(vertexID);
 
 	glGetShaderiv(vertexID, GL_INFO_LOG_LENGTH, &infoLogLength);
@@ -41,12 +41,12 @@ void SUBTRA::Shader::init(const std::string& a_vertexPath, const std::string& a_
 	if (infoLogLength > 0)
     {
 		std::vector<char> vertexShaderErrorMessage(infoLogLength + 1);
-		glGetShaderInfoLog(vertexID, infoLogLength, NULL, &vertexShaderErrorMessage[0]);
+		glGetShaderInfoLog(vertexID, infoLogLength, nullptr, &vertexShaderErrorMessage[0]);
 		SUBTRA::Log::Error(&vertexShaderErrorMessage[0]);
 	}
 
 	SUBTRA::Log::Print("Compiling fragment shader"sv, a_fragmentPath);
-	glShaderSource(fragmentID, 1, &fragmentCstr, NULL);
+	glShaderSource(fragmentID, 1, &fragmentCstr, nullptr);
 	glCompileShader(fragmentID);
 
 	// Check Fragment Shader
@@ -55,7 +55,7 @@ void SUBTRA::Shader::init(const std::string& a_vertexPath, const std::string& a_
 	if (infoLogLength > 0)
     {
 		std::vector<char> fragmentShaderErrorMessage(infoLogLength + 1);
-		glGetShaderInfoLog(fragmentID, infoLogLength, NULL, &fragmentShaderErrorMessage[0]);
+		glGetShaderInfoLog(fragmentID, infoLogLength, nullptr, &fragmentShaderErrorMessage[0]);
 		SUBTRA::Log::Error(&fragmentShaderErrorMessage[0]);
 	}
 
@@ -70,7 +70,7 @@ void SUBTRA::Shader::init(const std::string& a_vertexPath, const std::string& a_
     if (infoLogLength > 0)
     {
 		std::vector<char> programErrorMessage(infoLogLength + 1);
-		glGetProgramInfoLog(m_programID, infoLogLength, NULL, &programErrorMessage[0]);
+		glGetProgramInfoLog(m_programID, infoLogLength, nullptr, &programErrorMessage[0]);
 		SUBTRA::Log::Error(&programErrorMessage[0]);
 	}
 	
