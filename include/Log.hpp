@@ -23,6 +23,7 @@ namespace SUBTRA
         template<typename ...Args>
         void Error(Args&&... args)
         {
+            std::cerr << "ERROR: ";
             (std::cerr << ... << args) << std::endl;
         }
     }
