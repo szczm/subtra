@@ -19,7 +19,7 @@ namespace SUBTRA
     {
         public:
 
-        WindowManager();
+        WindowManager() = default;
         ~WindowManager();
 
         void init();
@@ -36,8 +36,8 @@ namespace SUBTRA
         void initOpenGL();
         void initIMGUI();
 
-        Window m_mainWindow;
-        Mesh m_testMesh;
-        Shader m_testShader;
+        Window m_mainWindow {};
+        Mesh m_testMesh {};
+        Shader m_testShader {};
     };
 }

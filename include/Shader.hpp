@@ -11,8 +11,8 @@ namespace SUBTRA
     {
         public:
 
-        Shader();
-        ~Shader();
+        Shader() = default;
+        ~Shader() = default;
         
         Shader(const char* a_name, const char* a_vertexPath, const char* a_fragmentPath);
 
@@ -23,7 +23,7 @@ namespace SUBTRA
 
         private:
 
-        const char* m_name;
-        GLuint m_programID;
+        const char* m_name = "";
+        GLuint m_programID = 0;
     };
 }

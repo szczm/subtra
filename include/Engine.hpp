@@ -12,7 +12,7 @@ namespace SUBTRA
     {
         public:
 
-        Engine();
+        Engine() = default;
         ~Engine();
 
         void init();

@@ -8,8 +8,6 @@
 
 #include "Exception.hpp"
 
-SUBTRA::Engine::Engine() {}
-
 SUBTRA::Engine::~Engine()
 {
     shutdown();

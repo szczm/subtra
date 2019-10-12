@@ -14,18 +14,17 @@ namespace SUBTRA
 
     class Mesh
     {
-
         public:
 
-        Mesh();
-        ~Mesh();
+        Mesh() = default;
+        ~Mesh() = default;
 
         void init();
         void bind();
 
         private:
 
-        GLuint m_VAO;
-        GLuint m_VBO;
+        GLuint m_VAO = 0;
+        GLuint m_VBO = 0;
     };
 }

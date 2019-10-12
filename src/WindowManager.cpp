@@ -9,8 +9,6 @@
 
 #include "Exception.hpp"
 
-SUBTRA::WindowManager::WindowManager() {}
-
 SUBTRA::WindowManager::~WindowManager()
 {
     shutdown();

@@ -11,8 +11,8 @@ namespace SUBTRA
     {
         public:
 
-        InputManager();
-        ~InputManager();
+        InputManager() = default;
+        ~InputManager() = default;
 
         // No need to init/shutdown - no state yet
         // void init();

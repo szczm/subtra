@@ -19,8 +19,8 @@ namespace SUBTRA
     {
         public:
 
-        Window();
-        ~Window();
+        Window() = default;
+        ~Window() = default;
         
         Window(const char* a_title, int a_width, int a_height);
 
@@ -38,7 +38,7 @@ namespace SUBTRA
 
         private:
 
-        std::shared_ptr<SDL_Window> m_SDLWindow;
-        std::shared_ptr<SDL_GLContext_> m_SDLContext;
+        std::shared_ptr<SDL_Window> m_SDLWindow {};
+        std::shared_ptr<SDL_GLContext_> m_SDLContext {};
     };
 }

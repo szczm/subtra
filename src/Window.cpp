@@ -5,9 +5,6 @@
 
 #include "Exception.hpp"
 
-SUBTRA::Window::Window() {}
-SUBTRA::Window::~Window() {}
-
 SUBTRA::Window::Window(const char* a_title, int a_width, int a_height)
 {
     init(a_title, a_width, a_height);
