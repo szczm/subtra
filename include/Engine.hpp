@@ -23,8 +23,8 @@ namespace SUBTRA
 
         void processEvent(const SDL_Event& a_event);
 
-        InputManager m_inputManager;
-        WindowManager m_windowManager;
+        InputManager m_inputManager {};
+        WindowManager m_windowManager {};
 
         bool m_running = true;
     };

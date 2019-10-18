@@ -14,7 +14,7 @@ SUBTRA::Shader::Shader(const std::string& a_vertexPath, const std::string& a_fra
 {
 	using namespace std::literals;
 
-	FileSystem fileSystem{};
+	FileSystem fileSystem;
 
     SUBTRA::Log::Print("Compiling shader program: "sv);
 
