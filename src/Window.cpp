@@ -80,4 +80,4 @@ std::shared_ptr<SDL_Window> SUBTRA::Window::getSDLWindow() const
 std::shared_ptr<SDL_GLContext_> SUBTRA::Window::getContext() const
 {
     return m_SDLContext;
-};
+}

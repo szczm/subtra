@@ -5,12 +5,21 @@
 # The configurable part
 
 CC = g++
+GCC = gcc
+
 MKDIR = mkdir
 RM = rm -r
 
 LIBS = -ldl -lSDL2 -lGL -lstdc++fs
-FLAGS = -Iinclude -Ilibs/glad/include -Ilibs/imgui \
-	-std=c++17
+INCLUDE = -Iinclude -Ilibs/glad/include -Ilibs/imgui
+FLAGS = -std=c++17
+
+GLAD_FLAGS = -w
+IMGUI_FLAGS = -w
+
+# Selective passive aggresive ignorance
+IGNORE_FLAGS = -pedantic -Wall -Wextra \
+	       -Wno-unused-parameter
 
 SOURCE_DIR = src
 BUILD_DIR = build
@@ -30,7 +39,7 @@ OBJS := $(EXT_OBJS:%.o=$(BUILD_DIR)/%.o) $(SOURCES:$(SOURCE_DIR)/%.cpp=$(BUILD_D
 # The part that rules (get it? rules?)
 
 all : $(MAIN) $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) $(MAIN) $(LIBS) -o $(OUTPUT)
+	$(CC) $(FLAGS) $(IGNORE_FLAGS) $(INCLUDE) $(OBJS) $(MAIN) $(LIBS) -o $(OUTPUT)
 
 debug : $(MAIN) $(OBJS)
 	$(CC) $(FLAGS) $(OBJS) $(MAIN) $(LIBS) -g -o $(OUTPUT)
@@ -40,16 +49,16 @@ clean :
 
 
 $(BUILD_DIR)/%.o : $(SOURCE_DIR)/%.cpp $(BUILD_DIR)
-	$(CC) $(FLAGS) -c $< $(LIBS) -o $@
+	$(CC) $(FLAGS) $(IGNORE_FLAGS) $(INCLUDE) -c $< $(LIBS) -o $@
 
 $(BUILD_DIR)/glad.o : libs/glad/src/glad.c $(BUILD_DIR)
-	$(CC) $(FLAGS) -c $< $(LIBS) -o $@
+	$(GCC) $(GLAD_FLAGS) $(INCLUDE) -c $< $(LIBS) -o $@
 
 $(BUILD_DIR)/imgui%.o : libs/imgui/imgui%.cpp $(BUILD_DIR)
-	$(CC) $(FLAGS) -c $< $(LIBS) -o $@
+	$(CC) $(IMGUI_FLAGS) $(INCLUDE) -c $< $(LIBS) -o $@
 
 $(BUILD_DIR)/imgui.o : libs/imgui/imgui.cpp $(BUILD_DIR)
-	$(CC) $(FLAGS) -c $< $(LIBS) -o $@
+	$(CC) $(IMGUI_FLAGS) $(INCLUDE) -c $< $(LIBS) -o $@
 
 $(BUILD_DIR) :
 	$(MKDIR) $(BUILD_DIR)
