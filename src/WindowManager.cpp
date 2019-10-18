@@ -24,8 +24,8 @@ void SUBTRA::WindowManager::init()
     initGLAD();
     initIMGUI();
 
-    m_testMesh = Mesh{"data/models/test.model"};
-    m_testShader = Shader{"data/shaders/test.vert", "data/shaders/test.frag"};
+    m_testMesh = Mesh{"assets/models/test.model"};
+    m_testShader = Shader{"assets/shaders/test.vert", "assets/shaders/test.frag"};
 }
 
 void SUBTRA::WindowManager::shutdown()
