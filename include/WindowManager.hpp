@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Window.hpp"
+#include "Windows/MainWindow.hpp"
 
 #include <glad/glad.h>
 #include <SDL2/SDL.h>
@@ -35,7 +36,7 @@ namespace SUBTRA
         void InitOpenGL();
         void InitIMGUI();
 
-        Window m_mainWindow {};
+        MainWindow m_mainWindow {};
         Mesh m_testMesh {};
         Shader m_testShader {};
     };

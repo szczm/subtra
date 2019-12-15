@@ -24,6 +24,7 @@ namespace SUBTRA
 
         ~Window() = default;
 
+        void Open(const std::string& a_title, int a_width, int a_height);
         void Maximize() const;
         void Clear() const;
         void Swap() const;
@@ -33,7 +34,7 @@ namespace SUBTRA
         std::shared_ptr<SDL_Window> GetSDLWindow() const;
         std::shared_ptr<SDL_GLContext_> GetContext() const;
 
-        private:
+        protected:
 
         std::shared_ptr<SDL_Window> m_sdlWindow {};
         std::shared_ptr<SDL_GLContext_> m_sdlContext {};

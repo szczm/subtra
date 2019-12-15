@@ -49,6 +49,7 @@ clean :
 
 
 $(BUILD_DIR)/%.o : $(SOURCE_DIR)/%.cpp $(BUILD_DIR)
+	mkdir -pv $$(dirname $@)
 	$(CC) $(FLAGS) $(IGNORE_FLAGS) $(INCLUDE) -c $< $(LIBS) -o $@
 
 $(BUILD_DIR)/glad.o : libs/glad/src/glad.c $(BUILD_DIR)

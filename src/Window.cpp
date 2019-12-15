@@ -8,6 +8,11 @@
 
 SUBTRA::Window::Window(const std::string& a_title, int a_width, int a_height)
 {
+    Open(a_title, a_width, a_height);
+}
+
+void SUBTRA::Window::Open(const std::string& a_title, int a_width, int a_height)
+{
     // Create window
     m_sdlWindow.reset
     (
@@ -37,13 +42,6 @@ SUBTRA::Window::Window(const std::string& a_title, int a_width, int a_height)
         throw SUBTRA::Exception {"Could not open context"};
 
     SDL_GL_MakeCurrent(m_sdlWindow.get(), m_sdlContext.get());
-
-    // Try enabling adaptive vsync
-    if (SDL_GL_SetSwapInterval(-1) < 0)
-    {
-        // If failed, fallback to vsync
-        SDL_GL_SetSwapInterval(1);
-    }
 }
 
 void SUBTRA::Window::Maximize() const

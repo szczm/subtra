@@ -18,9 +18,8 @@ SUBTRA::WindowManager::~WindowManager()
 void SUBTRA::WindowManager::Init()
 {
     InitOpenGL();
-
-	m_mainWindow = Window {"SUBTRA", 800, 600};
-	m_mainWindow.Maximize();
+    
+	m_mainWindow.Open();
 
     InitGLAD();
     InitIMGUI();
@@ -74,6 +73,13 @@ void SUBTRA::WindowManager::InitOpenGL()
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+
+    // Try enabling adaptive vsync
+    if (SDL_GL_SetSwapInterval(-1) < 0)
+    {
+        // If failed, fallback to vsync
+        SDL_GL_SetSwapInterval(1);
+    }
 }
 
 void SUBTRA::WindowManager::InitGLAD()
