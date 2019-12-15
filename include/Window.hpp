@@ -11,10 +11,10 @@
 #include "GLCommon.hpp"
 
 
-typedef std::remove_pointer<SDL_GLContext>::type SDL_GLContext_;
-
 namespace SUBTRA
 {
+    typedef std::remove_pointer<SDL_GLContext>::type SDL_GLContext_;
+
     class Window
     {
         public:

@@ -73,7 +73,7 @@ std::shared_ptr<SDL_Window> SUBTRA::Window::GetSDLWindow() const
     return m_sdlWindow;
 }
 
-std::shared_ptr<SDL_GLContext_> SUBTRA::Window::GetContext() const
+std::shared_ptr<SUBTRA::SDL_GLContext_> SUBTRA::Window::GetContext() const
 {
     return m_sdlContext;
 }
