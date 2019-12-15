@@ -18,14 +18,14 @@ void SUBTRA::WindowManager::Init()
 {
     InitOpenGL();
 
-	m_mainWindow = Window("SUBTRA", 800, 600);
+	m_mainWindow = Window {"SUBTRA", 800, 600};
 	m_mainWindow.Maximize();
 
     InitGLAD();
     InitIMGUI();
 
-    m_testMesh = Mesh("assets/models/test.model");
-    m_testShader = Shader("assets/shaders/test.vert", "assets/shaders/test.frag");
+    m_testMesh = Mesh {"assets/models/test.model"};
+    m_testShader = Shader {"assets/shaders/test.vert", "assets/shaders/test.frag"};
 }
 
 void SUBTRA::WindowManager::Shutdown()
@@ -38,9 +38,7 @@ void SUBTRA::WindowManager::Shutdown()
 void SUBTRA::WindowManager::ProcessEvent(const SDL_Event& a_event)
 {
     if (a_event.type == SDL_WINDOWEVENT && a_event.window.event == SDL_WINDOWEVENT_RESIZED)
-    {
         m_mainWindow.ResizeViewport(a_event.window.data1, a_event.window.data2);
-    }
 }
 
 void SUBTRA::WindowManager::Update()
@@ -80,9 +78,7 @@ void SUBTRA::WindowManager::InitOpenGL()
 void SUBTRA::WindowManager::InitGLAD()
 {
     if (!gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress))
-    {
-        throw SUBTRA::Exception("Could not initialize GLAD. Does your computer support OpenGL 3.3?");
-    }
+        throw SUBTRA::Exception {"Could not initialize GLAD. Does your computer support OpenGL 3.3?"};
 }
 
 void SUBTRA::WindowManager::InitIMGUI()

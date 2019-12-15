@@ -23,9 +23,7 @@ SUBTRA::Window::Window(const std::string& a_title, int a_width, int a_height)
     );
 
     if (!m_sdlWindow)
-    {
-        throw SUBTRA::Exception("Could not open window");
-    }
+        throw SUBTRA::Exception {"Could not open window"};
 
     // ...and create context
     m_sdlContext.reset
@@ -35,9 +33,7 @@ SUBTRA::Window::Window(const std::string& a_title, int a_width, int a_height)
     );
 
     if (!m_sdlContext)
-    {
-        throw SUBTRA::Exception("Could not open context");
-    }
+        throw SUBTRA::Exception {"Could not open context"};
 
     SDL_GL_MakeCurrent(m_sdlWindow.get(), m_sdlContext.get());
 

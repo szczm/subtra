@@ -14,14 +14,10 @@ void SUBTRA::InputManager::ProcessEvent(const SDL_Event& a_event)
     auto& imGuiIO = ImGui::GetIO();
 
     if (imGuiIO.WantCaptureKeyboard == false)
-    {
         ProcessKeyboardEvent(a_event);
-    }
 
     if (imGuiIO.WantCaptureMouse == false)
-    {
         ProcessMouseEvent(a_event);
-    }
 }
 
 void SUBTRA::InputManager::ProcessKeyboardEvent(const SDL_Event& a_event) {}

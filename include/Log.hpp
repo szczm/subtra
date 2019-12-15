@@ -10,8 +10,8 @@
 namespace SUBTRA
 {
     // I never really liked C++ streams. I wanted to have a print("a", 1, new Object) function
-    // that is equivalent to std::cout << "a" << 1 << new Object << std::endl; (take note of the
-    // implicit std::endl at the end), which is very easy to do with C++17 fold expressions! \o/
+    // that is equivalent to "std::cout << "a" << 1 << new Object << std::endl", which is very
+    // easy to do with C++17 fold expressions! \o/
     namespace Log
     {
         template<typename ...Args>

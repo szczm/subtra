@@ -37,7 +37,7 @@ SUBTRA::Shader::Shader(const std::string& a_vertexPath, const std::string& a_fra
 
 		if (infoLogLength > 0)
 		{
-			std::vector<char> shaderErrorMessage(infoLogLength + 1);
+			std::vector<char> shaderErrorMessage (infoLogLength + 1);
 			glGetShaderInfoLog(vertexId, infoLogLength, nullptr, &shaderErrorMessage[0]);
 			SUBTRA::Log::Error(&shaderErrorMessage[0]);
 		}
@@ -62,7 +62,7 @@ SUBTRA::Shader::Shader(const std::string& a_vertexPath, const std::string& a_fra
 
 		if (infoLogLength > 0)
 		{
-			std::vector<char> shaderErrorMessage(infoLogLength + 1);
+			std::vector<char> shaderErrorMessage (infoLogLength + 1);
 			glGetShaderInfoLog(fragmentId, infoLogLength, nullptr, &shaderErrorMessage[0]);
 			SUBTRA::Log::Error(&shaderErrorMessage[0]);
 		}
@@ -83,7 +83,7 @@ SUBTRA::Shader::Shader(const std::string& a_vertexPath, const std::string& a_fra
 	
     if (infoLogLength > 0)
     {
-		std::vector<char> programErrorMessage(infoLogLength + 1);
+		std::vector<char> programErrorMessage (infoLogLength + 1);
 		glGetProgramInfoLog(m_programId, infoLogLength, nullptr, &programErrorMessage[0]);
 		SUBTRA::Log::Error(&programErrorMessage[0]);
 	}

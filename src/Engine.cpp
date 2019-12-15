@@ -16,9 +16,7 @@ SUBTRA::Engine::~Engine()
 void SUBTRA::Engine::Init()
 {
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-        throw SUBTRA::Exception("Could not initialize SDL");
-    }
+        throw SUBTRA::Exception {"Could not initialize SDL"};
 
     m_inputManager.Init();
     m_windowManager.Init();
@@ -31,9 +29,7 @@ void SUBTRA::Engine::Run()
         SDL_Event event;
 
         while (SDL_PollEvent(&event))
-        {
             ProcessEvent(event);
-        }
 
         m_windowManager.Update();
     }
@@ -52,7 +48,5 @@ void SUBTRA::Engine::ProcessEvent(const SDL_Event& a_event)
     m_windowManager.ProcessEvent(a_event);
 
     if (a_event.type == SDL_QUIT)
-    {
         m_running = false;
-    }
 }
