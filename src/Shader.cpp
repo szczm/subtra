@@ -4,7 +4,6 @@
 #include "Shader.hpp"
 
 #include <string>
-#include <string_view>
 #include <vector>
 
 #include "FileSystem.hpp"
@@ -13,16 +12,12 @@
 
 SUBTRA::Shader::Shader(const std::string& a_vertexPath, const std::string& a_fragmentPath)
 {
-	using namespace std::literals;
-
 	FileSystem fileSystem;
 
-    SUBTRA::Log::Print("Compiling shader program: "sv);
+    SUBTRA::Log::Print("Compiling shader program: ");
 
     GLuint vertexId = glCreateShader(GL_VERTEX_SHADER);
 	GLuint fragmentId = glCreateShader(GL_FRAGMENT_SHADER);
-
-	int infoLogLength;
 
 	auto vertexSource = fileSystem.ReadFile(a_vertexPath);
 
@@ -30,22 +25,15 @@ SUBTRA::Shader::Shader(const std::string& a_vertexPath, const std::string& a_fra
 	{
 		const char* vertexCstr = vertexSource->c_str();
 
-		SUBTRA::Log::Print("Compiling vertex shader: "sv, a_vertexPath);
+		SUBTRA::Log::Print("Compiling vertex shader: ", a_vertexPath);
 		glShaderSource(vertexId, 1, &vertexCstr, nullptr);
 		glCompileShader(vertexId);
 
-		glGetShaderiv(vertexId, GL_INFO_LOG_LENGTH, &infoLogLength);
-
-		if (infoLogLength > 0)
-		{
-			std::vector<char> shaderErrorMessage (infoLogLength + 1);
-			glGetShaderInfoLog(vertexId, infoLogLength, nullptr, &shaderErrorMessage[0]);
-			SUBTRA::Log::Error(&shaderErrorMessage[0]);
-		}
+		Shader::LogErrors(vertexId);
 	}
 	else
 	{
-		SUBTRA::Log::Error("Could not open vertex shader file: "sv, a_vertexPath);
+		SUBTRA::Log::Error("Could not open vertex shader file: ", a_vertexPath);
 		return;
 	}
 
@@ -55,31 +43,25 @@ SUBTRA::Shader::Shader(const std::string& a_vertexPath, const std::string& a_fra
 	{
 		const char* fragmentCstr = fragmentSource->c_str();
 
-		SUBTRA::Log::Print("Compiling fragment shader: "sv, a_fragmentPath);
+		SUBTRA::Log::Print("Compiling fragment shader: ", a_fragmentPath);
 		glShaderSource(fragmentId, 1, &fragmentCstr, nullptr);
 		glCompileShader(fragmentId);
 
-		glGetShaderiv(fragmentId, GL_INFO_LOG_LENGTH, &infoLogLength);
-
-		if (infoLogLength > 0)
-		{
-			std::vector<char> shaderErrorMessage (infoLogLength + 1);
-			glGetShaderInfoLog(fragmentId, infoLogLength, nullptr, &shaderErrorMessage[0]);
-			SUBTRA::Log::Error(&shaderErrorMessage[0]);
-		}
+		Shader::LogErrors(fragmentId);
 	}
 	else
 	{
-		SUBTRA::Log::Error("Could not open fragment shader file: "sv, a_fragmentPath);
+		SUBTRA::Log::Error("Could not open fragment shader file: ", a_fragmentPath);
 		return;
 	}
 
-	SUBTRA::Log::Print("Linking program"sv);
+	SUBTRA::Log::Print("Linking program");
 	m_programId = glCreateProgram();
 	glAttachShader(m_programId, vertexId);
 	glAttachShader(m_programId, fragmentId);
 	glLinkProgram(m_programId);
 
+	int infoLogLength;
 	glGetProgramiv(m_programId, GL_INFO_LOG_LENGTH, &infoLogLength);
 	
     if (infoLogLength > 0)
@@ -99,4 +81,17 @@ SUBTRA::Shader::Shader(const std::string& a_vertexPath, const std::string& a_fra
 void SUBTRA::Shader::Use()
 {
     glUseProgram(m_programId);
+}
+
+void SUBTRA::Shader::LogErrors(GLuint a_shaderId)
+{
+	int infoLogLength;
+	glGetShaderiv(a_shaderId, GL_INFO_LOG_LENGTH, &infoLogLength);
+
+	if (infoLogLength > 0)
+	{
+		std::vector<char> shaderErrorMessage (infoLogLength + 1);
+		glGetShaderInfoLog(a_shaderId, infoLogLength, nullptr, &shaderErrorMessage[0]);
+		SUBTRA::Log::Error(&shaderErrorMessage[0]);
+	}
 }

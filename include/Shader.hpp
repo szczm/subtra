@@ -22,6 +22,8 @@ namespace SUBTRA
 
         private:
 
+        static void LogErrors(GLuint a_shaderId);
+
         GLuint m_programId = 0;
     };
 }
