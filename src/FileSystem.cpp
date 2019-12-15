@@ -8,9 +8,6 @@ std::optional<std::string> SUBTRA::FileSystem::ReadFile(const std::string& a_pat
     // Experimental because GCC 7 :(
     using std::experimental::filesystem::file_size;
 
-    // No value if file could not be open
-    std::optional<std::string> opt;
-
     if (std::ifstream stream {a_path}; stream.good())
     {
         auto filesize = file_size(a_path.c_str());
@@ -18,8 +15,8 @@ std::optional<std::string> SUBTRA::FileSystem::ReadFile(const std::string& a_pat
         std::string content (filesize, '\0');
         stream.read(content.data(), filesize);
 
-        opt = content;
+        return content;
     }
 
-    return opt;
+    return {};
 }
