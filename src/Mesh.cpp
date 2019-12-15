@@ -5,6 +5,7 @@
 
 #include <iostream>
 
+
 SUBTRA::Mesh::Mesh(const std::string& a_path)
 {
     glGenVertexArrays(1, &m_vao);

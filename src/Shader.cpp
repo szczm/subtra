@@ -10,6 +10,7 @@
 #include "FileSystem.hpp"
 #include "Log.hpp"
 
+
 SUBTRA::Shader::Shader(const std::string& a_vertexPath, const std::string& a_fragmentPath)
 {
 	using namespace std::literals;

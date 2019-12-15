@@ -6,6 +6,7 @@
 #include "imgui.h"
 #include "imgui_impl_sdl.h"
 
+
 void SUBTRA::InputManager::ProcessEvent(const SDL_Event& a_event)
 {
     // TODO: Check if ImGui was initialized

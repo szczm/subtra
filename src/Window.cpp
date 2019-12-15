@@ -5,6 +5,7 @@
 
 #include "Exception.hpp"
 
+
 SUBTRA::Window::Window(const std::string& a_title, int a_width, int a_height)
 {
     // Create window
