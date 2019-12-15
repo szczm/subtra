@@ -13,15 +13,15 @@ int main(int, char**)
 
 	try
 	{
-		engine.init();
-		engine.run();
+		engine.Init();
+		engine.Run();
 	}
 	catch (Exception& ex)
 	{
 		// Printing is done by the exceptions themselves
 	}
 
-	engine.shutdown();
+	engine.Shutdown();
 
 	return 0;
 }

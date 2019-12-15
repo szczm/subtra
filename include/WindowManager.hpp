@@ -22,18 +22,18 @@ namespace SUBTRA
         WindowManager() = default;
         ~WindowManager();
 
-        void init();
-        void shutdown();
+        void Init();
+        void Shutdown();
 
-        void processEvent(const SDL_Event& a_event);
-        void update();
+        void ProcessEvent(const SDL_Event& a_event);
+        void Update();
 
         private:
 
-        void initGLAD();
-        void initSDL();
-        void initOpenGL();
-        void initIMGUI();
+        void InitGLAD();
+        void InitSDL();
+        void InitOpenGL();
+        void InitIMGUI();
 
         Window m_mainWindow {};
         Mesh m_testMesh {};

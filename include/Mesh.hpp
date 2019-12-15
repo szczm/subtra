@@ -23,11 +23,11 @@ namespace SUBTRA
 
         ~Mesh() = default;
 
-        void bind();
+        void Bind();
 
         private:
 
-        GLuint m_VAO = 0;
-        GLuint m_VBO = 0;
+        GLuint m_vao = 0;
+        GLuint m_vbo = 0;
     };
 }

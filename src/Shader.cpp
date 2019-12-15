@@ -18,27 +18,27 @@ SUBTRA::Shader::Shader(const std::string& a_vertexPath, const std::string& a_fra
 
     SUBTRA::Log::Print("Compiling shader program: "sv);
 
-    GLuint vertexID = glCreateShader(GL_VERTEX_SHADER);
-	GLuint fragmentID = glCreateShader(GL_FRAGMENT_SHADER);
+    GLuint vertexId = glCreateShader(GL_VERTEX_SHADER);
+	GLuint fragmentId = glCreateShader(GL_FRAGMENT_SHADER);
 
 	int infoLogLength;
 
-	auto vertexSource = fileSystem.readFile(a_vertexPath);
+	auto vertexSource = fileSystem.ReadFile(a_vertexPath);
 
 	if (vertexSource)
 	{
 		const char* vertexCstr = vertexSource->c_str();
 
 		SUBTRA::Log::Print("Compiling vertex shader: "sv, a_vertexPath);
-		glShaderSource(vertexID, 1, &vertexCstr, nullptr);
-		glCompileShader(vertexID);
+		glShaderSource(vertexId, 1, &vertexCstr, nullptr);
+		glCompileShader(vertexId);
 
-		glGetShaderiv(vertexID, GL_INFO_LOG_LENGTH, &infoLogLength);
+		glGetShaderiv(vertexId, GL_INFO_LOG_LENGTH, &infoLogLength);
 
 		if (infoLogLength > 0)
 		{
 			std::vector<char> shaderErrorMessage(infoLogLength + 1);
-			glGetShaderInfoLog(vertexID, infoLogLength, nullptr, &shaderErrorMessage[0]);
+			glGetShaderInfoLog(vertexId, infoLogLength, nullptr, &shaderErrorMessage[0]);
 			SUBTRA::Log::Error(&shaderErrorMessage[0]);
 		}
 	}
@@ -48,22 +48,22 @@ SUBTRA::Shader::Shader(const std::string& a_vertexPath, const std::string& a_fra
 		return;
 	}
 
-	auto fragmentSource = fileSystem.readFile(a_fragmentPath);
+	auto fragmentSource = fileSystem.ReadFile(a_fragmentPath);
 
 	if (fragmentSource)
 	{
 		const char* fragmentCstr = fragmentSource->c_str();
 
 		SUBTRA::Log::Print("Compiling fragment shader: "sv, a_fragmentPath);
-		glShaderSource(fragmentID, 1, &fragmentCstr, nullptr);
-		glCompileShader(fragmentID);
+		glShaderSource(fragmentId, 1, &fragmentCstr, nullptr);
+		glCompileShader(fragmentId);
 
-		glGetShaderiv(fragmentID, GL_INFO_LOG_LENGTH, &infoLogLength);
+		glGetShaderiv(fragmentId, GL_INFO_LOG_LENGTH, &infoLogLength);
 
 		if (infoLogLength > 0)
 		{
 			std::vector<char> shaderErrorMessage(infoLogLength + 1);
-			glGetShaderInfoLog(fragmentID, infoLogLength, nullptr, &shaderErrorMessage[0]);
+			glGetShaderInfoLog(fragmentId, infoLogLength, nullptr, &shaderErrorMessage[0]);
 			SUBTRA::Log::Error(&shaderErrorMessage[0]);
 		}
 	}
@@ -74,28 +74,28 @@ SUBTRA::Shader::Shader(const std::string& a_vertexPath, const std::string& a_fra
 	}
 
 	SUBTRA::Log::Print("Linking program"sv);
-	m_programID = glCreateProgram();
-	glAttachShader(m_programID, vertexID);
-	glAttachShader(m_programID, fragmentID);
-	glLinkProgram(m_programID);
+	m_programId = glCreateProgram();
+	glAttachShader(m_programId, vertexId);
+	glAttachShader(m_programId, fragmentId);
+	glLinkProgram(m_programId);
 
-	glGetProgramiv(m_programID, GL_INFO_LOG_LENGTH, &infoLogLength);
+	glGetProgramiv(m_programId, GL_INFO_LOG_LENGTH, &infoLogLength);
 	
     if (infoLogLength > 0)
     {
 		std::vector<char> programErrorMessage(infoLogLength + 1);
-		glGetProgramInfoLog(m_programID, infoLogLength, nullptr, &programErrorMessage[0]);
+		glGetProgramInfoLog(m_programId, infoLogLength, nullptr, &programErrorMessage[0]);
 		SUBTRA::Log::Error(&programErrorMessage[0]);
 	}
 	
-	glDetachShader(m_programID, vertexID);
-	glDetachShader(m_programID, fragmentID);
+	glDetachShader(m_programId, vertexId);
+	glDetachShader(m_programId, fragmentId);
 	
-	glDeleteShader(vertexID);
-	glDeleteShader(fragmentID);
+	glDeleteShader(vertexId);
+	glDeleteShader(fragmentId);
 }
 
-void SUBTRA::Shader::use()
+void SUBTRA::Shader::Use()
 {
-    glUseProgram(m_programID);
+    glUseProgram(m_programId);
 }

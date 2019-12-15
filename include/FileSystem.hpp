@@ -18,6 +18,6 @@ namespace SUBTRA
         FileSystem() = default;
         ~FileSystem() = default;
 
-        std::optional<std::string> readFile(const std::string& a_path) const;
+        std::optional<std::string> ReadFile(const std::string& a_path) const;
     };
 }

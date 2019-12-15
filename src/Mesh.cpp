@@ -7,11 +7,11 @@
 
 SUBTRA::Mesh::Mesh(const std::string& a_path)
 {
-    glGenVertexArrays(1, &m_VAO);
-    glBindVertexArray(m_VAO);
+    glGenVertexArrays(1, &m_vao);
+    glBindVertexArray(m_vao);
 
-    glGenBuffers(1, &m_VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+    glGenBuffers(1, &m_vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 
     const GLfloat g_vertex_buffer_data[] =
     {
@@ -21,7 +21,7 @@ SUBTRA::Mesh::Mesh(const std::string& a_path)
     };
 
     // Bind vertex array
-    glBindBuffer(GL_ARRAY_BUFFER, m_VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, m_vao);
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
     // Bind position vertex attrib
@@ -31,7 +31,7 @@ SUBTRA::Mesh::Mesh(const std::string& a_path)
     glBindVertexArray(0);
 }
 
-void SUBTRA::Mesh::bind()
+void SUBTRA::Mesh::Bind()
 {
-    glBindVertexArray(m_VAO);
+    glBindVertexArray(m_vao);
 }

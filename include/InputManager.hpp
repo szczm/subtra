@@ -14,13 +14,13 @@ namespace SUBTRA
         InputManager() = default;
         ~InputManager() = default;
 
-        void init() {};
+        void Init() {};
 
-        void processEvent(const SDL_Event& a_event);
+        void ProcessEvent(const SDL_Event& a_event);
 
         private:
 
-        void processKeyboardEvent(const SDL_Event& a_event);
-        void processMouseEvent(const SDL_Event& a_event);
+        void ProcessKeyboardEvent(const SDL_Event& a_event);
+        void ProcessMouseEvent(const SDL_Event& a_event);
     };
 }

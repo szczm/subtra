@@ -18,10 +18,10 @@ namespace SUBTRA
 
         ~Shader() = default;
 
-        void use();
+        void Use();
 
         private:
 
-        GLuint m_programID = 0;
+        GLuint m_programId = 0;
     };
 }

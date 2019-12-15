@@ -3,7 +3,7 @@
 
 #include "FileSystem.hpp"
 
-std::optional<std::string> SUBTRA::FileSystem::readFile(const std::string& a_path) const
+std::optional<std::string> SUBTRA::FileSystem::ReadFile(const std::string& a_path) const
 {
     // Experimental because GCC 7 :(
     using std::experimental::filesystem::file_size;
