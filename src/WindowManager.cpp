@@ -57,6 +57,8 @@ void SUBTRA::WindowManager::Update()
 
     m_testShader.Use();
     m_testMesh.Bind();
+    m_testTexture.Bind();
+    
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

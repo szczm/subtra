@@ -10,16 +10,10 @@ SUBTRA::Mesh::Mesh(const std::string& a_path)
 {
     const GLfloat vertices[] =
     {
-        -1.0f, -1.0f, 0.0f,
-        1.0f, -1.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,
-    };
-
-    const GLfloat texCoords[] =
-    {
-        0.0f, 0.0f,
-        1.0f, 0.0f,
-        0.5f, 1.0f
+        // position --------   colours -----------   texcoords -
+        -1.0f, -1.0f,  0.0f,   1.0f,  1.0f,  0.0f,   0.0f, 0.0f,
+         1.0f, -1.0f,  0.0f,   1.0f,  0.0f,  1.0f,   1.0f, 0.0f,
+         0.0f,  1.0f,  0.0f,   0.0f,  1.0f,  1.0f,   0.5f, 1.0f
     };
 
 
@@ -33,9 +27,14 @@ SUBTRA::Mesh::Mesh(const std::string& a_path)
     glBindBuffer(GL_ARRAY_BUFFER, m_vao);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    // Bind position vertex attrib
+    // Bind position vertex attribs
     glEnableVertexAttribArray(VertexAttrib::Position);
-    glVertexAttribPointer(VertexAttrib::Position, 3, GL_FLOAT, GL_FALSE, 0, static_cast<void*>(0));
+    glEnableVertexAttribArray(VertexAttrib::Color);
+    glEnableVertexAttribArray(VertexAttrib::TexCoord);
+
+    glVertexAttribPointer(VertexAttrib::Position, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), reinterpret_cast<void*>(0));
+    glVertexAttribPointer(VertexAttrib::Color, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), reinterpret_cast<void*>(3*sizeof(float)));
+    glVertexAttribPointer(VertexAttrib::TexCoord, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), reinterpret_cast<void*>(6*sizeof(float)));
 
     glBindVertexArray(0);
 }

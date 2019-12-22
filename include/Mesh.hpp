@@ -12,7 +12,8 @@ namespace SUBTRA
     enum VertexAttrib
     {
         Position = 0,
-        TexCoords = 1
+        Color = 1,
+        TexCoord = 2
     };
 
     class Mesh

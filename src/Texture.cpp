@@ -27,12 +27,15 @@ SUBTRA::Texture::Texture(const std::string& a_path)
 
     if (textureData)
     {
-        Log::Print("yay!");
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureData->width, textureData->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData->data.get());
+        glGenerateMipmap(GL_TEXTURE_2D);
     }
     else
     {
-        Log::Print("nay!");
+        Log::Print("Texture ", a_path, " could not be loaded");
     }
+
+
 }
 
 void SUBTRA::Texture::Bind()
