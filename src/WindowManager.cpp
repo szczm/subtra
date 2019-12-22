@@ -58,6 +58,9 @@ void SUBTRA::WindowManager::Update()
     m_testShader.Use();
     m_testMesh.Bind();
     m_testTexture.Bind();
+
+    // TODO: What So Not - >>>Better<<<
+    m_testShader.Send("testTexture", 0);
     
     glDrawArrays(GL_TRIANGLES, 0, 3);
 

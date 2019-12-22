@@ -35,7 +35,8 @@ SUBTRA::Texture::Texture(const std::string& a_path)
         Log::Print("Texture ", a_path, " could not be loaded");
     }
 
-
+    // TODO: just once?
+    glActiveTexture(GL_TEXTURE0);
 }
 
 void SUBTRA::Texture::Bind()

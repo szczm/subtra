@@ -20,6 +20,11 @@ namespace SUBTRA
 
         void Use();
 
+        void Send(const std::string& a_key, int a_value);
+        void Send(const std::string& a_key, float a_value);
+
+        GLint GetUniformLocation(const std::string& a_key);
+
         private:
 
         static void LogErrors(GLuint a_shaderId);

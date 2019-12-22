@@ -83,6 +83,21 @@ void SUBTRA::Shader::Use()
     glUseProgram(m_programId);
 }
 
+GLint SUBTRA::Shader::GetUniformLocation(const std::string& a_key)
+{
+	return glGetUniformLocation(m_programId, a_key.c_str());
+}
+
+void SUBTRA::Shader::Send(const std::string& a_key, int a_value)
+{
+	glUniform1i(GetUniformLocation(a_key), a_value);
+}
+
+void SUBTRA::Shader::Send(const std::string& a_key, float a_value)
+{
+	glUniform1f(GetUniformLocation(a_key), a_value);
+}
+
 void SUBTRA::Shader::LogErrors(GLuint a_shaderId)
 {
 	int infoLogLength;
