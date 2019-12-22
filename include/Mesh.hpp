@@ -11,7 +11,8 @@ namespace SUBTRA
 {
     enum VertexAttrib
     {
-        Position = 0
+        Position = 0,
+        TexCoords = 1
     };
 
     class Mesh

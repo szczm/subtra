@@ -19,7 +19,7 @@ SUBTRA::Shader::Shader(const std::string& a_vertexPath, const std::string& a_fra
     GLuint vertexId = glCreateShader(GL_VERTEX_SHADER);
 	GLuint fragmentId = glCreateShader(GL_FRAGMENT_SHADER);
 
-	auto vertexSource = fileSystem.ReadFile(a_vertexPath);
+	auto vertexSource = fileSystem.ReadText(a_vertexPath);
 
 	if (vertexSource)
 	{
@@ -37,7 +37,7 @@ SUBTRA::Shader::Shader(const std::string& a_vertexPath, const std::string& a_fra
 		return;
 	}
 
-	auto fragmentSource = fileSystem.ReadFile(a_fragmentPath);
+	auto fragmentSource = fileSystem.ReadText(a_fragmentPath);
 
 	if (fragmentSource)
 	{

@@ -11,7 +11,7 @@ MKDIR = mkdir
 RM = rm -r
 
 LIBS = -ldl -lSDL2 -lGL -lstdc++fs
-INCLUDE = -Iinclude -Ilibs/glad/include -Ilibs/imgui
+INCLUDE = -Iinclude -Ilibs/glad/include -Ilibs/imgui -Ilibs
 FLAGS = -std=c++17
 
 GLAD_FLAGS = -w

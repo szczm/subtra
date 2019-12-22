@@ -11,6 +11,12 @@
 
 namespace SUBTRA
 {
+    struct TextureData
+    {
+        int width, height, channels;
+        std::shared_ptr<unsigned char> data;
+    };
+
     class FileSystem
     {
         public:
@@ -18,6 +24,9 @@ namespace SUBTRA
         FileSystem() = default;
         ~FileSystem() = default;
 
-        std::optional<std::string> ReadFile(const std::string& a_path) const;
+        std::optional<std::string> ReadText(const std::string& a_path) const;
+        std::optional<TextureData> ReadTexture(const std::string& a_path) const;
+
+        private:
     };
 }

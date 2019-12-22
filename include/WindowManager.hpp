@@ -12,7 +12,7 @@
 #include "GLCommon.hpp"
 #include "Mesh.hpp"
 #include "Shader.hpp"
-#include "Window.hpp"
+#include "Texture.hpp"
 
 namespace SUBTRA
 {
@@ -37,7 +37,9 @@ namespace SUBTRA
         void InitIMGUI();
 
         MainWindow m_mainWindow {};
+
         Mesh m_testMesh {};
         Shader m_testShader {};
+        Texture m_testTexture {};
     };
 }

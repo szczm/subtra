@@ -3,8 +3,11 @@
 
 #include "FileSystem.hpp"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
-std::optional<std::string> SUBTRA::FileSystem::ReadFile(const std::string& a_path) const
+
+std::optional<std::string> SUBTRA::FileSystem::ReadText(const std::string& a_path) const
 {
     // Experimental because GCC 7 :(
     using std::experimental::filesystem::file_size;
@@ -17,6 +20,29 @@ std::optional<std::string> SUBTRA::FileSystem::ReadFile(const std::string& a_pat
         stream.read(content.data(), filesize);
 
         return content;
+    }
+
+    return {};
+}
+
+std::optional<SUBTRA::TextureData> SUBTRA::FileSystem::ReadTexture(const std::string& a_path) const
+{
+    auto text = ReadText(a_path);
+
+    if (text)
+    {
+        TextureData textureData;
+
+        textureData.data.reset
+        (
+            stbi_load_from_memory
+            (
+                reinterpret_cast<const unsigned char*>(text->c_str()), text->length(),
+                &textureData.width, &textureData.height, &textureData.channels, 0
+            )
+        );
+
+        return textureData;
     }
 
     return {};
