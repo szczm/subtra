@@ -41,7 +41,8 @@ This is an early WIP version of the README, which will be updated accordingly in
 - [**SDL2**](https://www.libsdl.org/): window, event/input processing,
 - [**IMGUI**](https://github.com/ocornut/imgui): graphical interface,
 - [**Lua**](https://www.lua.org/): scripting capabilites,
-- **GLAD** (using [Dav1dde](https://github.com/Dav1dde)'s [web-based generator](https://glad.dav1d.de/))
+- **GLAD** (using [Dav1dde](https://github.com/Dav1dde)'s [web-based generator](https://glad.dav1d.de/)),
+- [**stb_image.h](https://github.com/nothings/stb): texture loading
 
 ## Recommended reading
 - [Learn OpenGL](https://learnopengl.com/) - very useful OpenGL tutorials,
