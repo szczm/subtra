@@ -1,6 +1,8 @@
 # SUBTRA — a realtime 3D engine
 \[insert logo here\]
 
+![screenshot of current version, displaying a test triangle and an overlaying test menu](assets/screenshots/current.png)
+
 **SUBTRA** is a realtime 3D rendering engine project, which focuses on generating high quality graphics in real time on modern hardware. My main purpose with this project is to have a framework for creating demos, as well as games with high fidelity graphics. In the future it will be a safe space for 3D graphics experiments, but now it's making its first baby steps into the third dimension.
 
 This is an early WIP version of the README, which will be updated accordingly in the future.
