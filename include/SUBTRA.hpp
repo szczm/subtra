@@ -4,6 +4,7 @@
 // Utilities
 #include "Exception.hpp"
 #include "GLCommon.hpp"
+#include "GLMCommon.hpp"
 #include "Log.hpp"
 
 // Objects

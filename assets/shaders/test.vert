@@ -7,10 +7,12 @@ layout(location = 2) in vec2 inTexcoord;
 out vec3 vertexColor;
 out vec2 texcoord;
 
+uniform mat4 testMatrix;
+
 void main()
 {
     vertexColor = inColor;
     texcoord = inTexcoord;
 
-    gl_Position = vec4(inPosition, 1.0);
+    gl_Position = testMatrix * vec4(inPosition, 1.0);
 }

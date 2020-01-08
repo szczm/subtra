@@ -1,4 +1,4 @@
-// SUBTRA Common header
+// SUBTRA GL Common header
 // 2019 Matthias Scherba @szczm_
 
 #pragma once

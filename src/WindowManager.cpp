@@ -26,8 +26,11 @@ void SUBTRA::WindowManager::Init()
 
     m_testMesh = Mesh {"assets/models/test.model"};
     m_testShader = Shader {"assets/shaders/test.vert", "assets/shaders/test.frag"};
-
     m_testTexture = Texture {"assets/textures/test.jpg"};
+
+    m_testMatrix = glm::mat4(1.0f);
+    m_testMatrix = glm::rotate(m_testMatrix, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0));
+    m_testMatrix = glm::scale(m_testMatrix, glm::vec3(2.0));
 }
 
 void SUBTRA::WindowManager::Shutdown()
@@ -61,6 +64,7 @@ void SUBTRA::WindowManager::Update()
 
     // TODO: What So Not - >>>Better<<<
     m_testShader.Send("testTexture", 0);
+    m_testShader.Send("testMatrix", m_testMatrix);
     
     glDrawArrays(GL_TRIANGLES, 0, 3);
 

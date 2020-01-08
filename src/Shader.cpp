@@ -98,6 +98,11 @@ void SUBTRA::Shader::Send(const std::string& a_key, float a_value)
     glUniform1f(GetUniformLocation(a_key), a_value);
 }
 
+void SUBTRA::Shader::Send(const std::string& a_key, glm::mat4 a_value)
+{
+    glUniformMatrix4fv(GetUniformLocation(a_key), 1, GL_FALSE, glm::value_ptr(a_value));
+}
+
 void SUBTRA::Shader::LogErrors(GLuint a_shaderId)
 {
     int infoLogLength;

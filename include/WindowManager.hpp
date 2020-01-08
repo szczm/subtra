@@ -41,5 +41,6 @@ namespace SUBTRA
         Mesh m_testMesh {};
         Shader m_testShader {};
         Texture m_testTexture {};
+        glm::mat4 m_testMatrix {};
     };
 }
