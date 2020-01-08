@@ -27,7 +27,7 @@ void SUBTRA::WindowManager::Init()
     m_testMesh = Mesh {"assets/models/test.model"};
     m_testShader = Shader {"assets/shaders/test.vert", "assets/shaders/test.frag"};
 
-    m_testTexture = Texture {"assets/textures/wall.jpg"};
+    m_testTexture = Texture {"assets/textures/test.jpg"};
 }
 
 void SUBTRA::WindowManager::Shutdown()
