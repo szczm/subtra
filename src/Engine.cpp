@@ -40,7 +40,7 @@ void SUBTRA::Engine::Shutdown()
 {
     m_windowManager.Shutdown();
 
-	SDL_Quit();
+    SDL_Quit();
 }
 
 void SUBTRA::Engine::ProcessEvent(const SDL_Event& a_event)

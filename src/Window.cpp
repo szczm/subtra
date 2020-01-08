@@ -22,7 +22,7 @@ void SUBTRA::Window::Open(const std::string& a_title, int a_width, int a_height)
             SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
             a_width, a_height,
             SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL
-	    ),
+        ),
 
         // Passing to automatically destroy SDL_Window* inside the smart pointer
         SDL_DestroyWindow

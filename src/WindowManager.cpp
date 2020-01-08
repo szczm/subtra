@@ -19,7 +19,7 @@ void SUBTRA::WindowManager::Init()
 {
     InitOpenGL();
     
-	m_mainWindow.Open();
+    m_mainWindow.Open();
 
     InitGLAD();
     InitIMGUI();

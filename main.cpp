@@ -10,19 +10,19 @@ using namespace SUBTRA;
 
 int main(int, char**)
 {
-	Engine engine;
+    Engine engine;
 
-	try
-	{
-		engine.Init();
-		engine.Run();
-	}
-	catch (Exception& ex)
-	{
-		// Printing is done by the exceptions themselves
-	}
+    try
+    {
+        engine.Init();
+        engine.Run();
+    }
+    catch (Exception& ex)
+    {
+        // Printing is done by the exceptions themselves
+    }
 
-	engine.Shutdown();
+    engine.Shutdown();
 
-	return 0;
+    return 0;
 }
