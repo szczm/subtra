@@ -38,7 +38,7 @@ std::optional<SUBTRA::TextureData> SUBTRA::FileSystem::ReadTexture(const std::st
             stbi_load_from_memory
             (
                 reinterpret_cast<const unsigned char*>(text->c_str()), text->length(),
-                &textureData.width, &textureData.height, &textureData.channels, 0
+                &textureData.width, &textureData.height, &textureData.channels, STBI_rgb_alpha
             )
         );
 
