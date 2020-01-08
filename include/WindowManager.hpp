@@ -11,6 +11,7 @@
 
 #include "GLCommon.hpp"
 #include "Mesh.hpp"
+#include "Object.hpp"
 #include "Shader.hpp"
 #include "Texture.hpp"
 
@@ -41,6 +42,8 @@ namespace SUBTRA
         Mesh m_testMesh {};
         Shader m_testShader {};
         Texture m_testTexture {};
-        glm::mat4 m_testMatrix {};
+        Object m_testObject {};
+        glm::vec3 m_testAngles {};
+        float m_testScale = 0.5f;
     };
 }

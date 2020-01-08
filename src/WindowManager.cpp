@@ -27,10 +27,6 @@ void SUBTRA::WindowManager::Init()
     m_testMesh = Mesh {"assets/models/test.model"};
     m_testShader = Shader {"assets/shaders/test.vert", "assets/shaders/test.frag"};
     m_testTexture = Texture {"assets/textures/test.jpg"};
-
-    m_testMatrix = glm::mat4(1.0f);
-    m_testMatrix = glm::rotate(m_testMatrix, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0));
-    m_testMatrix = glm::scale(m_testMatrix, glm::vec3(2.0));
 }
 
 void SUBTRA::WindowManager::Shutdown()
@@ -53,7 +49,19 @@ void SUBTRA::WindowManager::Update()
 
     ImGui::NewFrame();
 
-    ImGui::ShowDemoWindow(static_cast<bool *>(0));
+    // ImGui::ShowDemoWindow(static_cast<bool *>(0));
+
+    ImGui::Begin("Test Triangle", static_cast<bool *>(0), ImGuiWindowFlags_MenuBar);
+
+    ImGui::SliderFloat("Roll", &m_testAngles.x, -10.0f, 10.0f);
+    ImGui::SliderFloat("Pitch", &m_testAngles.y, -10.0f, 10.0f);
+    ImGui::SliderFloat("Yaw", &m_testAngles.z, -10.0f, 10.0f);
+    ImGui::SliderFloat("Scale", &m_testScale, -10.0f, 10.0f);
+
+    ImGui::End();
+
+    m_testObject.transform().setAngles(m_testAngles).setScale(m_testScale);
+
     ImGui::Render();
 
     m_mainWindow.Clear();
@@ -64,7 +72,7 @@ void SUBTRA::WindowManager::Update()
 
     // TODO: What So Not - >>>Better<<<
     m_testShader.Send("testTexture", 0);
-    m_testShader.Send("testMatrix", m_testMatrix);
+    m_testShader.Send("testMatrix", m_testObject.transform().getWorldMatrix());
     
     glDrawArrays(GL_TRIANGLES, 0, 3);
 

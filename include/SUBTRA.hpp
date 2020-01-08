@@ -9,7 +9,9 @@
 
 // Objects
 #include "Mesh.hpp"
+#include "Object.hpp"
 #include "Shader.hpp"
+#include "Transform.hpp"
 #include "Window.hpp"
 
 // Modules
