@@ -28,9 +28,11 @@ namespace SUBTRA
         void Maximize() const;
         void Clear() const;
         void Swap() const;
+        void ResizeViewport(int a_width, int a_height) const;
 
         virtual void ProcessEvent(const SDL_Event& a_event);
-        void ResizeViewport(int a_width, int a_height) const;
+        virtual void UpdateIMGUI();
+        virtual void Render();
 
         std::shared_ptr<SDL_Window> GetSDLWindow() const;
         std::shared_ptr<SDL_GLContext_> GetContext() const;

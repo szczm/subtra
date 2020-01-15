@@ -69,6 +69,16 @@ void SUBTRA::Window::ProcessEvent(const SDL_Event& a_event)
         ResizeViewport(a_event.window.data1, a_event.window.data2);
 }
 
+void SUBTRA::Window::UpdateIMGUI()
+{
+    // foo.
+}
+
+void SUBTRA::Window::Render()
+{
+    // bar.
+}
+
 void SUBTRA::Window::Swap() const
 {
     SDL_GL_SwapWindow(m_sdlWindow.get());

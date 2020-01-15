@@ -18,15 +18,13 @@ SUBTRA::WindowManager::~WindowManager()
 void SUBTRA::WindowManager::Init()
 {
     InitOpenGL();
-    
+
     m_mainWindow.Open();
 
     InitGLAD();
     InitIMGUI();
 
-    m_testMesh = Mesh {"assets/models/test.model"};
-    m_testShader = Shader {"assets/shaders/test.vert", "assets/shaders/test.frag"};
-    m_testTexture = Texture {"assets/textures/test.jpg"};
+    m_mainWindow.LoadTestData();
 }
 
 void SUBTRA::WindowManager::Shutdown()
@@ -44,40 +42,18 @@ void SUBTRA::WindowManager::ProcessEvent(const SDL_Event& a_event)
 void SUBTRA::WindowManager::Update()
 {
     ImGui_ImplOpenGL3_NewFrame();
+    // TODO: allow multiple windows
     ImGui_ImplSDL2_NewFrame(m_mainWindow.GetSDLWindow().get());
 
     ImGui::NewFrame();
 
     // ImGui::ShowDemoWindow(static_cast<bool *>(0));
-
-    ImGui::Begin("Test Triangle", static_cast<bool *>(0), ImGuiWindowFlags_MenuBar);
-
-    ImGui::SliderFloat("Roll", &m_testAngles.x, -10.0f, 10.0f);
-    ImGui::SliderFloat("Pitch", &m_testAngles.y, -10.0f, 10.0f);
-    ImGui::SliderFloat("Yaw", &m_testAngles.z, -10.0f, 10.0f);
-    ImGui::SliderFloat("Scale", &m_testScale, -10.0f, 10.0f);
+    m_mainWindow.UpdateIMGUI();
 
     ImGui::End();
-
-    m_testObject.transform().setAngles(m_testAngles).setScale(m_testScale);
-
     ImGui::Render();
 
-    m_mainWindow.Clear();
-
-    m_testShader.Use();
-    m_testMesh.Bind();
-    m_testTexture.Bind();
-
-    // TODO: What So Not - >>>Better<<<
-    m_testShader.Send("testTexture", 0);
-    m_testShader.Send("testMatrix", m_testObject.transform().getWorldMatrix());
-    
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-    m_mainWindow.Swap();
+    m_mainWindow.Render();
 }
 
 void SUBTRA::WindowManager::InitOpenGL()

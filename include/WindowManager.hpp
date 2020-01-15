@@ -6,15 +6,6 @@
 #include "Window.hpp"
 #include "Windows/MainWindow.hpp"
 
-#include <glad/glad.h>
-#include <SDL2/SDL.h>
-
-#include "GLCommon.hpp"
-#include "Mesh.hpp"
-#include "Object.hpp"
-#include "Shader.hpp"
-#include "Texture.hpp"
-
 namespace SUBTRA
 {
     class WindowManager
@@ -38,12 +29,5 @@ namespace SUBTRA
         void InitIMGUI();
 
         MainWindow m_mainWindow {};
-
-        Mesh m_testMesh {};
-        Shader m_testShader {};
-        Texture m_testTexture {};
-        Object m_testObject {};
-        glm::vec3 m_testAngles {};
-        float m_testScale = 0.5f;
     };
 }
