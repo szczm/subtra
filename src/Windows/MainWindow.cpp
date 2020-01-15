@@ -25,10 +25,10 @@ void SUBTRA::MainWindow::UpdateIMGUI()
 {
     ImGui::Begin("Test Triangle", static_cast<bool *>(0), ImGuiWindowFlags_MenuBar);
 
-    ImGui::SliderFloat("Roll", &m_testAngles.x, -10.0f, 10.0f);
-    ImGui::SliderFloat("Pitch", &m_testAngles.y, -10.0f, 10.0f);
-    ImGui::SliderFloat("Yaw", &m_testAngles.z, -10.0f, 10.0f);
-    ImGui::SliderFloat("Scale", &m_testScale, -10.0f, 10.0f);
+    ImGui::DragFloat("Roll", &m_testAngles.x, 1.0f, -180.0f, 180.0f);
+    ImGui::DragFloat("Pitch", &m_testAngles.y, 1.0f, -180.0f, 180.0f);
+    ImGui::DragFloat("Yaw", &m_testAngles.z, 1.0f, -180.0f, 180.0f);
+    ImGui::DragFloat("Scale", &m_testScale, 0.05f, -2.0f, 2.0f);
 }
 
 void SUBTRA::MainWindow::Render()
