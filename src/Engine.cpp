@@ -38,7 +38,7 @@ void SUBTRA::Engine::Run()
 
 void SUBTRA::Engine::Shutdown()
 {
-    m_windowManager.Shutdown();
+    // m_windowManager.Shutdown();
 
     SDL_Quit();
 }
