@@ -1,0 +1,29 @@
+// SUBTRA Time class header
+// 2020 Matthias Scherba @szczm_
+
+#pragma once
+
+#include "Engine.hpp"
+
+#include <SDL2/SDL.h>
+
+namespace SUBTRA
+{
+    class Time
+    {
+        friend Engine;
+
+        public:
+
+        inline static float deltaTime = 0.0f;
+        inline static float time = 0.0f;
+
+        private:
+
+        Time() = delete;
+
+        static void UpdateValues();
+
+        inline static Uint32 m_lastTicks = 0.0f;
+    };
+}

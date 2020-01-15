@@ -7,6 +7,8 @@
 #include "imgui_impl_sdl.h"
 #include "imgui_impl_opengl3.h"
 
+#include "Time.hpp"
+
 
 void SUBTRA::MainWindow::Open ()
 {
@@ -24,6 +26,9 @@ void SUBTRA::MainWindow::LoadTestData ()
 void SUBTRA::MainWindow::UpdateIMGUI ()
 {
     ImGui::Begin("Test Triangle", static_cast<bool *>(0), ImGuiWindowFlags_MenuBar);
+
+    ImGui::LabelText("Time", "%f", Time::time);
+    ImGui::LabelText("Delta time", "%f", Time::deltaTime);
 
     ImGui::DragFloat("Roll", &m_testAngles.x, 1.0f, -180.0f, 180.0f);
     ImGui::DragFloat("Pitch", &m_testAngles.y, 1.0f, -180.0f, 180.0f);

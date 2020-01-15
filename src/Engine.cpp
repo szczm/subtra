@@ -7,6 +7,7 @@
 #include <SDL2/SDL.h>
 
 #include "Exception.hpp"
+#include "Time.hpp"
 
 
 SUBTRA::Engine::~Engine ()
@@ -31,6 +32,8 @@ void SUBTRA::Engine::Run ()
 
         while (SDL_PollEvent(&event))
             ProcessEvent(event);
+
+        Time::UpdateValues();
 
         m_windowManager.Update();
     }

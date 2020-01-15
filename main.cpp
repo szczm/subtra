@@ -8,7 +8,7 @@
 using namespace SUBTRA;
 
 
-int main(int, char**)
+int main (int, char**)
 {
     Engine engine;
 
