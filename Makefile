@@ -42,7 +42,7 @@ all : $(MAIN) $(OBJS)
 	$(CC) $(FLAGS) $(IGNORE_FLAGS) $(INCLUDE) $(OBJS) $(MAIN) $(LIBS) -o $(OUTPUT)
 
 debug : $(MAIN) $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) $(MAIN) $(LIBS) -g -o $(OUTPUT)
+	$(CC) $(FLAGS) $(IGNORE_FLAGS) $(INCLUDE) $(OBJS) $(MAIN) $(LIBS) -g -o $(OUTPUT)
 
 clean :
 	$(RM) $(OUTPUT) $(BUILD_DIR)
