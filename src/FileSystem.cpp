@@ -33,6 +33,9 @@ std::optional<SUBTRA::TextureData> SUBTRA::FileSystem::ReadTexture(const std::st
     {
         TextureData textureData;
 
+        // TODO: extract image code to a separate class?
+        stbi_set_flip_vertically_on_load(1);
+
         textureData.data.reset
         (
             stbi_load_from_memory
