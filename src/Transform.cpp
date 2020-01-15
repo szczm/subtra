@@ -70,9 +70,9 @@ glm::mat4 SUBTRA::Transform::getWorldMatrix()
 
 void SUBTRA::Transform::updateWorldMatrix()
 {
-    m_worldMatrix = glm::mat4(1.0);
+    glm::vec3 localAnglesRad = glm::radians(m_localAngles);
 
-    m_worldMatrix = glm::scale(m_worldMatrix, m_localScale);
-    m_worldMatrix = glm::orientate4(m_localAngles) * m_worldMatrix;
+    m_worldMatrix = glm::scale(glm::mat4(1.0), m_localScale);
+    m_worldMatrix = glm::orientate4(localAnglesRad) * m_worldMatrix;
     m_worldMatrix = glm::translate(m_worldMatrix, m_localPosition);
 }
