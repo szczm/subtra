@@ -19,23 +19,23 @@ namespace SUBTRA
     {
         public:
 
-        Window() = default;
-        explicit Window(const std::string& a_title, int a_width, int a_height);
+        Window () = default;
+        explicit Window (const std::string& a_title, int a_width, int a_height);
 
-        ~Window() = default;
+        ~Window () = default;
 
-        void Open(const std::string& a_title, int a_width, int a_height);
-        void Maximize() const;
-        void Clear() const;
-        void Swap() const;
-        void ResizeViewport(int a_width, int a_height) const;
+        void Open (const std::string& a_title, int a_width, int a_height);
+        void Maximize () const;
+        void Clear () const;
+        void Swap () const;
+        void ResizeViewport (int a_width, int a_height) const;
 
-        virtual void ProcessEvent(const SDL_Event& a_event);
-        virtual void UpdateIMGUI();
-        virtual void Render();
+        virtual void ProcessEvent (const SDL_Event& a_event);
+        virtual void UpdateIMGUI ();
+        virtual void Render ();
 
-        std::shared_ptr<SDL_Window> GetSDLWindow() const;
-        std::shared_ptr<SDL_GLContext_> GetContext() const;
+        std::shared_ptr<SDL_Window> GetSDLWindow () const;
+        std::shared_ptr<SDL_GLContext_> GetContext () const;
 
         protected:
 

@@ -12,16 +12,16 @@ namespace SUBTRA
     {
         public:
 
-        Engine() = default;
-        ~Engine();
+        Engine () = default;
+        ~Engine ();
 
-        void Init();
-        void Run();
-        void Shutdown();
+        void Init ();
+        void Run ();
+        void Shutdown ();
 
         private:
 
-        void ProcessEvent(const SDL_Event& a_event);
+        void ProcessEvent (const SDL_Event& a_event);
 
         InputManager m_inputManager {};
         WindowManager m_windowManager {};

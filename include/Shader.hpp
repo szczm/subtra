@@ -14,22 +14,22 @@ namespace SUBTRA
     {
         public:
 
-        Shader() = default;
-        explicit Shader(const std::string& a_vertexPath, const std::string& a_fragmentPath);
+        Shader () = default;
+        explicit Shader (const std::string& a_vertexPath, const std::string& a_fragmentPath);
 
-        ~Shader() = default;
+        ~Shader () = default;
 
-        void Use();
+        void Use ();
 
-        void Send(const std::string& a_key, int a_value);
-        void Send(const std::string& a_key, float a_value);
-        void Send(const std::string& a_key, glm::mat4 a_value);
+        void Send (const std::string& a_key, int a_value);
+        void Send (const std::string& a_key, float a_value);
+        void Send (const std::string& a_key, glm::mat4 a_value);
 
-        GLint GetUniformLocation(const std::string& a_key);
+        GLint GetUniformLocation (const std::string& a_key);
 
         private:
 
-        static void LogErrors(GLuint a_shaderId);
+        static void LogErrors (GLuint a_shaderId);
 
         GLuint m_programId = 0;
     };

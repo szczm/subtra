@@ -6,7 +6,7 @@
 #include <iostream>
 
 
-SUBTRA::Mesh::Mesh(const std::string& a_path)
+SUBTRA::Mesh::Mesh (const std::string& a_path)
 {
     const GLfloat vertices[] =
     {
@@ -39,7 +39,7 @@ SUBTRA::Mesh::Mesh(const std::string& a_path)
     glBindVertexArray(0);
 }
 
-void SUBTRA::Mesh::Bind()
+void SUBTRA::Mesh::Bind ()
 {
     glBindVertexArray(m_vao);
 }

@@ -9,6 +9,6 @@ namespace SUBTRA
 {
     struct Exception : public std::runtime_error
     {
-        explicit Exception(const char* a_what);
+        explicit Exception (const char* a_what);
     };
 }

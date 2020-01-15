@@ -15,13 +15,13 @@ namespace SUBTRA
     namespace Log
     {
         template<typename ...Args>
-        void Print(Args&&... args)
+        void Print (Args&&... args)
         {
             (std::cout << ... << args) << std::endl;
         }
 
         template<typename ...Args>
-        void Error(Args&&... args)
+        void Error (Args&&... args)
         {
             std::cerr << "ERROR: ";
             (std::cerr << ... << args) << std::endl;

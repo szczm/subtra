@@ -22,15 +22,15 @@ namespace SUBTRA
     {
         public:
 
-        MainWindow() = default;
-        ~MainWindow() = default;
+        MainWindow () = default;
+        ~MainWindow () = default;
 
-        void Open();
+        void Open ();
 
-        void UpdateIMGUI() override;
-        void Render() override;
+        void UpdateIMGUI () override;
+        void Render () override;
 
-        void LoadTestData();
+        void LoadTestData ();
 
         private:
 

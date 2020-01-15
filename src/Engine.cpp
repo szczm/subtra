@@ -9,12 +9,12 @@
 #include "Exception.hpp"
 
 
-SUBTRA::Engine::~Engine()
+SUBTRA::Engine::~Engine ()
 {
     Shutdown();
 }
 
-void SUBTRA::Engine::Init()
+void SUBTRA::Engine::Init ()
 {
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
         throw SUBTRA::Exception {"Could not initialize SDL"};
@@ -23,7 +23,7 @@ void SUBTRA::Engine::Init()
     m_windowManager.Init();
 }
 
-void SUBTRA::Engine::Run()
+void SUBTRA::Engine::Run ()
 {
     while (m_running)
     {
@@ -36,14 +36,14 @@ void SUBTRA::Engine::Run()
     }
 }
 
-void SUBTRA::Engine::Shutdown()
+void SUBTRA::Engine::Shutdown ()
 {
     // m_windowManager.Shutdown();
 
     SDL_Quit();
 }
 
-void SUBTRA::Engine::ProcessEvent(const SDL_Event& a_event)
+void SUBTRA::Engine::ProcessEvent (const SDL_Event& a_event)
 {
     m_inputManager.ProcessEvent(a_event);
     m_windowManager.ProcessEvent(a_event);

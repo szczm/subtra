@@ -11,10 +11,10 @@ namespace SUBTRA
     {
         public:
 
-        Object() = default;
-        ~Object() = default;
+        Object () = default;
+        ~Object () = default;
 
-        Transform & transform();
+        Transform & transform ();
 
         private:
 

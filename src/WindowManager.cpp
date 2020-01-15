@@ -10,12 +10,12 @@
 #include "Exception.hpp"
 
 
-SUBTRA::WindowManager::~WindowManager()
+SUBTRA::WindowManager::~WindowManager ()
 {
     Shutdown();
 }
 
-void SUBTRA::WindowManager::Init()
+void SUBTRA::WindowManager::Init ()
 {
     InitOpenGL();
 
@@ -27,19 +27,19 @@ void SUBTRA::WindowManager::Init()
     m_mainWindow.LoadTestData();
 }
 
-void SUBTRA::WindowManager::Shutdown()
+void SUBTRA::WindowManager::Shutdown ()
 {
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL2_Shutdown();
     ImGui::DestroyContext();
 }
 
-void SUBTRA::WindowManager::ProcessEvent(const SDL_Event& a_event)
+void SUBTRA::WindowManager::ProcessEvent (const SDL_Event& a_event)
 {
     m_mainWindow.ProcessEvent(a_event);
 }
 
-void SUBTRA::WindowManager::Update()
+void SUBTRA::WindowManager::Update ()
 {
     ImGui_ImplOpenGL3_NewFrame();
     // TODO: allow multiple windows
@@ -56,7 +56,7 @@ void SUBTRA::WindowManager::Update()
     m_mainWindow.Render();
 }
 
-void SUBTRA::WindowManager::InitOpenGL()
+void SUBTRA::WindowManager::InitOpenGL ()
 {
     // Require OpenGL 3.3
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -76,13 +76,13 @@ void SUBTRA::WindowManager::InitOpenGL()
     }
 }
 
-void SUBTRA::WindowManager::InitGLAD()
+void SUBTRA::WindowManager::InitGLAD ()
 {
     if (!gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress))
         throw SUBTRA::Exception {"Could not initialize GLAD. Does your computer support OpenGL 3.3?"};
 }
 
-void SUBTRA::WindowManager::InitIMGUI()
+void SUBTRA::WindowManager::InitIMGUI ()
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();

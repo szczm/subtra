@@ -3,7 +3,7 @@
 
 #include "Transform.hpp"
 
-SUBTRA::Transform& SUBTRA::Transform::reset()
+SUBTRA::Transform& SUBTRA::Transform::reset ()
 {
     m_localPosition = m_localAngles = {};
     m_localScale = {1.0, 1.0, 1.0};
@@ -11,7 +11,7 @@ SUBTRA::Transform& SUBTRA::Transform::reset()
     return *this;
 }
 
-SUBTRA::Transform& SUBTRA::Transform::setPosition(glm::vec3 a_position)
+SUBTRA::Transform& SUBTRA::Transform::setPosition (glm::vec3 a_position)
 {
     m_localPosition = a_position;
 
@@ -19,7 +19,7 @@ SUBTRA::Transform& SUBTRA::Transform::setPosition(glm::vec3 a_position)
     return *this;
 }
 
-SUBTRA::Transform& SUBTRA::Transform::setAngles(glm::vec3 a_angles)
+SUBTRA::Transform& SUBTRA::Transform::setAngles (glm::vec3 a_angles)
 {
     m_localAngles = a_angles;
 
@@ -27,7 +27,7 @@ SUBTRA::Transform& SUBTRA::Transform::setAngles(glm::vec3 a_angles)
     return *this;
 }
 
-SUBTRA::Transform& SUBTRA::Transform::setScale(glm::vec3 a_scale)
+SUBTRA::Transform& SUBTRA::Transform::setScale (glm::vec3 a_scale)
 {
     m_localScale = a_scale;
 
@@ -35,27 +35,27 @@ SUBTRA::Transform& SUBTRA::Transform::setScale(glm::vec3 a_scale)
     return *this;
 }
 
-SUBTRA::Transform& SUBTRA::Transform::setScale(float a_uniformScale)
+SUBTRA::Transform& SUBTRA::Transform::setScale (float a_uniformScale)
 {
     return setScale(glm::vec3(a_uniformScale));
 }
 
-glm::vec3 SUBTRA::Transform::getPosition() const
+glm::vec3 SUBTRA::Transform::getPosition () const
 {
     return m_localPosition;
 }
 
-glm::vec3 SUBTRA::Transform::getAngles() const
+glm::vec3 SUBTRA::Transform::getAngles () const
 {
     return m_localAngles;
 }
 
-glm::vec3 SUBTRA::Transform::getScale() const
+glm::vec3 SUBTRA::Transform::getScale () const
 {
     return m_localScale;
 }
 
-glm::mat4 SUBTRA::Transform::getWorldMatrix()
+glm::mat4 SUBTRA::Transform::getWorldMatrix ()
 {
     if (m_shouldUpdateWorldMatrix)
     {
@@ -68,7 +68,7 @@ glm::mat4 SUBTRA::Transform::getWorldMatrix()
 }
 
 
-void SUBTRA::Transform::updateWorldMatrix()
+void SUBTRA::Transform::updateWorldMatrix ()
 {
     glm::vec3 localAnglesRad = glm::radians(m_localAngles);
 

@@ -3,7 +3,7 @@
 
 #include "Object.hpp"
 
-SUBTRA::Transform & SUBTRA::Object::transform()
+SUBTRA::Transform & SUBTRA::Object::transform ()
 {
     return m_transform;
 }

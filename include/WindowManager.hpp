@@ -12,21 +12,21 @@ namespace SUBTRA
     {
         public:
 
-        WindowManager() = default;
-        ~WindowManager();
+        WindowManager () = default;
+        ~WindowManager ();
 
-        void Init();
-        void Shutdown();
+        void Init ();
+        void Shutdown ();
 
-        void ProcessEvent(const SDL_Event& a_event);
-        void Update();
+        void ProcessEvent (const SDL_Event& a_event);
+        void Update ();
 
         private:
 
-        void InitGLAD();
-        void InitSDL();
-        void InitOpenGL();
-        void InitIMGUI();
+        void InitGLAD ();
+        void InitSDL ();
+        void InitOpenGL ();
+        void InitIMGUI ();
 
         MainWindow m_mainWindow {};
     };

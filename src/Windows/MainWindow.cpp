@@ -8,20 +8,20 @@
 #include "imgui_impl_opengl3.h"
 
 
-void SUBTRA::MainWindow::Open()
+void SUBTRA::MainWindow::Open ()
 {
     Open("SUBTRA", 800, 600);
     Maximize();
 }
 
-void SUBTRA::MainWindow::LoadTestData()
+void SUBTRA::MainWindow::LoadTestData ()
 {
     m_testMesh = Mesh {"assets/models/test.model"};
     m_testShader = Shader {"assets/shaders/test.vert", "assets/shaders/test.frag"};
     m_testTexture = Texture {"assets/textures/test.jpg"};
 }
 
-void SUBTRA::MainWindow::UpdateIMGUI()
+void SUBTRA::MainWindow::UpdateIMGUI ()
 {
     ImGui::Begin("Test Triangle", static_cast<bool *>(0), ImGuiWindowFlags_MenuBar);
 
@@ -31,7 +31,7 @@ void SUBTRA::MainWindow::UpdateIMGUI()
     ImGui::DragFloat("Scale", &m_testScale, 0.05f, -2.0f, 2.0f);
 }
 
-void SUBTRA::MainWindow::Render()
+void SUBTRA::MainWindow::Render ()
 {
     m_testObject.transform().setAngles(m_testAngles).setScale(m_testScale);
 

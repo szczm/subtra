@@ -7,7 +7,7 @@
 #include "Log.hpp"
 
 
-SUBTRA::Texture::Texture(const std::string& a_path)
+SUBTRA::Texture::Texture (const std::string& a_path)
 {
     glGenTextures(1, &m_tex);
 
@@ -39,7 +39,7 @@ SUBTRA::Texture::Texture(const std::string& a_path)
     glActiveTexture(GL_TEXTURE0);
 }
 
-void SUBTRA::Texture::Bind()
+void SUBTRA::Texture::Bind ()
 {
     glBindTexture(GL_TEXTURE_2D, m_tex);
 }

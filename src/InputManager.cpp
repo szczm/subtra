@@ -7,7 +7,7 @@
 #include "imgui_impl_sdl.h"
 
 
-void SUBTRA::InputManager::ProcessEvent(const SDL_Event& a_event)
+void SUBTRA::InputManager::ProcessEvent (const SDL_Event& a_event)
 {
     // TODO: Check if ImGui was initialized
     ImGui_ImplSDL2_ProcessEvent(&a_event);
@@ -21,5 +21,5 @@ void SUBTRA::InputManager::ProcessEvent(const SDL_Event& a_event)
         ProcessMouseEvent(a_event);
 }
 
-void SUBTRA::InputManager::ProcessKeyboardEvent(const SDL_Event& a_event) {}
-void SUBTRA::InputManager::ProcessMouseEvent(const SDL_Event& a_event) {}
+void SUBTRA::InputManager::ProcessKeyboardEvent (const SDL_Event& a_event) {}
+void SUBTRA::InputManager::ProcessMouseEvent (const SDL_Event& a_event) {}
