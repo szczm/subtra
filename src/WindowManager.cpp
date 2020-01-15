@@ -38,8 +38,7 @@ void SUBTRA::WindowManager::Shutdown()
 
 void SUBTRA::WindowManager::ProcessEvent(const SDL_Event& a_event)
 {
-    if (a_event.type == SDL_WINDOWEVENT && a_event.window.event == SDL_WINDOWEVENT_RESIZED)
-        m_mainWindow.ResizeViewport(a_event.window.data1, a_event.window.data2);
+    m_mainWindow.ProcessEvent(a_event);
 }
 
 void SUBTRA::WindowManager::Update()
