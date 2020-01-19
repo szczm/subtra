@@ -7,6 +7,8 @@
 #include "imgui_impl_sdl.h"
 #include "imgui_impl_opengl3.h"
 
+#include "Components/Camera.hpp"
+#include "ComponentManager.hpp"
 #include "Time.hpp"
 
 
@@ -21,6 +23,8 @@ void SUBTRA::MainWindow::LoadTestData ()
     m_testMesh = Mesh {"assets/models/test.model"};
     m_testShader = Shader {"assets/shaders/test.vert", "assets/shaders/test.frag"};
     m_testTexture = Texture {"assets/textures/test.jpg"};
+
+    m_testObject.AddComponent<Camera>();
 }
 
 void SUBTRA::MainWindow::UpdateIMGUI ()
@@ -38,6 +42,11 @@ void SUBTRA::MainWindow::UpdateIMGUI ()
 
 void SUBTRA::MainWindow::Render ()
 {
+    for (Component& component : ComponentManager::GetComponents<Component>())
+    {
+        component.Update();
+    }
+
     m_testObject.transform().setAngles(m_testAngles).setScale(m_testScale);
 
     Clear();

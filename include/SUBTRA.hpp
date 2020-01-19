@@ -8,6 +8,7 @@
 #include "Log.hpp"
 
 // Objects
+#include "Component.hpp"
 #include "Mesh.hpp"
 #include "Object.hpp"
 #include "Shader.hpp"
@@ -15,6 +16,7 @@
 #include "Window.hpp"
 
 // Modules
+#include "ComponentManager.hpp"
 #include "InputManager.hpp"
 #include "FileSystem.hpp"
 #include "WindowManager.hpp"
