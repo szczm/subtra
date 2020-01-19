@@ -8,11 +8,13 @@ out vec3 vertexColor;
 out vec2 texcoord;
 
 uniform mat4 testMatrix;
+uniform mat4 projection;
+uniform mat4 view;
 
 void main()
 {
     vertexColor = inColor;
     texcoord = inTexcoord;
 
-    gl_Position = testMatrix * vec4(inPosition, 1.0);
+    gl_Position = projection * view * testMatrix * vec4(inPosition, 1.0);
 }

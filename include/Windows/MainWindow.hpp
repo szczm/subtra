@@ -5,9 +5,12 @@
 
 #include "Window.hpp"
 
+#include <memory>
+
 #include <glad/glad.h>
 #include <SDL2/SDL.h>
 
+#include "Components/Camera.hpp"
 #include "GLCommon.hpp"
 #include "Mesh.hpp"
 #include "Object.hpp"
@@ -28,6 +31,7 @@ namespace SUBTRA
         void Open ();
         void LoadTestData ();
 
+        void ProcessEvent (const SDL_Event& a_event);
         void UpdateIMGUI () override;
         void Render () override;
 
@@ -41,6 +45,7 @@ namespace SUBTRA
         Texture m_testTexture {};
         Object m_testObject {};
         glm::vec3 m_testAngles {};
+        std::shared_ptr<Camera> m_testCamera {};
         float m_testScale = 0.5f;
     };
 }

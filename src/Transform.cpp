@@ -3,7 +3,7 @@
 
 #include "Transform.hpp"
 
-SUBTRA::Transform& SUBTRA::Transform::reset ()
+SUBTRA::Transform& SUBTRA::Transform::Reset ()
 {
     m_localPosition = m_localAngles = {};
     m_localScale = {1.0, 1.0, 1.0};
@@ -11,7 +11,7 @@ SUBTRA::Transform& SUBTRA::Transform::reset ()
     return *this;
 }
 
-SUBTRA::Transform& SUBTRA::Transform::setPosition (glm::vec3 a_position)
+SUBTRA::Transform& SUBTRA::Transform::SetPosition (glm::vec3 a_position)
 {
     m_localPosition = a_position;
 
@@ -19,7 +19,7 @@ SUBTRA::Transform& SUBTRA::Transform::setPosition (glm::vec3 a_position)
     return *this;
 }
 
-SUBTRA::Transform& SUBTRA::Transform::setAngles (glm::vec3 a_angles)
+SUBTRA::Transform& SUBTRA::Transform::SetAngles (glm::vec3 a_angles)
 {
     m_localAngles = a_angles;
 
@@ -27,7 +27,7 @@ SUBTRA::Transform& SUBTRA::Transform::setAngles (glm::vec3 a_angles)
     return *this;
 }
 
-SUBTRA::Transform& SUBTRA::Transform::setScale (glm::vec3 a_scale)
+SUBTRA::Transform& SUBTRA::Transform::SetScale (glm::vec3 a_scale)
 {
     m_localScale = a_scale;
 
@@ -35,31 +35,31 @@ SUBTRA::Transform& SUBTRA::Transform::setScale (glm::vec3 a_scale)
     return *this;
 }
 
-SUBTRA::Transform& SUBTRA::Transform::setScale (float a_uniformScale)
+SUBTRA::Transform& SUBTRA::Transform::SetScale (float a_uniformScale)
 {
-    return setScale(glm::vec3(a_uniformScale));
+    return SetScale(glm::vec3(a_uniformScale));
 }
 
-glm::vec3 SUBTRA::Transform::getPosition () const
+glm::vec3 SUBTRA::Transform::GetPosition () const
 {
     return m_localPosition;
 }
 
-glm::vec3 SUBTRA::Transform::getAngles () const
+glm::vec3 SUBTRA::Transform::GetAngles () const
 {
     return m_localAngles;
 }
 
-glm::vec3 SUBTRA::Transform::getScale () const
+glm::vec3 SUBTRA::Transform::GetScale () const
 {
     return m_localScale;
 }
 
-glm::mat4 SUBTRA::Transform::getWorldMatrix ()
+glm::mat4 SUBTRA::Transform::GetWorldMatrix ()
 {
     if (m_shouldUpdateWorldMatrix)
     {
-        updateWorldMatrix();
+        UpdateWorldMatrix();
 
         m_shouldUpdateWorldMatrix = false;
     }
@@ -68,11 +68,13 @@ glm::mat4 SUBTRA::Transform::getWorldMatrix ()
 }
 
 
-void SUBTRA::Transform::updateWorldMatrix ()
+void SUBTRA::Transform::UpdateWorldMatrix ()
 {
     glm::vec3 localAnglesRad = glm::radians(m_localAngles);
 
-    m_worldMatrix = glm::scale(glm::mat4(1.0), m_localScale);
-    m_worldMatrix = glm::orientate4(localAnglesRad) * m_worldMatrix;
-    m_worldMatrix = glm::translate(m_worldMatrix, m_localPosition);
+    glm::mat4 scale = glm::scale(glm::mat4(1.0), m_localScale);
+    glm::mat4 rotate = glm::orientate4(localAnglesRad);
+    glm::mat4 translate = glm::translate(glm::mat4(1.0), m_localPosition);
+
+    m_worldMatrix = translate * rotate * scale;
 }

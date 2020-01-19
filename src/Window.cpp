@@ -57,9 +57,12 @@ void SUBTRA::Window::Clear () const
 }
 
 // TODO: Assumes single window and context
-void SUBTRA::Window::ResizeViewport (int a_width, int a_height) const
+void SUBTRA::Window::ResizeViewport (int a_width, int a_height)
 {
     glViewport(0, 0, a_width, a_height);
+
+    m_width = a_width;
+    m_height = a_height;
 }
 
 // TODO: Assumes single window and context

@@ -20,12 +20,15 @@ namespace SUBTRA
         Object () = default;
         ~Object () = default;
 
-        Transform& transform ();
+        Transform& GetTransform ();
 
         template <class T>
-        void AddComponent ()
+        std::shared_ptr<T> AddComponent ()
         {
-            m_components.push_back(ComponentManager::AddComponent<T>());
+            auto component = ComponentManager::AddComponent<T>();
+            m_components.push_back(component);
+
+            return component;
         }
 
 

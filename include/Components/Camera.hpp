@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include "GLMCommon.hpp"
+
 #include "Component.hpp"
 
 
@@ -15,5 +17,21 @@ namespace SUBTRA
         void Init () override;
         void Update () override;
         void Destroy () override;
+
+        void SetFoV (float a_fov);
+        void SetAspect (float a_fov);
+
+        glm::mat4 GetProjectionMatrix ();
+
+
+        private:
+
+        void UpdateProjectionMatrix ();
+        bool m_shouldUpdateProjectionMatrix = true;
+
+        glm::mat4 m_projectionMatrix = glm::mat4(1.0);
+
+        float m_fov = 60.0f;
+        float m_aspect = 1.0;
     };
 }

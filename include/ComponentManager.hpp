@@ -16,7 +16,7 @@ namespace SUBTRA
         public:
 
         template <class T>
-        static ComponentPtr AddComponent ()
+        static std::shared_ptr<T> AddComponent ()
         {
             auto component = std::make_shared<T>();
             m_components.push_back(component);

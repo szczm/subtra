@@ -27,7 +27,7 @@ namespace SUBTRA
         void Maximize () const;
         void Clear () const;
         void Swap () const;
-        void ResizeViewport (int a_width, int a_height) const;
+        void ResizeViewport (int a_width, int a_height);
 
         std::shared_ptr<SDL_Window> GetSDLWindow () const;
         std::shared_ptr<SDL_GLContext_> GetContext () const;
@@ -41,5 +41,8 @@ namespace SUBTRA
 
         std::shared_ptr<SDL_Window> m_sdlWindow {};
         std::shared_ptr<SDL_GLContext_> m_sdlContext {};
+
+        int m_width = 0;
+        int m_height = 0;
     };
 }

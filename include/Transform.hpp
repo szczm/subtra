@@ -14,24 +14,24 @@ namespace SUBTRA
         Transform () = default;
         ~Transform () = default;
 
-        Transform& reset ();
+        Transform& Reset ();
         // Transform& reset(Transform& a_template);
 
-        Transform& setPosition (glm::vec3 a_position);
-        Transform& setAngles (glm::vec3 a_angles);
-        Transform& setScale (glm::vec3 a_scale);
-        Transform& setScale (float a_uniformScale);
+        Transform& SetPosition (glm::vec3 a_position);
+        Transform& SetAngles (glm::vec3 a_angles);
+        Transform& SetScale (glm::vec3 a_scale);
+        Transform& SetScale (float a_uniformScale);
 
-        glm::vec3 getPosition () const;
-        glm::vec3 getAngles () const;
-        glm::vec3 getScale () const;
+        glm::vec3 GetPosition () const;
+        glm::vec3 GetAngles () const;
+        glm::vec3 GetScale () const;
 
-        glm::mat4 getWorldMatrix ();
+        glm::mat4 GetWorldMatrix ();
 
 
         private:
 
-        void updateWorldMatrix ();
+        void UpdateWorldMatrix ();
         bool m_shouldUpdateWorldMatrix = false;
 
         glm::mat4 m_worldMatrix = glm::mat4(1.0);
