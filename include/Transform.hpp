@@ -28,6 +28,7 @@ namespace SUBTRA
 
         glm::mat4 getWorldMatrix ();
 
+
         private:
 
         void updateWorldMatrix ();

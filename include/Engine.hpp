@@ -19,6 +19,7 @@ namespace SUBTRA
         void Run ();
         void Shutdown ();
 
+
         private:
 
         void ProcessEvent (const SDL_Event& a_event);

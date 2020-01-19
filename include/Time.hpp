@@ -11,16 +11,18 @@ namespace SUBTRA
 {
     class Time
     {
-        friend Engine;
-
         public:
 
         inline static float deltaTime = 0.0f;
         inline static float time = 0.0f;
 
+        friend Engine;
+
+
         private:
 
         Time() = delete;
+        ~Time() = default;
 
         static void UpdateValues();
 

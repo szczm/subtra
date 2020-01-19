@@ -14,9 +14,8 @@ namespace SUBTRA
     {
         public:
 
-        Shader () = default;
         explicit Shader (const std::string& a_vertexPath, const std::string& a_fragmentPath);
-
+        Shader () = default;
         ~Shader () = default;
 
         void Use ();
@@ -26,6 +25,7 @@ namespace SUBTRA
         void Send (const std::string& a_key, glm::mat4 a_value);
 
         GLint GetUniformLocation (const std::string& a_key);
+
 
         private:
 

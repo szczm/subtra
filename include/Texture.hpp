@@ -15,12 +15,12 @@ namespace SUBTRA
     {
         public:
 
-        Texture () = default;
         explicit Texture (const std::string& a_path);
-
+        Texture () = default;
         ~Texture () = default;
 
         void Bind ();
+
 
         private:
 

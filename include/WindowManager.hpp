@@ -16,10 +16,12 @@ namespace SUBTRA
         ~WindowManager ();
 
         void Init ();
-        void Shutdown ();
 
         void ProcessEvent (const SDL_Event& a_event);
         void Update ();
+
+        void Shutdown ();
+
 
         private:
 

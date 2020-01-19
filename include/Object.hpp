@@ -14,7 +14,8 @@ namespace SUBTRA
         Object () = default;
         ~Object () = default;
 
-        Transform & transform ();
+        Transform& transform ();
+
 
         private:
 

@@ -14,9 +14,10 @@ namespace SUBTRA
         InputManager () = default;
         ~InputManager () = default;
 
-        void Init () {};
+        void Init ();
 
         void ProcessEvent (const SDL_Event& a_event);
+        
 
         private:
 

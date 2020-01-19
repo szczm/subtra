@@ -26,11 +26,11 @@ namespace SUBTRA
         ~MainWindow () = default;
 
         void Open ();
+        void LoadTestData ();
 
         void UpdateIMGUI () override;
         void Render () override;
 
-        void LoadTestData ();
 
         private:
 

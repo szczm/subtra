@@ -26,7 +26,5 @@ namespace SUBTRA
 
         std::optional<std::string> ReadText (const std::string& a_path) const;
         std::optional<TextureData> ReadTexture (const std::string& a_path) const;
-
-        private:
     };
 }

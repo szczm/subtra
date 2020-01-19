@@ -20,12 +20,12 @@ namespace SUBTRA
     {
         public:
 
-        Mesh () = default;
         explicit Mesh (const std::string& a_path);
-
+        Mesh () = default;
         ~Mesh () = default;
 
         void Bind ();
+
 
         private:
 
