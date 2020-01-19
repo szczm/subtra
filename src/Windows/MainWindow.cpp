@@ -11,6 +11,8 @@
 #include "ComponentManager.hpp"
 #include "Time.hpp"
 
+#include "Log.hpp"
+
 
 void SUBTRA::MainWindow::Open ()
 {
@@ -42,9 +44,14 @@ void SUBTRA::MainWindow::UpdateIMGUI ()
 
 void SUBTRA::MainWindow::Render ()
 {
-    for (Component& component : ComponentManager::GetComponents<Component>())
+    for (Component& component : ComponentManager::GetComponents())
     {
         component.Update();
+    }
+
+    for (Camera& camera : ComponentManager::GetComponents<Camera>())
+    {
+        camera.Update();
     }
 
     m_testObject.transform().setAngles(m_testAngles).setScale(m_testScale);

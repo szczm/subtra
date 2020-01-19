@@ -24,7 +24,7 @@ namespace SUBTRA
             return component;
         }
 
-        template <class T>
+        template <typename T>
         static std::vector<std::reference_wrapper<T>> GetComponents ()
         {
             std::vector<std::reference_wrapper<T>> components;
@@ -40,9 +40,14 @@ namespace SUBTRA
             return components;
         }
 
+        static std::vector<std::reference_wrapper<Component>> GetComponents ()
+        {
+            return GetComponents<Component>();
+        }
+
 
         private:
 
-        inline static std::vector<ComponentPtr> m_components;
+        inline static std::vector<ComponentPtr> m_components {};
     };
 }
