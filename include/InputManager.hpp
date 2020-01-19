@@ -1,5 +1,5 @@
-// SUBTRA InputManager class header
-// 2019 Matthias Scherba @szczm_
+// SUBTRA Input Manager class header
+// 2020 Matthias Scherba @szczm_
 
 #pragma once
 
@@ -17,7 +17,7 @@ namespace SUBTRA
         void Init ();
 
         void ProcessEvent (const SDL_Event& a_event);
-        
+
 
         private:
 

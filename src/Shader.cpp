@@ -1,5 +1,5 @@
 // SUBTRA Shader class source
-// 2019 Matthias Scherba @szczm_
+// 2020 Matthias Scherba @szczm_
 
 #include "Shader.hpp"
 

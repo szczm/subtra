@@ -1,5 +1,5 @@
-// SUBTRA MainWindow class header
-// 2019 Matthias Scherba @szczm_
+// SUBTRA Main Window class header
+// 2020 Matthias Scherba @szczm_
 
 #pragma once
 

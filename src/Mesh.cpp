@@ -1,5 +1,5 @@
 // SUBTRA Mesh class source
-// 2019 Matthias Scherba @szczm_
+// 2020 Matthias Scherba @szczm_
 
 #include "Mesh.hpp"
 

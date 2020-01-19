@@ -1,5 +1,5 @@
-// SUBTRA InputManager class header
-// 2019 Matthias Scherba @szczm_
+// SUBTRA Input Manager class header
+// 2020 Matthias Scherba @szczm_
 
 #include "InputManager.hpp"
 

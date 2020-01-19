@@ -1,5 +1,5 @@
 // SUBTRA Shader class header
-// 2019 Matthias Scherba @szczm_
+// 2020 Matthias Scherba @szczm_
 
 #pragma once
 

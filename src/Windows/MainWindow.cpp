@@ -1,5 +1,5 @@
-// SUBTRA MainWindow class source
-// 2019 Matthias Scherba @szczm_
+// SUBTRA Main Window class source
+// 2020 Matthias Scherba @szczm_
 
 #include "Windows/MainWindow.hpp"
 

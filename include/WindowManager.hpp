@@ -1,5 +1,5 @@
-// SUBTRA WindowManager class header
-// 2019 Matthias Scherba @szczm_
+// SUBTRA Window Manager class header
+// 2020 Matthias Scherba @szczm_
 
 #pragma once
 

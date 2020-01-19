@@ -1,5 +1,5 @@
-// SUBTRA FileSystem class header
-// 2019 Matthias Scherba @szczm_
+// SUBTRA File System class header
+// 2020 Matthias Scherba @szczm_
 
 #include "FileSystem.hpp"
 

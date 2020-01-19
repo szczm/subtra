@@ -1,5 +1,5 @@
-// SUBTRA WindowManager class source
-// 2019 Matthias Scherba @szczm_
+// SUBTRA Window Manager class source
+// 2020 Matthias Scherba @szczm_
 
 #include "WindowManager.hpp"
 

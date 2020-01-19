@@ -1,5 +1,5 @@
 // SUBTRA Transform class source
-// 2019-2020 Matthias Scherba @szczm_
+// 2020 Matthias Scherba @szczm_
 
 #include "Transform.hpp"
 
