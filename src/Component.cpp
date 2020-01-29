@@ -8,10 +8,10 @@
 
 SUBTRA::Component::Component ()
 {
-    // ComponentManager::AddComponent(ComponentPtr(this));
+    // ComponentManager::AddComponent(ComponentPointer(this));
 }
 
 SUBTRA::Component::~Component ()
 {
-    // ComponentManager::RemoveComponent(ComponentPtr(this));
+    // ComponentManager::RemoveComponent(ComponentPointer(this));
 }

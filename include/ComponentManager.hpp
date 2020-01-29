@@ -29,7 +29,7 @@ namespace SUBTRA
         {
             std::vector<std::reference_wrapper<T>> components;
 
-            for (ComponentPtr component : m_components)
+            for (ComponentPointer component : m_components)
             {
                 if (auto* Tcomponent = dynamic_cast<T*>(component.get()))
                 {
@@ -48,6 +48,6 @@ namespace SUBTRA
 
         private:
 
-        inline static std::vector<ComponentPtr> m_components {};
+        inline static std::vector<ComponentPointer> m_components {};
     };
 }

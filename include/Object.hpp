@@ -35,6 +35,6 @@ namespace SUBTRA
         private:
 
         Transform m_transform {};
-        std::vector<ComponentPtr> m_components {};
+        std::vector<ComponentPointer> m_components {};
     };
 }

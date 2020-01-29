@@ -20,5 +20,5 @@ namespace SUBTRA
         virtual void Destroy () = 0;
     };
 
-    typedef std::shared_ptr<Component> ComponentPtr;
+    using ComponentPointer = std::shared_ptr<Component>;
 }

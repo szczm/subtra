@@ -13,7 +13,7 @@
 
 namespace SUBTRA
 {
-    typedef std::remove_pointer<SDL_GLContext>::type SDL_GLContext_;
+    using SDL_GLContext = std::remove_pointer<SDL_GLContext>::type;
 
     class Window
     {
@@ -30,7 +30,7 @@ namespace SUBTRA
         void ResizeViewport (int a_width, int a_height);
 
         std::shared_ptr<SDL_Window> GetSDLWindow () const;
-        std::shared_ptr<SDL_GLContext_> GetContext () const;
+        std::shared_ptr<SDL_GLContext> GetContext () const;
 
         virtual void ProcessEvent (const SDL_Event& a_event);
         virtual void UpdateIMGUI ();
@@ -40,7 +40,7 @@ namespace SUBTRA
         protected:
 
         std::shared_ptr<SDL_Window> m_sdlWindow {};
-        std::shared_ptr<SDL_GLContext_> m_sdlContext {};
+        std::shared_ptr<SDL_GLContext> m_sdlContext {};
 
         int m_width = 0;
         int m_height = 0;
