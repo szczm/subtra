@@ -87,12 +87,12 @@ void SUBTRA::Window::Swap () const
     SDL_GL_SwapWindow(m_sdlWindow.get());
 }
 
-std::shared_ptr<SDL_Window> SUBTRA::Window::GetSDLWindow () const
+std::weak_ptr<SDL_Window> SUBTRA::Window::GetSDLWindow () const
 {
     return m_sdlWindow;
 }
 
-std::shared_ptr<SUBTRA::SDL_GLContext> SUBTRA::Window::GetContext () const
+std::weak_ptr<SUBTRA::SDL_GLContext> SUBTRA::Window::GetContext () const
 {
     return m_sdlContext;
 }

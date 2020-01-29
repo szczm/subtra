@@ -42,9 +42,14 @@ void SUBTRA::WindowManager::ProcessEvent (const SDL_Event& a_event)
 void SUBTRA::WindowManager::Update ()
 {
     ImGui_ImplOpenGL3_NewFrame();
-    // TODO: allow multiple windows
-    ImGui_ImplSDL2_NewFrame(m_mainWindow.GetSDLWindow().get());
 
+    // TODO: allow multiple windows
+    // TODO: improve below after decoupling context/window creation
+    if (auto window = m_mainWindow.GetSDLWindow().lock())
+    {
+        ImGui_ImplSDL2_NewFrame(window.get());
+    }
+    
     ImGui::NewFrame();
 
     // ImGui::ShowDemoWindow(static_cast<bool *>(0));
@@ -90,9 +95,13 @@ void SUBTRA::WindowManager::InitIMGUI ()
     // antisocial energy saving club
     ImGui::StyleColorsDark();
 
-    auto window = m_mainWindow.GetSDLWindow().get();
-    auto context = m_mainWindow.GetContext().get();
+    // TODO: improve below after decoupling context/window creation
+    if (auto window = m_mainWindow.GetSDLWindow().lock())
+    if (auto context = m_mainWindow.GetContext().lock())
+    {
+        ImGui_ImplSDL2_InitForOpenGL(window.get(), context.get());
+    }
 
-    ImGui_ImplSDL2_InitForOpenGL(window, context);
+    // ImGui_ImplSDL2_InitForOpenGL(window, context);
     ImGui_ImplOpenGL3_Init("#version 330 core");
 }
