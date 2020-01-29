@@ -13,7 +13,7 @@
 
 namespace SUBTRA
 {
-    class Object
+    class Object final
     {
         public:
 

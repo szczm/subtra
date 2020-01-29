@@ -21,7 +21,7 @@
 namespace SUBTRA
 {
     // Move default main window properties away from construction site
-    class MainWindow : public Window
+    class MainWindow final : public Window
     {
         public:
 

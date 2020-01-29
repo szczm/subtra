@@ -8,7 +8,7 @@
 
 namespace SUBTRA
 {
-    class Engine
+    class Engine final
     {
         public:
 

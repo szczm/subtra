@@ -8,7 +8,7 @@
 
 namespace SUBTRA
 {
-    class WindowManager
+    class WindowManager final
     {
         public:
 

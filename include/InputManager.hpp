@@ -7,7 +7,7 @@
 
 namespace SUBTRA
 {
-    class InputManager
+    class InputManager final
     {
         public:
 

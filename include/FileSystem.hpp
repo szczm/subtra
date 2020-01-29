@@ -17,7 +17,7 @@ namespace SUBTRA
         std::shared_ptr<unsigned char> data;
     };
 
-    class FileSystem
+    class FileSystem final
     {
         public:
 

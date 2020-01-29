@@ -9,7 +9,7 @@
 
 namespace SUBTRA
 {
-    class Time
+    class Time final
     {
         public:
 

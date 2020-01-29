@@ -11,7 +11,7 @@
 
 namespace SUBTRA
 {
-    class ComponentManager
+    class ComponentManager final
     {
         public:
 

@@ -7,7 +7,7 @@
 
 namespace SUBTRA
 {
-    class Transform
+    class Transform final
     {
         public:
 
