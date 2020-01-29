@@ -44,7 +44,7 @@ This is an early WIP version of the README, which will be updated accordingly in
 - [**IMGUI**](https://github.com/ocornut/imgui): graphical interface,
 - [**Lua**](https://www.lua.org/): scripting capabilites,
 - **GLAD** (using [Dav1dde](https://github.com/Dav1dde)'s [web-based generator](https://glad.dav1d.de/)),
-- [**stb_image.h](https://github.com/nothings/stb): texture loading
+- [**stb_image.h**](https://github.com/nothings/stb): texture loading
 
 ## Recommended reading
 - [Learn OpenGL](https://learnopengl.com/) - very useful OpenGL tutorials,
@@ -59,7 +59,7 @@ This is an early WIP version of the README, which will be updated accordingly in
 
   Just came up with this name when I was thinking about the word _subtractive_. It sounds like a secret U.S. government program like MK-Ultra, and the word itself immediately gave me some ideas for a logo (WIP).
   
-  Other early (worse) candidates: **blob**, **HUE**, **PRISM Engine**. I hereby waive all my rights to these names, feel free to use any of these byproducts. Definitely not gonna use the **_HUEHUEHUEHUE_** name.
+  Other early (worse) candidates: **blob**, **HUE**, **PRISM Engine**. I hereby waive all my rights to those names, feel free to use any of these byproducts. Definitely not gonna use the **_HUEHUEHUEHUE_** name.
   
 ## Contribute
 Do you know how to build stuff? Do you know how to test stuff? You're hired! Try building a standalone executable for your platform of choice, make instructions on how to build it in that environment, and I'll be more than happy to include it in this repository. To contact me, use info at the bottom of this page.
