@@ -13,7 +13,7 @@ void SUBTRA::Camera::Init ()
 
 void SUBTRA::Camera::Update ()
 {
-    Log::Print("Camera update");
+    // Log::Print("Camera update");
 }
 
 void SUBTRA::Camera::Destroy ()

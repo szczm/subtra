@@ -74,8 +74,8 @@ void SUBTRA::MainWindow::Render ()
     m_testTexture.Bind();
 
     // TODO: What So Not - >>>Better<<<
-    m_testShader.Send("testTexture", 0);
-    m_testShader.Send("testMatrix", m_testObject.GetTransform().GetWorldMatrix());
+    m_testShader.Send("albedo", 0);
+    m_testShader.Send("world", m_testObject.GetTransform().GetWorldMatrix());
     m_testShader.Send("view", glm::mat4(1.0));
     m_testShader.Send("projection", m_testCamera->GetProjectionMatrix());
     
