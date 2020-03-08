@@ -3,22 +3,22 @@
 
 #pragma once
 
-#include <memory>
-
 
 namespace SUBTRA
 {
+    class Object;
+
     class Component
     {
         public:
 
-        Component ();
+        explicit Component (const Object& a_object);
         virtual ~Component () = 0;
 
         virtual void Init () = 0;
         virtual void Update () = 0;
         virtual void Destroy () = 0;
-    };
 
-    using ComponentPointer = std::shared_ptr<Component>;
+        const Object& m_object;
+    };
 }

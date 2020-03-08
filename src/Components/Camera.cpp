@@ -5,6 +5,11 @@
 
 #include "Log.hpp"
 
+SUBTRA::Camera::Camera(const Object& a_object)
+ : Component(a_object)
+{
+
+}
 
 void SUBTRA::Camera::Init ()
 {

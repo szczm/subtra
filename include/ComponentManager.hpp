@@ -11,17 +11,15 @@
 
 namespace SUBTRA
 {
+    using ComponentPtr = std::weak_ptr<Component>;
+
     class ComponentManager final
     {
         public:
 
-        template <class T>
-        static std::shared_ptr<T> AddComponent ()
+        static void AddComponent (ComponentPtr a_component)
         {
-            auto component = std::make_shared<T>();
-            m_components.push_back(component);
-
-            return component;
+            m_components.push_back(a_component);
         }
 
         template <typename T>
@@ -29,12 +27,22 @@ namespace SUBTRA
         {
             std::vector<std::reference_wrapper<T>> components;
 
-            for (ComponentPointer component : m_components)
+            for (auto it = m_components.begin(); it != m_components.end(); /**/)
             {
-                if (auto* Tcomponent = dynamic_cast<T*>(component.get()))
+                if (auto component = it->lock())
                 {
-                    components.push_back(*Tcomponent);
+                    if (auto* Tcomponent = dynamic_cast<T*>(component.get()))
+                    {
+                        components.push_back(*Tcomponent);
+                    }
+
+                    ++it;
                 }
+                else
+                {
+                    it = m_components.erase(it);
+                }
+                
             }
 
             return components;
@@ -48,6 +56,6 @@ namespace SUBTRA
 
         private:
 
-        inline static std::vector<ComponentPointer> m_components {};
+        inline static std::vector<ComponentPtr> m_components {};
     };
 }

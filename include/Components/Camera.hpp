@@ -14,6 +14,8 @@ namespace SUBTRA
     {
         public:
 
+        Camera(const Object& a_object);
+
         void Init () override;
         void Update () override;
         void Destroy () override;

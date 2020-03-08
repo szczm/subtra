@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <memory>
 #include <vector>
 
 #include "Transform.hpp"
@@ -25,8 +26,10 @@ namespace SUBTRA
         template <class T>
         std::shared_ptr<T> AddComponent ()
         {
-            auto component = ComponentManager::AddComponent<T>();
+            auto component = std::make_shared<T>(*this);
+
             m_components.push_back(component);
+            ComponentManager::AddComponent(component);
 
             return component;
         }
@@ -35,6 +38,6 @@ namespace SUBTRA
         private:
 
         Transform m_transform {};
-        std::vector<ComponentPointer> m_components {};
+        std::vector<std::shared_ptr<Component>> m_components {};
     };
 }
