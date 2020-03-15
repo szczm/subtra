@@ -14,7 +14,7 @@ namespace SUBTRA
     {
         public:
 
-        Camera(const Object& a_object);
+        Camera (const Object& a_object);
 
         void Init () override;
         void Update () override;
@@ -29,7 +29,7 @@ namespace SUBTRA
         private:
 
         void UpdateProjectionMatrix ();
-        bool m_shouldUpdateProjectionMatrix = true;
+        bool m_isDirty = true;
 
         glm::mat4 m_projectionMatrix = glm::mat4(1.0);
 

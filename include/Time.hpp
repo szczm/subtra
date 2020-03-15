@@ -21,10 +21,10 @@ namespace SUBTRA
 
         private:
 
-        Time() = delete;
-        ~Time() = default;
+        Time () = delete;
+        ~Time () = default;
 
-        static void UpdateValues();
+        static void Update ();
 
         inline static Uint32 m_lastTicks = 0.0f;
     };

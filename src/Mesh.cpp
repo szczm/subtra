@@ -24,7 +24,6 @@ SUBTRA::Mesh::Mesh (const std::string& a_path)
     glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    // Bind position vertex attribs
     glEnableVertexAttribArray(VertexAttrib::Position);
     glEnableVertexAttribArray(VertexAttrib::Color);
     glEnableVertexAttribArray(VertexAttrib::TexCoord);

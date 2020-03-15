@@ -102,6 +102,6 @@ void SUBTRA::WindowManager::InitIMGUI ()
         ImGui_ImplSDL2_InitForOpenGL(window.get(), context.get());
     }
 
-    // ImGui_ImplSDL2_InitForOpenGL(window, context);
+    // TODO: wtf is this
     ImGui_ImplOpenGL3_Init("#version 330 core");
 }

@@ -32,7 +32,7 @@ namespace SUBTRA
         private:
 
         void UpdateWorldMatrix ();
-        bool m_shouldUpdateWorldMatrix = false;
+        bool m_isDirty = true;
 
         glm::mat4 m_worldMatrix = glm::mat4(1.0);
 

@@ -29,14 +29,14 @@ SUBTRA::Texture::Texture (const std::string& a_path)
     {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureData->width, textureData->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData->data.get());
         glGenerateMipmap(GL_TEXTURE_2D);
+
+        // TODO: just once?
+        glActiveTexture(GL_TEXTURE0);
     }
     else
     {
         Log::Print("Texture ", a_path, " could not be loaded");
     }
-
-    // TODO: just once?
-    glActiveTexture(GL_TEXTURE0);
 }
 
 void SUBTRA::Texture::Bind ()

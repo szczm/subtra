@@ -29,7 +29,9 @@ void SUBTRA::Window::Open (const std::string& a_title, int a_width, int a_height
     );
 
     if (!m_sdlWindow)
+    {
         throw SUBTRA::Exception {"Could not open window"};
+    }
 
     // ...and create context
     m_sdlContext.reset
@@ -39,7 +41,9 @@ void SUBTRA::Window::Open (const std::string& a_title, int a_width, int a_height
     );
 
     if (!m_sdlContext)
+    {
         throw SUBTRA::Exception {"Could not open context"};
+    }
 
     SDL_GL_MakeCurrent(m_sdlWindow.get(), m_sdlContext.get());
 }
@@ -69,7 +73,9 @@ void SUBTRA::Window::ResizeViewport (int a_width, int a_height)
 void SUBTRA::Window::ProcessEvent (const SDL_Event& a_event)
 {
     if (a_event.type == SDL_WINDOWEVENT && a_event.window.event == SDL_WINDOWEVENT_RESIZED)
+    {
         ResizeViewport(a_event.window.data1, a_event.window.data2);
+    }
 }
 
 void SUBTRA::Window::UpdateIMGUI ()

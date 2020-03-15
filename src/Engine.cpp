@@ -33,7 +33,7 @@ void SUBTRA::Engine::Run ()
         while (SDL_PollEvent(&event))
             ProcessEvent(event);
 
-        Time::UpdateValues();
+        Time::Update();
 
         m_windowManager.Update();
     }

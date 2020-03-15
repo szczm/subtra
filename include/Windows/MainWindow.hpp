@@ -31,13 +31,14 @@ namespace SUBTRA
         void Open ();
         void LoadTestData ();
 
-        void ProcessEvent (const SDL_Event& a_event);
+        void ProcessEvent (const SDL_Event& a_event) override;
         void UpdateIMGUI () override;
         void Render () override;
 
 
         private:
 
+        // Hide the original method which takes parameters
         using Window::Open;
 
         Mesh m_testMesh {};

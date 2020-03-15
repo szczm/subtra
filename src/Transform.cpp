@@ -8,6 +8,7 @@ SUBTRA::Transform& SUBTRA::Transform::Reset ()
     m_localPosition = m_localAngles = {};
     m_localScale = {1.0, 1.0, 1.0};
 
+    m_isDirty = true;
     return *this;
 }
 
@@ -15,7 +16,7 @@ SUBTRA::Transform& SUBTRA::Transform::SetPosition (glm::vec3 a_position)
 {
     m_localPosition = a_position;
 
-    m_shouldUpdateWorldMatrix = true;
+    m_isDirty = true;
     return *this;
 }
 
@@ -23,7 +24,7 @@ SUBTRA::Transform& SUBTRA::Transform::SetAngles (glm::vec3 a_angles)
 {
     m_localAngles = a_angles;
 
-    m_shouldUpdateWorldMatrix = true;
+    m_isDirty = true;
     return *this;
 }
 
@@ -31,7 +32,7 @@ SUBTRA::Transform& SUBTRA::Transform::SetScale (glm::vec3 a_scale)
 {
     m_localScale = a_scale;
 
-    m_shouldUpdateWorldMatrix = true;
+    m_isDirty = true;
     return *this;
 }
 
@@ -57,11 +58,11 @@ glm::vec3 SUBTRA::Transform::GetScale () const
 
 glm::mat4 SUBTRA::Transform::GetWorldMatrix ()
 {
-    if (m_shouldUpdateWorldMatrix)
+    if (m_isDirty)
     {
         UpdateWorldMatrix();
 
-        m_shouldUpdateWorldMatrix = false;
+        m_isDirty = false;
     }
 
     return m_worldMatrix;

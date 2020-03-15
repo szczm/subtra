@@ -5,8 +5,8 @@
 
 #include "Log.hpp"
 
-SUBTRA::Camera::Camera(const Object& a_object)
- : Component(a_object)
+SUBTRA::Camera::Camera (const Object& a_object)
+: Component(a_object)
 {
 
 }
@@ -30,23 +30,23 @@ void SUBTRA::Camera::SetFoV (float a_fov)
 {
     m_fov = a_fov;
 
-    m_shouldUpdateProjectionMatrix = true;
+    m_isDirty = true;
 }
 
 void SUBTRA::Camera::SetAspect (float a_aspect)
 {
     m_aspect = a_aspect;
 
-    m_shouldUpdateProjectionMatrix = true;
+    m_isDirty = true;
 }
 
 glm::mat4 SUBTRA::Camera::GetProjectionMatrix ()
 {
-    if (m_shouldUpdateProjectionMatrix)
+    if (m_isDirty)
     {
         UpdateProjectionMatrix();
 
-        m_shouldUpdateProjectionMatrix = false;
+        m_isDirty = false;
     }
 
     return m_projectionMatrix;
