@@ -21,7 +21,9 @@ namespace SUBTRA
         void Destroy () override;
 
         void SetFoV (float a_fov);
-        void SetAspect (float a_fov);
+        void SetAspect (float a_aspect);
+        void SetNear (float a_near);
+        void SetFar (float a_far);
 
         glm::mat4 GetProjectionMatrix ();
 
@@ -35,5 +37,7 @@ namespace SUBTRA
 
         float m_fov = 60.0f;
         float m_aspect = 1.0;
+        float m_near = 0.1f;
+        float m_far = 100.0f;
     };
 }

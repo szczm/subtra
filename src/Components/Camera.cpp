@@ -40,6 +40,20 @@ void SUBTRA::Camera::SetAspect (float a_aspect)
     m_isDirty = true;
 }
 
+void SUBTRA::Camera::SetNear (float a_near)
+{
+    m_near = a_near;
+
+    m_isDirty = true;
+}
+
+void SUBTRA::Camera::SetFar (float a_far)
+{
+    m_far = a_far;
+
+    m_isDirty = true;
+}
+
 glm::mat4 SUBTRA::Camera::GetProjectionMatrix ()
 {
     if (m_isDirty)
@@ -54,5 +68,5 @@ glm::mat4 SUBTRA::Camera::GetProjectionMatrix ()
 
 void SUBTRA::Camera::UpdateProjectionMatrix ()
 {
-    m_projectionMatrix = glm::perspective(glm::radians(m_fov), m_aspect, 0.1f, 100.0f);
+    m_projectionMatrix = glm::perspective(glm::radians(m_fov), m_aspect, m_near, m_far);
 }
