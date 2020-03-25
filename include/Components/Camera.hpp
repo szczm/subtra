@@ -6,6 +6,7 @@
 #include "GLMCommon.hpp"
 
 #include "Component.hpp"
+#include "Utilities/Parameter.hpp"
 
 
 namespace SUBTRA
@@ -18,6 +19,7 @@ namespace SUBTRA
 
         void Init () override;
         void Update () override;
+        void UpdateIMGUI () override;
         void Destroy () override;
 
         void SetFoV (float a_fov);
@@ -35,9 +37,10 @@ namespace SUBTRA
 
         glm::mat4 m_projectionMatrix = glm::mat4(1.0);
 
-        float m_fov = 60.0f;
+        Parameter<float> m_fov = Parameter {"FoV", 60.0f, 0.5f, 0.0f, 180.0f};
+        Parameter<float> m_near = Parameter {"Near", 0.1f, 0.1f, 0.0f, 100000.0f};
+        Parameter<float> m_far = Parameter {"Far", 10.0f, 0.1f, 0.0f, 100000.0f};
+
         float m_aspect = 1.0;
-        float m_near = 0.1f;
-        float m_far = 100.0f;
     };
 }

@@ -51,6 +51,11 @@ void SUBTRA::MainWindow::UpdateIMGUI ()
     ImGui::DragFloat("Pitch", &m_testAngles.y, 1.0f, -180.0f, 180.0f);
     ImGui::DragFloat("Yaw", &m_testAngles.z, 1.0f, -180.0f, 180.0f);
     ImGui::DragFloat("Scale", &m_testScale, 0.02f, -2.0f, 2.0f);
+
+    for (Component& component : ComponentManager::GetComponents())
+    {
+        component.UpdateIMGUI();
+    }
 }
 
 void SUBTRA::MainWindow::Render ()

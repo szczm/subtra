@@ -4,6 +4,7 @@
 #include "Window.hpp"
 
 #include "Exception.hpp"
+#include "Log.hpp"
 
 
 SUBTRA::Window::Window (const std::string& a_title, int a_width, int a_height)

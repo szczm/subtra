@@ -3,6 +3,8 @@
 
 #include "Components/Camera.hpp"
 
+#include "imgui.h"
+
 #include "Log.hpp"
 
 SUBTRA::Camera::Camera (const Object& a_object)
@@ -19,6 +21,13 @@ void SUBTRA::Camera::Init ()
 void SUBTRA::Camera::Update ()
 {
     // Log::Print("Camera update");
+}
+
+void SUBTRA::Camera::UpdateIMGUI ()
+{
+    m_isDirty |= m_fov.UpdateIMGUI()
+              || m_near.UpdateIMGUI()
+              || m_far.UpdateIMGUI();
 }
 
 void SUBTRA::Camera::Destroy ()
@@ -68,5 +77,5 @@ glm::mat4 SUBTRA::Camera::GetProjectionMatrix ()
 
 void SUBTRA::Camera::UpdateProjectionMatrix ()
 {
-    m_projectionMatrix = glm::perspective(glm::radians(m_fov), m_aspect, m_near, m_far);
+    m_projectionMatrix = glm::perspective(glm::radians(*m_fov), m_aspect, *m_near, *m_far);
 }
