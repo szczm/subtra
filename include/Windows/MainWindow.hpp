@@ -27,20 +27,17 @@ namespace SUBTRA
     {
         public:
 
-        MainWindow () = default;
-        ~MainWindow () = default;
-
         void Open ();
         void LoadTestData ();
 
-        void ProcessEvent (const SDL_Event& a_event) override;
+        void ProcessEvent (SDL_Event a_event) override;
         void UpdateIMGUI () override;
         void Render () override;
 
 
         private:
 
-        // Hide the original method which takes parameters
+        // Hide the original method which allows parameters
         using Window::Open;
 
         Mesh m_testMesh {};

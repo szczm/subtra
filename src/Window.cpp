@@ -7,12 +7,12 @@
 #include "Log.hpp"
 
 
-SUBTRA::Window::Window (const std::string& a_title, int a_width, int a_height)
+SUBTRA::Window::Window (std::string a_title, int a_width, int a_height)
 {
     Open(a_title, a_width, a_height);
 }
 
-void SUBTRA::Window::Open (const std::string& a_title, int a_width, int a_height)
+void SUBTRA::Window::Open (std::string a_title, int a_width, int a_height)
 {
     // Create window
     m_sdlWindow.reset
@@ -71,7 +71,7 @@ void SUBTRA::Window::ResizeViewport (int a_width, int a_height)
 }
 
 // TODO: Assumes single window and context
-void SUBTRA::Window::ProcessEvent (const SDL_Event& a_event)
+void SUBTRA::Window::ProcessEvent (SDL_Event a_event)
 {
     if (a_event.type == SDL_WINDOWEVENT && a_event.window.event == SDL_WINDOWEVENT_RESIZED)
     {

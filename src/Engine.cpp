@@ -26,7 +26,7 @@ void SUBTRA::Engine::Init ()
 
 void SUBTRA::Engine::Run ()
 {
-    while (m_running)
+    while (m_isRunning)
     {
         SDL_Event event;
 
@@ -46,11 +46,11 @@ void SUBTRA::Engine::Shutdown ()
     SDL_Quit();
 }
 
-void SUBTRA::Engine::ProcessEvent (const SDL_Event& a_event)
+void SUBTRA::Engine::ProcessEvent (SDL_Event a_event)
 {
     m_inputManager.ProcessEvent(a_event);
     m_windowManager.ProcessEvent(a_event);
 
     if (a_event.type == SDL_QUIT)
-        m_running = false;
+        m_isRunning = false;
 }

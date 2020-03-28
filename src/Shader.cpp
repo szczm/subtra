@@ -10,7 +10,7 @@
 #include "Log.hpp"
 
 
-SUBTRA::Shader::Shader (const std::string& a_vertexPath, const std::string& a_fragmentPath)
+SUBTRA::Shader::Shader (std::string a_vertexPath, std::string a_fragmentPath)
 {
     FileSystem fileSystem;
 
@@ -83,27 +83,27 @@ void SUBTRA::Shader::Use ()
     glUseProgram(m_programId);
 }
 
-GLint SUBTRA::Shader::GetUniformLocation (const std::string& a_key)
+GLint SUBTRA::Shader::GetUniformLocation (std::string a_key)
 {
     return glGetUniformLocation(m_programId, a_key.c_str());
 }
 
-void SUBTRA::Shader::Send (const std::string& a_key, int a_value)
+void SUBTRA::Shader::Send (std::string a_key, int a_value)
 {
     glUniform1i(GetUniformLocation(a_key), a_value);
 }
 
-void SUBTRA::Shader::Send (const std::string& a_key, float a_value)
+void SUBTRA::Shader::Send (std::string a_key, float a_value)
 {
     glUniform1f(GetUniformLocation(a_key), a_value);
 }
 
-void SUBTRA::Shader::Send (const std::string& a_key, glm::mat4 a_value)
+void SUBTRA::Shader::Send (std::string a_key, glm::mat4 a_value)
 {
     glUniformMatrix4fv(GetUniformLocation(a_key), 1, GL_FALSE, glm::value_ptr(a_value));
 }
 
-void SUBTRA::Shader::Send (const std::string& a_key, Color a_value, ColorMode a_colorMode)
+void SUBTRA::Shader::Send (std::string a_key, Color a_value, ColorMode a_colorMode)
 {
     switch (a_colorMode)
     {

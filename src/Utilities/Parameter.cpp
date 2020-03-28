@@ -5,6 +5,7 @@
 
 #include "Utilities/Color.hpp"
 
+
 template<>
 bool SUBTRA::Parameter<float>::UpdateIMGUI ()
 {
@@ -14,5 +15,5 @@ bool SUBTRA::Parameter<float>::UpdateIMGUI ()
 template<>
 bool SUBTRA::Parameter<SUBTRA::Color>::UpdateIMGUI ()
 {
-    ImGui::ColorEdit4(m_label, static_cast<float*>(&m_value.red));
+    return ImGui::ColorEdit4(m_label, static_cast<float*>(&m_value.red));
 }

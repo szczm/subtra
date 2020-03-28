@@ -16,8 +16,6 @@ namespace SUBTRA
         inline static float deltaTime = 0.0f;
         inline static float time = 0.0f;
 
-        friend Engine;
-
 
         private:
 
@@ -27,5 +25,7 @@ namespace SUBTRA
         static void Update ();
 
         inline static Uint32 m_lastTicks = 0.0f;
+
+        friend Engine;
     };
 }

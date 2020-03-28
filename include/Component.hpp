@@ -12,7 +12,8 @@ namespace SUBTRA
     {
         public:
 
-        explicit Component (const Object& a_object);
+        Component (Object& a_object);
+        Component () = delete;
         virtual ~Component () = 0;
 
         virtual void Init () = 0;
@@ -20,6 +21,6 @@ namespace SUBTRA
         virtual void UpdateIMGUI () = 0;
         virtual void Destroy () = 0;
 
-        const Object& m_object;
+        Object& m_object;
     };
 }

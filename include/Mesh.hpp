@@ -13,7 +13,7 @@ namespace SUBTRA
     {
         public:
 
-        explicit Mesh (const std::string& a_path);
+        Mesh (std::string a_path);
         Mesh () = default;
         ~Mesh () = default;
 

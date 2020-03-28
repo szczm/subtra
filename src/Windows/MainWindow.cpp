@@ -29,7 +29,7 @@ void SUBTRA::MainWindow::LoadTestData ()
     m_testCamera = m_testObject.AddComponent<Camera>();
 }
 
-void SUBTRA::MainWindow::ProcessEvent(const SDL_Event& a_event)
+void SUBTRA::MainWindow::ProcessEvent(SDL_Event a_event)
 {
     Window::ProcessEvent(a_event);
 
@@ -42,7 +42,7 @@ void SUBTRA::MainWindow::ProcessEvent(const SDL_Event& a_event)
 
 void SUBTRA::MainWindow::UpdateIMGUI ()
 {
-    ImGui::Begin("Test Triangle", static_cast<bool *>(0), ImGuiWindowFlags_MenuBar);
+    ImGui::Begin("Test Triangle", static_cast<bool *>(nullptr), ImGuiWindowFlags_MenuBar);
 
     ImGui::LabelText("Time", "%f", Time::time);
     ImGui::LabelText("Delta time", "%f", Time::deltaTime);
@@ -72,7 +72,7 @@ void SUBTRA::MainWindow::Render ()
         camera.Update();
     }
 
-    m_testObject.GetTransform().SetPosition(glm::vec3(1.0, 0.5, -3.0)).SetAngles(m_testAngles).SetScale(m_testScale);
+    m_testObject.transform.SetPosition(glm::vec3(1.0, 0.5, -3.0)).SetAngles(m_testAngles).SetScale(m_testScale);
 
     Clear();
 
@@ -81,11 +81,11 @@ void SUBTRA::MainWindow::Render ()
     m_testTexture.Bind();
 
     // TODO: What So Not - >>>Better<<<
-    m_testShader.Send("albedo", 0);
-    m_testShader.Send("world", m_testObject.GetTransform().GetWorldMatrix());
-    m_testShader.Send("view", glm::mat4(1.0));
-    m_testShader.Send("projection", m_testCamera->GetProjectionMatrix());
-    m_testShader.Send("color", *m_testColor);
+    m_testShader.Send("u_albedo", 0);
+    m_testShader.Send("u_world", m_testObject.transform.GetWorldMatrix());
+    m_testShader.Send("u_view", glm::mat4(1.0));
+    m_testShader.Send("u_proj", m_testCamera->GetProjectionMatrix());
+    m_testShader.Send("u_color", *m_testColor);
     
     glDrawArrays(GL_TRIANGLES, 0, 3);
 

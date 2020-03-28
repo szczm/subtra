@@ -3,6 +3,12 @@
 
 #include "Transform.hpp"
 
+SUBTRA::Transform::Transform (Object& a_object)
+: object(a_object)
+{
+
+}
+
 SUBTRA::Transform& SUBTRA::Transform::Reset ()
 {
     m_localPosition = m_localAngles = {};
@@ -39,6 +45,39 @@ SUBTRA::Transform& SUBTRA::Transform::SetScale (glm::vec3 a_scale)
 SUBTRA::Transform& SUBTRA::Transform::SetScale (float a_uniformScale)
 {
     return SetScale(glm::vec3(a_uniformScale));
+}
+
+SUBTRA::Transform& SUBTRA::Transform::Translate (glm::vec3 a_translation)
+{
+    m_localPosition += a_translation;
+
+    m_isDirty = true;
+    return *this;
+}
+
+SUBTRA::Transform& SUBTRA::Transform::Rotate (glm::vec3 a_rotationAxis, float a_degrees)
+{
+    // TODO: Implement after switching to quaternions
+    // m_localRotation *= glm::rotate();
+
+    m_isDirty = true;
+    return *this;
+}
+
+SUBTRA::Transform& SUBTRA::Transform::Scale (glm::vec3 a_scale)
+{
+    m_localScale *= a_scale;
+
+    m_isDirty = true;
+    return *this;
+}
+
+SUBTRA::Transform& SUBTRA::Transform::Scale (float a_uniformScale)
+{
+    m_localScale *= a_uniformScale;
+
+    m_isDirty = true;
+    return *this;
 }
 
 glm::vec3 SUBTRA::Transform::GetPosition () const

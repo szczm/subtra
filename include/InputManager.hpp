@@ -16,12 +16,12 @@ namespace SUBTRA
 
         void Init ();
 
-        void ProcessEvent (const SDL_Event& a_event);
+        void ProcessEvent (SDL_Event a_event);
 
 
         private:
 
-        void ProcessKeyboardEvent (const SDL_Event& a_event);
-        void ProcessMouseEvent (const SDL_Event& a_event);
+        void ProcessKeyboardEvent (SDL_Event a_event);
+        void ProcessMouseEvent (SDL_Event a_event);
     };
 }

@@ -21,7 +21,9 @@ namespace SUBTRA
             return ((count ? hash_string(s, count - 1) : 2166136261u) ^ s[count]) * 16777619u;
         }
     }
+    // Above is an anonymous namespace: the hash_string function gets a unique name and is not available elsewhere.
 
+    // This looks complex, but it's not: "Hello"_name is a string in Edit Mode, and a compiled hash in Play Mode.
     inline constexpr decltype(auto) operator"" _name(const char* a_name, std::size_t a_length)
     {
         if constexpr (Settings::IS_PLAY_MODE)

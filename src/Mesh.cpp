@@ -6,7 +6,7 @@
 #include <iostream>
 
 
-SUBTRA::Mesh::Mesh (const std::string& a_path)
+SUBTRA::Mesh::Mesh (std::string a_path)
 {
     const GLfloat vertices[] =
     {

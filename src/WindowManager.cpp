@@ -34,7 +34,7 @@ void SUBTRA::WindowManager::Shutdown ()
     ImGui::DestroyContext();
 }
 
-void SUBTRA::WindowManager::ProcessEvent (const SDL_Event& a_event)
+void SUBTRA::WindowManager::ProcessEvent (SDL_Event a_event)
 {
     m_mainWindow.ProcessEvent(a_event);
 }

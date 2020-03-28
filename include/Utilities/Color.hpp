@@ -8,10 +8,8 @@ namespace SUBTRA
 {
     using byte = unsigned char;
 
-    class Color final
+    struct Color final
     {
-        public:
-        
         static Color FromByte (byte a_red, byte a_green, byte a_blue, byte a_alpha = 255);
         static Color FromLinear (float a_red, float a_green, float a_blue, float a_alpha = 1.0f);
 

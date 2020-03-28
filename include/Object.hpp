@@ -18,11 +18,6 @@ namespace SUBTRA
     {
         public:
 
-        Object () = default;
-        ~Object () = default;
-
-        Transform& GetTransform ();
-
         template <class T>
         std::shared_ptr<T> AddComponent ()
         {
@@ -34,10 +29,12 @@ namespace SUBTRA
             return component;
         }
 
+        Transform& transform = m_transform;
+
 
         private:
 
-        Transform m_transform {};
+        Transform m_transform {*this};
         std::vector<std::shared_ptr<Component>> m_components {};
     };
 }

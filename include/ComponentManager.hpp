@@ -11,17 +11,17 @@
 
 namespace SUBTRA
 {
-    using ComponentPtr = std::weak_ptr<Component>;
-
     class ComponentManager final
     {
         public:
 
-        static void AddComponent (ComponentPtr a_component)
+        static void AddComponent (std::weak_ptr<Component> a_component)
         {
             m_components.push_back(a_component);
         }
 
+        // This may look bad at first glance, but it allows very clean usage on site:
+        //   for (Camera& camera : ComponentManager::GetComponents<Camera>())
         template <typename T>
         static std::vector<std::reference_wrapper<T>> GetComponents ()
         {
@@ -56,6 +56,6 @@ namespace SUBTRA
 
         private:
 
-        inline static std::vector<ComponentPtr> m_components {};
+        inline static std::vector<std::weak_ptr<Component>> m_components {};
     };
 }

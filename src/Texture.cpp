@@ -7,7 +7,7 @@
 #include "Log.hpp"
 
 
-SUBTRA::Texture::Texture (const std::string& a_path)
+SUBTRA::Texture::Texture (std::string a_path)
 {
     glGenTextures(1, &m_tex);
 

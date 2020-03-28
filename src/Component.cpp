@@ -6,8 +6,8 @@
 // #include "ComponentManager.hpp"
 
 
-SUBTRA::Component::Component (const Object& a_object)
- : m_object(a_object)
+SUBTRA::Component::Component (Object& a_object)
+: m_object(a_object)
 {
     // ComponentManager::AddComponent(ComponentPointer(this));
 }

@@ -17,7 +17,7 @@ namespace SUBTRA
 
         void Init ();
 
-        void ProcessEvent (const SDL_Event& a_event);
+        void ProcessEvent (SDL_Event a_event);
         void Update ();
 
         void Shutdown ();

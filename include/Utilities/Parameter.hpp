@@ -39,9 +39,9 @@ namespace SUBTRA
 
         private:
         
-        Type m_value {};
-
         const char* m_label = nullptr;
+        
+        Type m_value {};
         const Type m_stepValue {};
         const Type m_minValue {};
         const Type m_maxValue {};

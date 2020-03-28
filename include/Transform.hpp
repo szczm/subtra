@@ -7,26 +7,37 @@
 
 namespace SUBTRA
 {
+    class Object;
+    
     class Transform final
     {
         public:
 
-        Transform () = default;
+        Transform (Object& a_object);
+        Transform () = delete;
         ~Transform () = default;
 
         Transform& Reset ();
-        // Transform& reset(Transform& a_template);
+        // Transform& Reset (Transform& a_template);
 
         Transform& SetPosition (glm::vec3 a_position);
         Transform& SetAngles (glm::vec3 a_angles);
         Transform& SetScale (glm::vec3 a_scale);
         Transform& SetScale (float a_uniformScale);
 
+        Transform& Translate (glm::vec3 a_translation);
+        Transform& Rotate (glm::vec3 a_rotationAxis, float a_degrees);
+        Transform& Scale (glm::vec3 a_scale);
+        Transform& Scale (float a_uniformScale);
+
         glm::vec3 GetPosition () const;
         glm::vec3 GetAngles () const;
         glm::vec3 GetScale () const;
 
         glm::mat4 GetWorldMatrix ();
+
+
+        Object& object;
 
 
         private:

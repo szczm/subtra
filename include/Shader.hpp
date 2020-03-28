@@ -15,7 +15,7 @@ namespace SUBTRA
     {
         public:
 
-        explicit Shader (const std::string& a_vertexPath, const std::string& a_fragmentPath);
+        Shader (std::string a_vertexPath, std::string a_fragmentPath);
         Shader () = default;
         ~Shader () = default;
 
@@ -28,13 +28,12 @@ namespace SUBTRA
             RGBA
         };
 
-        void Send (const std::string& a_key, int a_value);
-        void Send (const std::string& a_key, float a_value);
-        void Send (const std::string& a_key, glm::mat4 a_value);
-        void Send (const std::string& a_key, Color a_value, ColorMode a_colorMode = ColorMode::RGBA);
+        void Send (std::string a_key, int a_value);
+        void Send (std::string a_key, float a_value);
+        void Send (std::string a_key, glm::mat4 a_value);
+        void Send (std::string a_key, Color a_value, ColorMode a_colorMode = ColorMode::RGBA);
 
-
-        GLint GetUniformLocation (const std::string& a_key);
+        GLint GetUniformLocation (std::string a_key);
 
 
         private:

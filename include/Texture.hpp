@@ -15,7 +15,7 @@ namespace SUBTRA
     {
         public:
 
-        explicit Texture (const std::string& a_path);
+        Texture (std::string a_path);
         Texture () = default;
         ~Texture () = default;
 

@@ -22,11 +22,11 @@ namespace SUBTRA
 
         private:
 
-        void ProcessEvent (const SDL_Event& a_event);
+        void ProcessEvent (SDL_Event a_event);
 
         InputManager m_inputManager {};
         WindowManager m_windowManager {};
 
-        bool m_running = true;
+        bool m_isRunning = true;
     };
 }
