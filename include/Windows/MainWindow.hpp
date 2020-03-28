@@ -16,6 +16,8 @@
 #include "Object.hpp"
 #include "Shader.hpp"
 #include "Texture.hpp"
+#include "Utilities/Parameter.hpp"
+#include "Utilities/Color.hpp"
 
 
 namespace SUBTRA
@@ -48,5 +50,6 @@ namespace SUBTRA
         glm::vec3 m_testAngles {};
         std::shared_ptr<Camera> m_testCamera {};
         float m_testScale = 0.5f;
+        Parameter<Color> m_testColor {"Color"};
     };
 }

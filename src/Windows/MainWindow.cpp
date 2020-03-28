@@ -47,6 +47,8 @@ void SUBTRA::MainWindow::UpdateIMGUI ()
     ImGui::LabelText("Time", "%f", Time::time);
     ImGui::LabelText("Delta time", "%f", Time::deltaTime);
 
+    m_testColor.UpdateIMGUI();
+
     ImGui::DragFloat("Roll", &m_testAngles.x, 1.0f, -180.0f, 180.0f);
     ImGui::DragFloat("Pitch", &m_testAngles.y, 1.0f, -180.0f, 180.0f);
     ImGui::DragFloat("Yaw", &m_testAngles.z, 1.0f, -180.0f, 180.0f);
@@ -83,6 +85,7 @@ void SUBTRA::MainWindow::Render ()
     m_testShader.Send("world", m_testObject.GetTransform().GetWorldMatrix());
     m_testShader.Send("view", glm::mat4(1.0));
     m_testShader.Send("projection", m_testCamera->GetProjectionMatrix());
+    m_testShader.Send("color", m_testColor.value);
     
     glDrawArrays(GL_TRIANGLES, 0, 3);
 

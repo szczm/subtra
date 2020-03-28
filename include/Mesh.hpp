@@ -9,13 +9,6 @@
 
 namespace SUBTRA
 {
-    enum VertexAttrib
-    {
-        Position = 0,
-        Color = 1,
-        TexCoord = 2
-    };
-
     class Mesh
     {
         public:
@@ -25,6 +18,13 @@ namespace SUBTRA
         ~Mesh () = default;
 
         void Bind ();
+
+        enum VertexAttrib
+        {
+            Position = 0,
+            Color = 1,
+            TexCoord = 2
+        };
 
 
         private:

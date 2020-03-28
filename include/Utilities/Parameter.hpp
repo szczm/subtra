@@ -21,6 +21,12 @@ namespace SUBTRA
 
         }
 
+        Parameter (const char* a_label)
+        : m_label(a_label)
+        {
+
+        }
+
         ~Parameter () = default;
 
         inline Parameter& operator= (Type a_value) { m_value = a_value; return *this; }

@@ -103,6 +103,24 @@ void SUBTRA::Shader::Send (const std::string& a_key, glm::mat4 a_value)
     glUniformMatrix4fv(GetUniformLocation(a_key), 1, GL_FALSE, glm::value_ptr(a_value));
 }
 
+void SUBTRA::Shader::Send (const std::string& a_key, Color a_value, ColorMode a_colorMode)
+{
+    switch (a_colorMode)
+    {
+        case ColorMode::RGB:
+        {
+            glUniform3f(GetUniformLocation(a_key), a_value.red, a_value.green, a_value.blue);
+            break;
+        }
+
+        case ColorMode::RGBA:
+        {
+            glUniform4f(GetUniformLocation(a_key), a_value.red, a_value.green, a_value.blue, a_value.alpha);
+            break;
+        }
+    }
+}
+
 void SUBTRA::Shader::LogErrors (GLuint a_shaderId)
 {
     int infoLogLength;

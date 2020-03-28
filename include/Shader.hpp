@@ -5,6 +5,7 @@
 
 #include "GLCommon.hpp"
 #include "GLMCommon.hpp"
+#include "Utilities/Color.hpp"
 
 #include <string>
 
@@ -20,9 +21,18 @@ namespace SUBTRA
 
         void Use ();
 
+
+        enum class ColorMode
+        {
+            RGB,
+            RGBA
+        };
+
         void Send (const std::string& a_key, int a_value);
         void Send (const std::string& a_key, float a_value);
         void Send (const std::string& a_key, glm::mat4 a_value);
+        void Send (const std::string& a_key, Color a_value, ColorMode a_colorMode = ColorMode::RGBA);
+
 
         GLint GetUniformLocation (const std::string& a_key);
 
