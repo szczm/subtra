@@ -85,7 +85,7 @@ void SUBTRA::MainWindow::Render ()
     m_testShader.Send("world", m_testObject.GetTransform().GetWorldMatrix());
     m_testShader.Send("view", glm::mat4(1.0));
     m_testShader.Send("projection", m_testCamera->GetProjectionMatrix());
-    m_testShader.Send("color", m_testColor.value);
+    m_testShader.Send("color", *m_testColor);
     
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
