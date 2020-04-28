@@ -15,9 +15,8 @@ namespace SUBTRA
     {
         public:
 
-        Shader (std::string a_vertexPath, std::string a_fragmentPath);
-        Shader () = default;
-        ~Shader () = default;
+        // TODO: Implement move func. in case more data is added to class
+        static Shader LoadFromFile(const std::string& a_vertexPath, const std::string& a_fragmentPath);
 
         void Use ();
 
@@ -28,17 +27,17 @@ namespace SUBTRA
             RGBA
         };
 
-        void Send (std::string a_key, int a_value);
-        void Send (std::string a_key, float a_value);
-        void Send (std::string a_key, glm::mat4 a_value);
-        void Send (std::string a_key, Color a_value, ColorMode a_colorMode = ColorMode::RGBA);
+        void Send (const std::string& a_key, int a_value);
+        void Send (const std::string& a_key, float a_value);
+        void Send (const std::string& a_key, glm::mat4 a_value);
+        void Send (const std::string& a_key, Color a_value, ColorMode a_colorMode = ColorMode::RGBA);
 
-        GLint GetUniformLocation (std::string a_key);
+        GLint GetUniformLocation (const std::string& a_uniformName);
 
 
         private:
 
-        static void LogErrors (GLuint a_shaderId);
+        static void LogShaderErrors (GLuint a_shaderId);
 
         GLuint m_programId = 0;
     };

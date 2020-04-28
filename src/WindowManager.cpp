@@ -19,7 +19,7 @@ void SUBTRA::WindowManager::Init ()
 {
     InitOpenGL();
 
-    m_mainWindow.Open();
+    m_mainWindow = MainWindow::Open();
 
     InitGLAD();
     InitIMGUI();
@@ -84,7 +84,9 @@ void SUBTRA::WindowManager::InitOpenGL ()
 void SUBTRA::WindowManager::InitGLAD ()
 {
     if (!gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress))
+    {
         throw SUBTRA::Exception {"Could not initialize GLAD. Does your computer support OpenGL 3.3?"};
+    }
 }
 
 void SUBTRA::WindowManager::InitIMGUI ()
@@ -102,6 +104,6 @@ void SUBTRA::WindowManager::InitIMGUI ()
         ImGui_ImplSDL2_InitForOpenGL(window.get(), context.get());
     }
 
-    // TODO: wtf is this
+    // TODO: the hell is this
     ImGui_ImplOpenGL3_Init("#version 330 core");
 }

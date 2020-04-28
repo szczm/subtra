@@ -7,15 +7,12 @@
 #include "Log.hpp"
 
 
-SUBTRA::Window::Window (std::string a_title, int a_width, int a_height)
+SUBTRA::Window SUBTRA::Window::Open (const std::string& a_title, uint a_width, uint a_height)
 {
-    Open(a_title, a_width, a_height);
-}
+    Window window;
 
-void SUBTRA::Window::Open (std::string a_title, int a_width, int a_height)
-{
     // Create window
-    m_sdlWindow.reset
+    window.m_sdlWindow.reset
     (
         SDL_CreateWindow
         (
@@ -29,24 +26,29 @@ void SUBTRA::Window::Open (std::string a_title, int a_width, int a_height)
         SDL_DestroyWindow
     );
 
-    if (!m_sdlWindow)
+    if (!window.m_sdlWindow)
     {
         throw SUBTRA::Exception {"Could not open window"};
     }
 
     // ...and create context
-    m_sdlContext.reset
+    window.m_sdlContext.reset
     (
-        SDL_GL_CreateContext(m_sdlWindow.get()),
+        SDL_GL_CreateContext(window.m_sdlWindow.get()),
         SDL_GL_DeleteContext
     );
 
-    if (!m_sdlContext)
+    if (!window.m_sdlContext)
     {
         throw SUBTRA::Exception {"Could not open context"};
     }
 
-    SDL_GL_MakeCurrent(m_sdlWindow.get(), m_sdlContext.get());
+    SDL_GL_MakeCurrent(window.m_sdlWindow.get(), window.m_sdlContext.get());
+
+    window.m_height = a_height;
+    window.m_width = a_width;
+
+    return window;
 }
 
 void SUBTRA::Window::Maximize () const
@@ -62,7 +64,7 @@ void SUBTRA::Window::Clear () const
 }
 
 // TODO: Assumes single window and context
-void SUBTRA::Window::ResizeViewport (int a_width, int a_height)
+void SUBTRA::Window::ResizeViewport (uint a_width, uint a_height)
 {
     glViewport(0, 0, a_width, a_height);
 
@@ -89,7 +91,7 @@ void SUBTRA::Window::Render ()
     // bar.
 }
 
-void SUBTRA::Window::Swap () const
+void SUBTRA::Window::SwapBuffers () const
 {
     SDL_GL_SwapWindow(m_sdlWindow.get());
 }

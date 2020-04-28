@@ -10,7 +10,7 @@
 #include "Log.hpp"
 
 
-SUBTRA::Shader::Shader (std::string a_vertexPath, std::string a_fragmentPath)
+SUBTRA::Shader SUBTRA::Shader::LoadFromFile (const std::string& a_vertexPath, const std::string& a_fragmentPath)
 {
     FileSystem fileSystem;
 
@@ -19,63 +19,73 @@ SUBTRA::Shader::Shader (std::string a_vertexPath, std::string a_fragmentPath)
     GLuint vertexId = glCreateShader(GL_VERTEX_SHADER);
     GLuint fragmentId = glCreateShader(GL_FRAGMENT_SHADER);
 
-    auto vertexSource = fileSystem.ReadText(a_vertexPath);
+    auto vertexSource = fileSystem.LoadText(a_vertexPath);
 
     if (vertexSource)
     {
         const char* vertexCstr = vertexSource->c_str();
 
-        SUBTRA::Log::Print("Compiling vertex shader: ", a_vertexPath);
+        Log::Print("Compiling vertex shader: ", a_vertexPath);
+
         glShaderSource(vertexId, 1, &vertexCstr, nullptr);
         glCompileShader(vertexId);
 
-        Shader::LogErrors(vertexId);
+        LogShaderErrors(vertexId);
     }
     else
     {
-        SUBTRA::Log::Error("Could not open vertex shader file: ", a_vertexPath);
-        return;
+        Log::Error("Could not open vertex shader file: ", a_vertexPath);
+
+        return {};
     }
 
-    auto fragmentSource = fileSystem.ReadText(a_fragmentPath);
+    auto fragmentSource = fileSystem.LoadText(a_fragmentPath);
 
     if (fragmentSource)
     {
         const char* fragmentCstr = fragmentSource->c_str();
 
-        SUBTRA::Log::Print("Compiling fragment shader: ", a_fragmentPath);
+        Log::Print("Compiling fragment shader: ", a_fragmentPath);
+        
         glShaderSource(fragmentId, 1, &fragmentCstr, nullptr);
         glCompileShader(fragmentId);
 
-        Shader::LogErrors(fragmentId);
+        LogShaderErrors(fragmentId);
     }
     else
     {
-        SUBTRA::Log::Error("Could not open fragment shader file: ", a_fragmentPath);
-        return;
+        Log::Error("Could not open fragment shader file: ", a_fragmentPath);
+
+        return {};
     }
 
-    SUBTRA::Log::Print("Linking program");
-    m_programId = glCreateProgram();
-    glAttachShader(m_programId, vertexId);
-    glAttachShader(m_programId, fragmentId);
-    glLinkProgram(m_programId);
+    Log::Print("Linking program");
+
+    Shader shader;
+
+    shader.m_programId = glCreateProgram();
+    glAttachShader(shader.m_programId, vertexId);
+    glAttachShader(shader.m_programId, fragmentId);
+    glLinkProgram(shader.m_programId);
 
     int infoLogLength;
-    glGetProgramiv(m_programId, GL_INFO_LOG_LENGTH, &infoLogLength);
+    glGetProgramiv(shader.m_programId, GL_INFO_LOG_LENGTH, &infoLogLength);
     
     if (infoLogLength > 0)
     {
         std::vector<char> programErrorMessage (infoLogLength + 1);
-        glGetProgramInfoLog(m_programId, infoLogLength, nullptr, &programErrorMessage[0]);
-        SUBTRA::Log::Error(&programErrorMessage[0]);
+        glGetProgramInfoLog(shader.m_programId, infoLogLength, nullptr, &programErrorMessage[0]);
+
+        Log::Error(&programErrorMessage[0]);
     }
     
-    glDetachShader(m_programId, vertexId);
-    glDetachShader(m_programId, fragmentId);
+    glDetachShader(shader.m_programId, vertexId);
+    glDetachShader(shader.m_programId, fragmentId);
     
     glDeleteShader(vertexId);
     glDeleteShader(fragmentId);
+
+    return shader;
 }
 
 void SUBTRA::Shader::Use ()
@@ -83,27 +93,27 @@ void SUBTRA::Shader::Use ()
     glUseProgram(m_programId);
 }
 
-GLint SUBTRA::Shader::GetUniformLocation (std::string a_key)
+GLint SUBTRA::Shader::GetUniformLocation (const std::string& a_uniformName)
 {
-    return glGetUniformLocation(m_programId, a_key.c_str());
+    return glGetUniformLocation(m_programId, a_uniformName.c_str());
 }
 
-void SUBTRA::Shader::Send (std::string a_key, int a_value)
+void SUBTRA::Shader::Send (const std::string& a_key, int a_value)
 {
     glUniform1i(GetUniformLocation(a_key), a_value);
 }
 
-void SUBTRA::Shader::Send (std::string a_key, float a_value)
+void SUBTRA::Shader::Send (const std::string& a_key, float a_value)
 {
     glUniform1f(GetUniformLocation(a_key), a_value);
 }
 
-void SUBTRA::Shader::Send (std::string a_key, glm::mat4 a_value)
+void SUBTRA::Shader::Send (const std::string& a_key, glm::mat4 a_value)
 {
     glUniformMatrix4fv(GetUniformLocation(a_key), 1, GL_FALSE, glm::value_ptr(a_value));
 }
 
-void SUBTRA::Shader::Send (std::string a_key, Color a_value, ColorMode a_colorMode)
+void SUBTRA::Shader::Send (const std::string& a_key, Color a_value, ColorMode a_colorMode)
 {
     switch (a_colorMode)
     {
@@ -121,7 +131,7 @@ void SUBTRA::Shader::Send (std::string a_key, Color a_value, ColorMode a_colorMo
     }
 }
 
-void SUBTRA::Shader::LogErrors (GLuint a_shaderId)
+void SUBTRA::Shader::LogShaderErrors (GLuint a_shaderId)
 {
     int infoLogLength;
     glGetShaderiv(a_shaderId, GL_INFO_LOG_LENGTH, &infoLogLength);
@@ -130,6 +140,6 @@ void SUBTRA::Shader::LogErrors (GLuint a_shaderId)
     {
         std::vector<char> shaderErrorMessage (infoLogLength + 1);
         glGetShaderInfoLog(a_shaderId, infoLogLength, nullptr, &shaderErrorMessage[0]);
-        SUBTRA::Log::Error(&shaderErrorMessage[0]);
+        Log::Error(&shaderErrorMessage[0]);
     }
 }

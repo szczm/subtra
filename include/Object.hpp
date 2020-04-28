@@ -18,6 +18,8 @@ namespace SUBTRA
     {
         public:
 
+        Object& operator= (const Object& a_other);
+
         template <class T>
         std::shared_ptr<T> AddComponent ()
         {

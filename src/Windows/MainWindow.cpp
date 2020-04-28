@@ -14,17 +14,68 @@
 #include "Log.hpp"
 
 
-void SUBTRA::MainWindow::Open ()
+SUBTRA::MainWindow SUBTRA::MainWindow::Open ()
 {
-    Open("SUBTRA", 800, 600);
-    Maximize();
+    MainWindow window;
+    window = Window::Open("SUBTRA", 800, 600);
+    window.Maximize();
+
+    return window;
+}
+
+SUBTRA::MainWindow::MainWindow (const SUBTRA::MainWindow& a_other)
+: m_testColor(a_other.m_testColor)
+{
+    m_sdlWindow = a_other.m_sdlWindow;
+    m_sdlContext = a_other.m_sdlContext;
+
+    m_width = a_other.m_width;
+    m_height = a_other.m_height;
+
+    m_testMesh = a_other.m_testMesh;
+    m_testShader = a_other.m_testShader;
+    m_testTexture = a_other.m_testTexture;
+    m_testObject = a_other.m_testObject;
+    m_testAngles = a_other.m_testAngles;
+    m_testCamera = a_other.m_testCamera;
+    m_testScale = a_other.m_testScale;
+}
+
+SUBTRA::MainWindow& SUBTRA::MainWindow::operator= (SUBTRA::MainWindow&& a_other)
+{
+    m_sdlWindow = a_other.m_sdlWindow;
+    m_sdlContext = a_other.m_sdlContext;
+
+    m_width = a_other.m_width;
+    m_height = a_other.m_height;
+
+    m_testMesh = a_other.m_testMesh;
+    m_testShader = a_other.m_testShader;
+    m_testTexture = a_other.m_testTexture;
+    m_testObject = a_other.m_testObject;
+    m_testAngles = a_other.m_testAngles;
+    m_testCamera = a_other.m_testCamera;
+    m_testScale = a_other.m_testScale;
+    m_testColor = a_other.m_testColor;
+
+    return *this;
+}
+
+SUBTRA::MainWindow::MainWindow ()
+{
+
+}
+
+SUBTRA::MainWindow::~MainWindow ()
+{
+
 }
 
 void SUBTRA::MainWindow::LoadTestData ()
 {
-    m_testMesh = Mesh {"assets/models/test.model"};
-    m_testShader = Shader {"assets/shaders/test.vert", "assets/shaders/test.frag"};
-    m_testTexture = Texture {"assets/textures/test.jpg"};
+    m_testMesh = Mesh::LoadFromFile("assets/models/test.model");
+    m_testShader = Shader::LoadFromFile("assets/shaders/test.vert", "assets/shaders/test.frag");
+    m_testTexture = Texture::LoadFromFile("assets/textures/test.jpg");
 
     m_testCamera = m_testObject.AddComponent<Camera>();
 }
@@ -35,7 +86,7 @@ void SUBTRA::MainWindow::ProcessEvent(SDL_Event a_event)
 
     if (a_event.type == SDL_WINDOWEVENT && a_event.window.event == SDL_WINDOWEVENT_RESIZED)
     {
-        m_testCamera.get()->SetAspect(static_cast<float>(m_width) / static_cast<float>(m_height));
+        m_testCamera.get()->SetAspectRatio(static_cast<float>(m_width) / static_cast<float>(m_height));
     }
 }
 
@@ -91,5 +142,16 @@ void SUBTRA::MainWindow::Render ()
 
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-    Swap();
+    SwapBuffers();
+}
+
+SUBTRA::MainWindow& SUBTRA::MainWindow::operator= (const SUBTRA::Window& a_other)
+{
+    m_sdlWindow = a_other.m_sdlWindow;
+    m_sdlContext = a_other.m_sdlContext;
+
+    m_width = a_other.m_width;
+    m_height = a_other.m_height;
+
+    return *this;
 }

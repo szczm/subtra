@@ -13,10 +13,14 @@ namespace SUBTRA
     {
         public:
 
+        // A Transform cannot exist without an Object, and vice versa
         Transform (Object& a_object);
         Transform () = delete;
         ~Transform () = default;
 
+        Transform& operator=(const Transform& a_other);
+
+        // Below methods always return the currently used Transform, thus allowing chain calling
         Transform& Reset ();
         // Transform& Reset (Transform& a_template);
 
@@ -29,6 +33,7 @@ namespace SUBTRA
         Transform& Rotate (glm::vec3 a_rotationAxis, float a_degrees);
         Transform& Scale (glm::vec3 a_scale);
         Transform& Scale (float a_uniformScale);
+
 
         glm::vec3 GetPosition () const;
         glm::vec3 GetAngles () const;
@@ -43,7 +48,7 @@ namespace SUBTRA
         private:
 
         void UpdateWorldMatrix ();
-        bool m_isDirty = true;
+        bool m_shouldUpdateWorldMatrix = true;
 
         glm::mat4 m_worldMatrix = glm::mat4(1.0);
 

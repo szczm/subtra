@@ -6,8 +6,10 @@
 #include <iostream>
 
 
-SUBTRA::Mesh::Mesh (std::string a_path)
+SUBTRA::Mesh SUBTRA::Mesh::LoadFromFile (const std::string& a_path)
 {
+    Mesh mesh;
+
     const GLfloat vertices[] =
     {
         // position --------   colours -----------   texcoords -
@@ -17,11 +19,11 @@ SUBTRA::Mesh::Mesh (std::string a_path)
     };
 
 
-    glGenVertexArrays(1, &m_vao);
-    glBindVertexArray(m_vao);
+    glGenVertexArrays(1, &mesh.m_vao);
+    glBindVertexArray(mesh.m_vao);
 
-    glGenBuffers(1, &m_vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+    glGenBuffers(1, &mesh.m_vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, mesh.m_vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(VertexAttrib::Position);
@@ -33,6 +35,8 @@ SUBTRA::Mesh::Mesh (std::string a_path)
     glVertexAttribPointer(VertexAttrib::TexCoord, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), reinterpret_cast<void*>(6*sizeof(float)));
 
     glBindVertexArray(0);
+
+    return mesh;
 }
 
 void SUBTRA::Mesh::Bind ()

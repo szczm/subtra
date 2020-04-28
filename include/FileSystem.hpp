@@ -29,7 +29,7 @@ namespace SUBTRA
         FileSystem () = default;
         ~FileSystem () = default;
 
-        std::optional<std::string> ReadText (std::string a_path);
-        std::optional<TextureData> ReadTexture (std::string a_path);
+        std::optional<std::string> LoadText (const std::string& a_path);
+        std::optional<TextureData> LoadTexture (const std::string& a_path);
     };
 }

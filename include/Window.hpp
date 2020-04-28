@@ -19,15 +19,13 @@ namespace SUBTRA
     {
         public:
 
-        Window (std::string a_title, int a_width, int a_height);
-        Window () = default;
-        ~Window () = default;
+        // TODO: Implement move func. in case more data is added to class
+        static Window Open (const std::string& a_title, uint a_width, uint a_height);
 
-        void Open (std::string a_title, int a_width, int a_height);
         void Maximize () const;
         void Clear () const;
-        void Swap () const;
-        void Resize (int a_width, int a_height);
+        void SwapBuffers () const;
+        void Resize (uint a_width, uint a_height);
 
         std::weak_ptr<SDL_Window> GetSDLWindow () const;
         std::weak_ptr<SDL_GLContext> GetContext () const;
@@ -39,12 +37,15 @@ namespace SUBTRA
 
         protected:
         
-        void ResizeViewport (int a_width, int a_height);
+        void ResizeViewport (uint a_newWidth, uint a_newHeight);
 
         std::shared_ptr<SDL_Window> m_sdlWindow {};
         std::shared_ptr<SDL_GLContext> m_sdlContext {};
 
-        int m_width = 0;
-        int m_height = 0;
+        uint m_width = 0;
+        uint m_height = 0;
+
+
+        friend class MainWindow;
     };
 }

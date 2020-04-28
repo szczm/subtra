@@ -7,6 +7,7 @@
 
 namespace SUBTRA
 {
+    // Subclassed exception in case I decide to add anything to it
     struct Exception : public std::runtime_error
     {
         explicit Exception (const char* a_what);

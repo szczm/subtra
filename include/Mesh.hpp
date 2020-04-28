@@ -13,9 +13,8 @@ namespace SUBTRA
     {
         public:
 
-        Mesh (std::string a_path);
-        Mesh () = default;
-        ~Mesh () = default;
+        // TODO: Implement move func. in case more data is added to class
+        static Mesh LoadFromFile (const std::string& a_path);
 
         void Bind ();
 

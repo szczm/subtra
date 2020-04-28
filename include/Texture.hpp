@@ -15,9 +15,8 @@ namespace SUBTRA
     {
         public:
 
-        Texture (std::string a_path);
-        Texture () = default;
-        ~Texture () = default;
+        // TODO: Implement move func. in case more data is added to class
+        static Texture LoadFromFile(const std::string& a_path);
 
         void Bind ();
 

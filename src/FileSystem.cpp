@@ -7,7 +7,7 @@
 #include "stb_image.h"
 
 
-std::optional<std::string> SUBTRA::FileSystem::ReadText (std::string a_path)
+std::optional<std::string> SUBTRA::FileSystem::LoadText (const std::string& a_path)
 {
     // Experimental because GCC 7 :(
     using std::experimental::filesystem::file_size;
@@ -25,9 +25,9 @@ std::optional<std::string> SUBTRA::FileSystem::ReadText (std::string a_path)
     return {};
 }
 
-std::optional<SUBTRA::FileSystem::TextureData> SUBTRA::FileSystem::ReadTexture (std::string a_path)
+std::optional<SUBTRA::FileSystem::TextureData> SUBTRA::FileSystem::LoadTexture (const std::string& a_path)
 {
-    auto text = ReadText(a_path);
+    auto text = LoadText(a_path);
 
     if (text)
     {

@@ -19,7 +19,7 @@ int main (int, char**)
     }
     catch (Exception& ex)
     {
-        // Printing is done by the exceptions themselves
+        Log::Error("Uncaught exception: ", ex.what());
     }
 
     engine.Shutdown();

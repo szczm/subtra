@@ -25,9 +25,9 @@ void SUBTRA::Camera::Update ()
 
 void SUBTRA::Camera::UpdateIMGUI ()
 {
-    m_isDirty |= m_fov.UpdateIMGUI()
-              || m_near.UpdateIMGUI()
-              || m_far.UpdateIMGUI();
+    m_shouldUpdateMatrix |= m_fieldOfView.UpdateIMGUI()
+                         || m_near.UpdateIMGUI()
+                         || m_far.UpdateIMGUI();
 }
 
 void SUBTRA::Camera::Destroy ()
@@ -35,47 +35,47 @@ void SUBTRA::Camera::Destroy ()
     // Log::Print("Camera destroy");
 }
 
-void SUBTRA::Camera::SetFoV (float a_fov)
+void SUBTRA::Camera::SetFieldOfView (float a_fieldOfView)
 {
-    m_fov = a_fov;
+    m_fieldOfView = a_fieldOfView;
 
-    m_isDirty = true;
+    m_shouldUpdateMatrix = true;
 }
 
-void SUBTRA::Camera::SetAspect (float a_aspect)
+void SUBTRA::Camera::SetAspectRatio (float a_aspectRatio)
 {
-    m_aspect = a_aspect;
+    m_aspectRatio = a_aspectRatio;
 
-    m_isDirty = true;
+    m_shouldUpdateMatrix = true;
 }
 
 void SUBTRA::Camera::SetNear (float a_near)
 {
     m_near = a_near;
 
-    m_isDirty = true;
+    m_shouldUpdateMatrix = true;
 }
 
 void SUBTRA::Camera::SetFar (float a_far)
 {
     m_far = a_far;
 
-    m_isDirty = true;
+    m_shouldUpdateMatrix = true;
 }
 
 glm::mat4 SUBTRA::Camera::GetProjectionMatrix ()
 {
-    if (m_isDirty)
+    if (m_shouldUpdateMatrix)
     {
-        UpdateProjectionMatrix();
+        UpdateMatrix();
 
-        m_isDirty = false;
+        m_shouldUpdateMatrix = false;
     }
 
     return m_projectionMatrix;
 }
 
-void SUBTRA::Camera::UpdateProjectionMatrix ()
+void SUBTRA::Camera::UpdateMatrix ()
 {
-    m_projectionMatrix = glm::perspective(glm::radians(*m_fov), m_aspect, *m_near, *m_far);
+    m_projectionMatrix = glm::perspective(glm::radians(*m_fieldOfView), m_aspectRatio, *m_near, *m_far);
 }

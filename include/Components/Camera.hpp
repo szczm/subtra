@@ -22,8 +22,8 @@ namespace SUBTRA
         void UpdateIMGUI () override;
         void Destroy () override;
 
-        void SetFoV (float a_fov);
-        void SetAspect (float a_aspect);
+        void SetFieldOfView (float a_fieldOfView);
+        void SetAspectRatio (float a_aspectRatio);
         void SetNear (float a_near);
         void SetFar (float a_far);
 
@@ -32,15 +32,16 @@ namespace SUBTRA
 
         private:
 
-        void UpdateProjectionMatrix ();
-        bool m_isDirty = true;
+        // Cache the projection matrix and update it only when needed
+        void UpdateMatrix ();
+        bool m_shouldUpdateMatrix = true;
 
         glm::mat4 m_projectionMatrix = glm::mat4(1.0);
 
-        Parameter<float> m_fov = Parameter {"FoV", 60.0f, 0.5f, 0.0f, 180.0f};
+        Parameter<float> m_fieldOfView = Parameter {"Field of view", 60.0f, 0.5f, 0.0f, 180.0f};
         Parameter<float> m_near = Parameter {"Near", 0.1f, 0.1f, 0.0f, 100000.0f};
         Parameter<float> m_far = Parameter {"Far", 10.0f, 0.1f, 0.0f, 100000.0f};
 
-        float m_aspect = 1.0;
+        float m_aspectRatio = 1.0;
     };
 }
