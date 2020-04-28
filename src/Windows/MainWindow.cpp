@@ -45,7 +45,7 @@ void SUBTRA::MainWindow::UpdateIMGUI ()
     ImGui::Begin("Test Triangle", static_cast<bool *>(nullptr), ImGuiWindowFlags_MenuBar);
 
     ImGui::LabelText("Time", "%f", Time::time);
-    ImGui::LabelText("Delta time", "%f", Time::deltaTime);
+    ImGui::LabelText("Delta time", "%f ms", Time::deltaTime * 1000.0f);
 
     m_testColor.UpdateIMGUI();
 
