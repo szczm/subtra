@@ -17,35 +17,36 @@ namespace SUBTRA
 
     class Window
     {
-        public:
 
-        // TODO: Implement move func. in case more data is added to class
-        static Window Open (const std::string& a_title, uint a_width, uint a_height);
+    public:
+
+        // TODO: Implement move semantics in case more data is added to class
+        static Window Open (const std::string& Title, uint Width, uint Height);
 
         void Maximize () const;
         void Clear () const;
         void SwapBuffers () const;
-        void Resize (uint a_width, uint a_height);
+        void Resize (uint Width, uint Height);
 
         std::weak_ptr<SDL_Window> GetSDLWindow () const;
         std::weak_ptr<SDL_GLContext> GetContext () const;
 
-        virtual void ProcessEvent (SDL_Event a_event);
+        virtual void ProcessEvent (SDL_Event Event);
         virtual void UpdateIMGUI ();
         virtual void Render ();
 
 
-        protected:
+    protected:
         
-        void ResizeViewport (uint a_newWidth, uint a_newHeight);
+        void ResizeViewport (uint Width, uint Height);
 
-        std::shared_ptr<SDL_Window> m_sdlWindow {};
-        std::shared_ptr<SDL_GLContext> m_sdlContext {};
+        std::shared_ptr<SDL_Window> SDLWindow {};
+        std::shared_ptr<SDL_GLContext> SDLContext {};
 
-        uint m_width = 0;
-        uint m_height = 0;
+        uint Width = 0;
+        uint Height = 0;
 
-
+        // TODO: get rid of it? required for MainWindow::Open
         friend class MainWindow;
     };
 }

@@ -16,25 +16,25 @@ namespace SUBTRA
     // Stolen from here: https://gist.github.com/Lee-R/3839813
     namespace
     {
-        constexpr std::size_t hash_string(char const* s, std::size_t count)
+        constexpr std::size_t hash_string(char const* String, std::size_t StringLength)
         {
-            return ((count ? hash_string(s, count - 1) : 2166136261u) ^ s[count]) * 16777619u;
+            return ((StringLength ? hash_string(String, StringLength - 1) : 2166136261u) ^ String[StringLength]) * 16777619u;
         }
     }
     // Above is an anonymous namespace: the hash_string function gets a unique name and is not available elsewhere.
 
-    // This looks complex, but it's not: "Hello"_name is a string in Edit Mode, and a compiled hash in Play Mode.
-    inline constexpr decltype(auto) operator"" _name(const char* a_name, std::size_t a_length)
+    // "Hello"_name is a string in Edit Mode, and becomes a hash in Play Mode. Begone, defines.
+    inline constexpr decltype(auto) operator"" _Name(const char* Name, std::size_t NameLength)
     {
-        if constexpr (Settings::IS_PLAY_MODE)
+        if constexpr (Settings::IsPlayMode)
         {
-            return hash_string(a_name, a_length);
+            return hash_string(Name, NameLength);
         }
         else
         {
-            return a_name;
+            return Name;
         }
     }
 
-    using Name = decltype(""_name);
+    using Name = decltype(""_Name);
 }

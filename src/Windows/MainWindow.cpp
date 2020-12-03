@@ -14,144 +14,90 @@
 #include "Log.hpp"
 
 
+// TODO: what is this, why is this, why isn't it static, what why
 SUBTRA::MainWindow SUBTRA::MainWindow::Open ()
 {
-    MainWindow window;
-    window = Window::Open("SUBTRA", 800, 600);
-    window.Maximize();
+    MainWindow NewMainWindow;
+    Window NewWindow = Window::Open("SUBTRA", 800, 600);    
 
-    return window;
-}
+    NewMainWindow.SDLContext = NewWindow.SDLContext;
+    NewMainWindow.SDLWindow = NewWindow.SDLWindow;
+    NewMainWindow.Maximize();
 
-SUBTRA::MainWindow::MainWindow (const SUBTRA::MainWindow& a_other)
-: m_testColor(a_other.m_testColor)
-{
-    m_sdlWindow = a_other.m_sdlWindow;
-    m_sdlContext = a_other.m_sdlContext;
-
-    m_width = a_other.m_width;
-    m_height = a_other.m_height;
-
-    m_testMesh = a_other.m_testMesh;
-    m_testShader = a_other.m_testShader;
-    m_testTexture = a_other.m_testTexture;
-    m_testObject = a_other.m_testObject;
-    m_testAngles = a_other.m_testAngles;
-    m_testCamera = a_other.m_testCamera;
-    m_testScale = a_other.m_testScale;
-}
-
-SUBTRA::MainWindow& SUBTRA::MainWindow::operator= (SUBTRA::MainWindow&& a_other)
-{
-    m_sdlWindow = a_other.m_sdlWindow;
-    m_sdlContext = a_other.m_sdlContext;
-
-    m_width = a_other.m_width;
-    m_height = a_other.m_height;
-
-    m_testMesh = a_other.m_testMesh;
-    m_testShader = a_other.m_testShader;
-    m_testTexture = a_other.m_testTexture;
-    m_testObject = a_other.m_testObject;
-    m_testAngles = a_other.m_testAngles;
-    m_testCamera = a_other.m_testCamera;
-    m_testScale = a_other.m_testScale;
-    m_testColor = a_other.m_testColor;
-
-    return *this;
-}
-
-SUBTRA::MainWindow::MainWindow ()
-{
-
-}
-
-SUBTRA::MainWindow::~MainWindow ()
-{
-
+    return NewMainWindow;
 }
 
 void SUBTRA::MainWindow::LoadTestData ()
 {
-    m_testMesh = Mesh::LoadFromFile("assets/models/test.model");
-    m_testShader = Shader::LoadFromFile("assets/shaders/test.vert", "assets/shaders/test.frag");
-    m_testTexture = Texture::LoadFromFile("assets/textures/test.jpg");
+    TestMesh = Mesh::LoadFromFile("assets/models/test.model");
+    TestShader = Shader::LoadFromFile("assets/shaders/test.vert", "assets/shaders/test.frag");
+    TestTexture = Texture::LoadFromFile("assets/textures/test.jpg");
 
-    m_testCamera = m_testObject.AddComponent<Camera>();
+    TestCamera = TestObject.AddComponent<Camera>();
 }
 
-void SUBTRA::MainWindow::ProcessEvent(SDL_Event a_event)
+void SUBTRA::MainWindow::ProcessEvent(SDL_Event Event)
 {
-    Window::ProcessEvent(a_event);
+    Window::ProcessEvent(Event);
 
-    if (a_event.type == SDL_WINDOWEVENT && a_event.window.event == SDL_WINDOWEVENT_RESIZED)
+    if (Event.type == SDL_WINDOWEVENT && Event.window.event == SDL_WINDOWEVENT_RESIZED)
     {
-        m_testCamera.get()->SetAspectRatio(static_cast<float>(m_width) / static_cast<float>(m_height));
+        TestCamera.get()->SetAspectRatio(static_cast<float>(Width) / static_cast<float>(Height));
     }
 }
-
 
 void SUBTRA::MainWindow::UpdateIMGUI ()
 {
     ImGui::Begin("Test Triangle", static_cast<bool *>(nullptr), ImGuiWindowFlags_MenuBar);
 
-    ImGui::LabelText("Time", "%f", Time::time);
-    ImGui::LabelText("Delta time", "%f ms", Time::deltaTime * 1000.0f);
+    ImGui::LabelText("Time", "%f", Time::TotalTime);
+    ImGui::LabelText("Delta time", "%f ms", Time::DeltaTime * 1000.0f);
 
-    m_testColor.UpdateIMGUI();
+    TestColor.UpdateIMGUI();
 
-    ImGui::DragFloat("Roll", &m_testAngles.x, 1.0f, -180.0f, 180.0f);
-    ImGui::DragFloat("Pitch", &m_testAngles.y, 1.0f, -180.0f, 180.0f);
-    ImGui::DragFloat("Yaw", &m_testAngles.z, 1.0f, -180.0f, 180.0f);
-    ImGui::DragFloat("Scale", &m_testScale, 0.02f, -2.0f, 2.0f);
+    ImGui::DragFloat("Roll", &TestAngles.x, 1.0f, -180.0f, 180.0f);
+    ImGui::DragFloat("Pitch", &TestAngles.y, 1.0f, -180.0f, 180.0f);
+    ImGui::DragFloat("Yaw", &TestAngles.z, 1.0f, -180.0f, 180.0f);
+    ImGui::DragFloat("Scale", &TestScale, 0.02f, -2.0f, 2.0f);
 
-    for (Component& component : ComponentManager::GetComponents())
+    for (Component& Component : ComponentManager::GetComponents())
     {
-        component.UpdateIMGUI();
+        Component.UpdateIMGUI();
     }
 }
 
 void SUBTRA::MainWindow::Render ()
 {
-    for (Component& component : ComponentManager::GetComponents())
+    // TODO: extract update from render
+    for (Component& Component : ComponentManager::GetComponents())
     {
-        component.Update();
+        Component.Update();
     }
 
-    for (Camera& camera : ComponentManager::GetComponents<Camera>())
+    // TODO: separate camera update? why?
+    for (Camera& Camera : ComponentManager::GetComponents<Camera>())
     {
-        camera.Update();
+        Camera.Update();
     }
 
-    m_testObject.transform.SetPosition(glm::vec3(1.0, 0.5, -3.0)).SetAngles(m_testAngles).SetScale(m_testScale);
+    TestObject.Transform.SetLocalPosition(glm::vec3(1.0, 0.5, -3.0)).SetLocalRotation(TestAngles).SetLocalScale(TestScale);
 
     Clear();
 
-    m_testShader.Use();
-    m_testMesh.Bind();
-    m_testTexture.Bind();
+    TestShader.Use();
+    TestMesh.Bind();
+    TestTexture.Bind();
 
-    // TODO: What So Not - >>>Better<<<
-    m_testShader.Send("u_albedo", 0);
-    m_testShader.Send("u_world", m_testObject.transform.GetWorldMatrix());
-    m_testShader.Send("u_view", glm::mat4(1.0));
-    m_testShader.Send("u_proj", m_testCamera->GetProjectionMatrix());
-    m_testShader.Send("u_color", *m_testColor);
+    // TODO: fix up this whole mess
+    TestShader.Send("AlbedoTexture", 0);
+    TestShader.Send("World", TestObject.Transform.GetWorldMatrix());
+    TestShader.Send("View", glm::mat4(1.0));
+    TestShader.Send("Projection", TestCamera->GetProjectionMatrix());
+    TestShader.Send("Tint", TestColor.Value);
     
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
     SwapBuffers();
-}
-
-SUBTRA::MainWindow& SUBTRA::MainWindow::operator= (const SUBTRA::Window& a_other)
-{
-    m_sdlWindow = a_other.m_sdlWindow;
-    m_sdlContext = a_other.m_sdlContext;
-
-    m_width = a_other.m_width;
-    m_height = a_other.m_height;
-
-    return *this;
 }

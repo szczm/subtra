@@ -16,27 +16,27 @@ namespace SUBTRA
 {
     class Object final
     {
-        public:
+    
+    public:
 
-        Object& operator= (const Object& a_other);
+        // TODO?: Delete for now, have to reassign parents properly
+        Object& operator= (const Object& Victim);
 
-        template <class T>
-        std::shared_ptr<T> AddComponent ()
+        template <class ComponentType>
+        std::shared_ptr<ComponentType> AddComponent ()
         {
-            auto component = std::make_shared<T>(*this);
+            auto Component = std::make_shared<ComponentType>(*this);
 
-            m_components.push_back(component);
-            ComponentManager::AddComponent(component);
+            Components.push_back(Component);
+            ComponentManager::AddComponent(Component);
 
-            return component;
+            return Component;
         }
 
-        Transform& transform = m_transform;
+        SUBTRA::Transform Transform {*this};
 
-
-        private:
-
-        Transform m_transform {*this};
-        std::vector<std::shared_ptr<Component>> m_components {};
+    private:
+    
+        std::vector<std::shared_ptr<Component>> Components {};
     };
 }

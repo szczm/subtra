@@ -15,42 +15,42 @@ SUBTRA::Engine::~Engine ()
     Shutdown();
 }
 
-void SUBTRA::Engine::Init ()
+void SUBTRA::Engine::Initialize ()
 {
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
         throw SUBTRA::Exception {"Could not initialize SDL"};
 
-    m_inputManager.Init();
-    m_windowManager.Init();
+    InputManager.Initialize();
+    WindowManager.Initialize();
 }
 
 void SUBTRA::Engine::Run ()
 {
-    while (m_isRunning)
+    while (IsRunning)
     {
-        SDL_Event event;
+        SDL_Event Event;
 
-        while (SDL_PollEvent(&event))
-            ProcessEvent(event);
+        while (SDL_PollEvent(&Event))
+            ProcessEvent(Event);
 
         Time::Update();
 
-        m_windowManager.Update();
+        WindowManager.Update();
     }
 }
 
 void SUBTRA::Engine::Shutdown ()
 {
-    // m_windowManager.Shutdown();
+    // WindowManager.Shutdown();
 
     SDL_Quit();
 }
 
-void SUBTRA::Engine::ProcessEvent (SDL_Event a_event)
+void SUBTRA::Engine::ProcessEvent (SDL_Event Event)
 {
-    m_inputManager.ProcessEvent(a_event);
-    m_windowManager.ProcessEvent(a_event);
+    InputManager.ProcessEvent(Event);
+    WindowManager.ProcessEvent(Event);
 
-    if (a_event.type == SDL_QUIT)
-        m_isRunning = false;
+    if (Event.type == SDL_QUIT)
+        IsRunning = false;
 }

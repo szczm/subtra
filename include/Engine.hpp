@@ -10,23 +10,24 @@ namespace SUBTRA
 {
     class Engine final
     {
-        public:
+
+    public:
 
         Engine () = default;
         ~Engine ();
 
-        void Init ();
+        void Initialize ();
         void Run ();
         void Shutdown ();
 
 
-        private:
+    private:
 
-        void ProcessEvent (SDL_Event a_event);
+        void ProcessEvent (SDL_Event Event);
 
-        InputManager m_inputManager {};
-        WindowManager m_windowManager {};
+        SUBTRA::InputManager InputManager {};
+        SUBTRA::WindowManager WindowManager {};
 
-        bool m_isRunning = true;
+        bool IsRunning = true;
     };
 }

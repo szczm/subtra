@@ -10,26 +10,27 @@ namespace SUBTRA
 {
     class WindowManager final
     {
-        public:
+    
+    public:
 
         WindowManager () = default;
         ~WindowManager ();
 
-        void Init ();
+        void Initialize ();
 
-        void ProcessEvent (SDL_Event a_event);
+        void ProcessEvent (SDL_Event Event);
         void Update ();
 
         void Shutdown ();
 
 
-        private:
+    private:
 
         void InitGLAD ();
         void InitSDL ();
         void InitOpenGL ();
         void InitIMGUI ();
 
-        MainWindow m_mainWindow {};
+        SUBTRA::MainWindow MainWindow {};
     };
 }

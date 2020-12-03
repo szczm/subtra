@@ -11,20 +11,20 @@ namespace SUBTRA
 {
     class Time final
     {
-        public:
 
-        inline static float deltaTime = 0.0f;
-        inline static float time = 0.0f;
+    public:
 
+        inline static float DeltaTime = 0.0f;
+        inline static float TotalTime = 0.0f;
 
-        private:
+    private:
 
         Time () = delete;
-        ~Time () = default;
+        ~Time () = delete;
 
         static void Update ();
 
-        inline static Uint32 m_lastTicks = 0.0f;
+        inline static Uint32 LastTicks = 0.0f;
 
         friend Engine;
     };

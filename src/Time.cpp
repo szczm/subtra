@@ -5,14 +5,14 @@
 
 void SUBTRA::Time::Update()
 {
-    Uint32 ticks = SDL_GetTicks();
+    Uint32 Ticks = SDL_GetTicks();
 
-    if (m_lastTicks > 0)
+    if (LastTicks > 0)
     {
-        deltaTime = static_cast<float>(ticks - m_lastTicks) / 1000.0f;
+        DeltaTime = static_cast<float>(Ticks - LastTicks) / 1000.0f;
     }
 
-    time = static_cast<float>(ticks) / 1000.0f;
+    TotalTime = static_cast<float>(Ticks) / 1000.0f;
 
-    m_lastTicks = ticks;
+    LastTicks = Ticks;
 }

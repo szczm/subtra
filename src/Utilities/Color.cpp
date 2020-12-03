@@ -4,26 +4,26 @@
 #include "Utilities/Color.hpp"
 
 
-SUBTRA::Color SUBTRA::Color::FromByte (byte a_red, byte a_green, byte a_blue, byte a_alpha)
+SUBTRA::Color SUBTRA::Color::FromByte (byte Red, byte Green, byte Blue, byte Alpha)
 {
-    Color color;
+    Color NewColor;
 
-    color.red = a_red / 256.0f;
-    color.green = a_green / 256.0f;
-    color.blue = a_blue / 256.0f;
-    color.alpha = a_alpha / 256.0f;
+    NewColor.Red = Red / 256.0f;
+    NewColor.Green = Green / 256.0f;
+    NewColor.Blue = Blue / 256.0f;
+    NewColor.Alpha = Alpha / 256.0f;
 
-    return color;
+    return NewColor;
 }
 
-SUBTRA::Color SUBTRA::Color::FromLinear (float a_red, float a_green, float a_blue, float a_alpha)
+SUBTRA::Color SUBTRA::Color::FromLinear (float Red, float Green, float Blue, float Alpha)
 {
-    Color color;
+    Color NewColor;
 
-    color.red = a_red;
-    color.green = a_green;
-    color.blue = a_blue;
-    color.alpha = a_alpha;
+    NewColor.Red = Red;
+    NewColor.Green = Green;
+    NewColor.Blue = Blue;
+    NewColor.Alpha = Alpha;
 
-    return color;
+    return NewColor;
 }

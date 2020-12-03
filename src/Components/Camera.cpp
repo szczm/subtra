@@ -7,13 +7,13 @@
 
 #include "Log.hpp"
 
-SUBTRA::Camera::Camera (Object& a_object)
-: Component(a_object)
+SUBTRA::Camera::Camera (Object& Owner)
+: Component(Owner)
 {
 
 }
 
-void SUBTRA::Camera::Init ()
+void SUBTRA::Camera::Initialize ()
 {
     // Log::Print("Camera init");
 }
@@ -25,9 +25,9 @@ void SUBTRA::Camera::Update ()
 
 void SUBTRA::Camera::UpdateIMGUI ()
 {
-    m_shouldUpdateMatrix |= m_fieldOfView.UpdateIMGUI()
-                         || m_near.UpdateIMGUI()
-                         || m_far.UpdateIMGUI();
+    FieldOfView.UpdateIMGUI();
+    Near.UpdateIMGUI();
+    Far.UpdateIMGUI();
 }
 
 void SUBTRA::Camera::Destroy ()
@@ -35,47 +35,27 @@ void SUBTRA::Camera::Destroy ()
     // Log::Print("Camera destroy");
 }
 
-void SUBTRA::Camera::SetFieldOfView (float a_fieldOfView)
+void SUBTRA::Camera::SetFieldOfView (float FieldOfView)
 {
-    m_fieldOfView = a_fieldOfView;
-
-    m_shouldUpdateMatrix = true;
+    this->FieldOfView = FieldOfView;
 }
 
-void SUBTRA::Camera::SetAspectRatio (float a_aspectRatio)
+void SUBTRA::Camera::SetAspectRatio (float AspectRatio)
 {
-    m_aspectRatio = a_aspectRatio;
-
-    m_shouldUpdateMatrix = true;
+    this->AspectRatio = AspectRatio;
 }
 
-void SUBTRA::Camera::SetNear (float a_near)
+void SUBTRA::Camera::SetNear (float Near)
 {
-    m_near = a_near;
-
-    m_shouldUpdateMatrix = true;
+    this->Near = Near;
 }
 
-void SUBTRA::Camera::SetFar (float a_far)
+void SUBTRA::Camera::SetFar (float Far)
 {
-    m_far = a_far;
-
-    m_shouldUpdateMatrix = true;
+    this->Far = Far;
 }
 
 glm::mat4 SUBTRA::Camera::GetProjectionMatrix ()
 {
-    if (m_shouldUpdateMatrix)
-    {
-        UpdateMatrix();
-
-        m_shouldUpdateMatrix = false;
-    }
-
-    return m_projectionMatrix;
-}
-
-void SUBTRA::Camera::UpdateMatrix ()
-{
-    m_projectionMatrix = glm::perspective(glm::radians(*m_fieldOfView), m_aspectRatio, *m_near, *m_far);
+    return glm::perspective(glm::radians(FieldOfView.Value), AspectRatio, Near.Value, Far.Value);
 }

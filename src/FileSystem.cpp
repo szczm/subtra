@@ -7,45 +7,45 @@
 #include "stb_image.h"
 
 
-std::optional<std::string> SUBTRA::FileSystem::LoadText (const std::string& a_path)
+std::optional<std::string> SUBTRA::FileSystem::LoadText (const std::string& PathToFile)
 {
     // Experimental because GCC 7 :(
     using std::experimental::filesystem::file_size;
 
-    if (std::ifstream stream {a_path}; stream.good())
+    if (std::ifstream stream(PathToFile); stream.good())
     {
-        auto filesize = file_size(a_path.c_str());
+        auto FileSize = file_size(PathToFile.c_str());
 
-        std::string content (filesize, '\0');
-        stream.read(content.data(), filesize);
+        std::string Content (FileSize, '\0');
+        stream.read(Content.data(), FileSize);
 
-        return content;
+        return Content;
     }
 
     return {};
 }
 
-std::optional<SUBTRA::FileSystem::TextureData> SUBTRA::FileSystem::LoadTexture (const std::string& a_path)
+std::optional<SUBTRA::FileSystem::TextureData> SUBTRA::FileSystem::LoadTexture (const std::string& PathToFile)
 {
-    auto text = LoadText(a_path);
+    auto Text = LoadText(PathToFile);
 
-    if (text)
+    if (Text)
     {
-        TextureData textureData;
+        TextureData NewTextureData;
 
         // TODO: extract image code to a separate class?
         stbi_set_flip_vertically_on_load(1);
 
-        textureData.data.reset
+        NewTextureData.Data.reset
         (
             stbi_load_from_memory
             (
-                reinterpret_cast<const unsigned char*>(text->c_str()), text->length(),
-                &textureData.width, &textureData.height, &textureData.channels, STBI_rgb_alpha
+                reinterpret_cast<const unsigned char*>(Text->c_str()), Text->length(),
+                &NewTextureData.Width, &NewTextureData.Height, &NewTextureData.Channels, STBI_rgb_alpha
             )
         );
 
-        return textureData;
+        return NewTextureData;
     }
 
     return {};

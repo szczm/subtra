@@ -10,19 +10,19 @@ using namespace SUBTRA;
 
 int main (int, char**)
 {
-    Engine engine;
+    Engine Engine;
 
     try
     {
-        engine.Init();
-        engine.Run();
+        Engine.Initialize();
+        Engine.Run();
     }
-    catch (Exception& ex)
+    catch (Exception& Exception)
     {
-        Log::Error("Uncaught exception: ", ex.what());
+        Log::Error("Uncaught exception: ", Exception.what());
     }
 
-    engine.Shutdown();
+    Engine.Shutdown();
 
     return 0;
 }

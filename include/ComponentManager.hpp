@@ -13,40 +13,41 @@ namespace SUBTRA
 {
     class ComponentManager final
     {
-        public:
 
-        inline static void AddComponent (std::weak_ptr<Component> a_component)
+    public:
+
+        inline static void AddComponent (std::weak_ptr<Component> Component)
         {
-            m_components.push_back(a_component);
+            AllComponents.push_back(Component);
         }
 
-        // This may look bad at a first glance, but it allows very clean usage on site:
-        //   for (Camera& camera : ComponentManager::GetComponents<Camera>())
-        template <typename T>
-        static std::vector<std::reference_wrapper<T>> GetComponents ()
+        // Ugly on the inside, beautiful on the outside. Usage example:
+        // for (Camera& camera : ComponentManager::GetComponents<Camera>())
+        template <typename ReturnType>
+        static std::vector<std::reference_wrapper<ReturnType>> GetComponents ()
         {
-            std::vector<std::reference_wrapper<T>> components;
+            std::vector<std::reference_wrapper<ReturnType>> ComponentRefs;
 
-            for (auto it = m_components.begin(); it != m_components.end(); /**/)
+            for (auto Iterator = AllComponents.begin(); Iterator != AllComponents.end(); /**/)
             {
-                if (auto component = it->lock())
+                if (auto Component = Iterator->lock())
                 {
-                    if (auto* Tcomponent = dynamic_cast<T*>(component.get()))
+                    if (auto* CastComponent = dynamic_cast<ReturnType*>(Component.get()))
                     {
-                        components.push_back(*Tcomponent);
+                        ComponentRefs.push_back(*CastComponent);
                     }
 
-                    ++it;
+                    ++Iterator;
                 }
                 else
                 {
-                    // Delete component if the reference to it is no longer valid
-                    it = m_components.erase(it);
+                    // Delete component if the reference to Iterator is no longer valid
+                    Iterator = AllComponents.erase(Iterator);
                 }
                 
             }
 
-            return components;
+            return ComponentRefs;
         }
 
         // Alias for getting all components
@@ -56,8 +57,9 @@ namespace SUBTRA
         }
 
 
-        private:
+    private:
 
-        inline static std::vector<std::weak_ptr<Component>> m_components {};
+        inline static std::vector<std::weak_ptr<Component>> AllComponents {};
+
     };
 }

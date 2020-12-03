@@ -7,18 +7,18 @@
 #include "Log.hpp"
 
 
-SUBTRA::Texture SUBTRA::Texture::LoadFromFile (const std::string& a_path)
+SUBTRA::Texture SUBTRA::Texture::LoadFromFile (const std::string& PathToFile)
 {
-    FileSystem fileSystem;
-    auto textureData = fileSystem.LoadTexture(a_path);
+    FileSystem FileSystem;
+    auto TextureData = FileSystem.LoadTexture(PathToFile);
 
-    if (textureData)
+    if (TextureData)
     {
-        Texture texture;
+        Texture NewTexture;
 
-        glGenTextures(1, &texture.m_tex);
+        glGenTextures(1, &NewTexture.TextureID);
 
-        glBindTexture(GL_TEXTURE_2D, texture.m_tex);
+        glBindTexture(GL_TEXTURE_2D, NewTexture.TextureID);
 
         // TODO: do this somewhere else
         // TODO: more options?
@@ -29,17 +29,17 @@ SUBTRA::Texture SUBTRA::Texture::LoadFromFile (const std::string& a_path)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureData->width, textureData->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData->data.get());
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TextureData->Width, TextureData->Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, TextureData->Data.get());
         glGenerateMipmap(GL_TEXTURE_2D);
 
         // TODO: just once?
         glActiveTexture(GL_TEXTURE0);
 
-        return texture;
+        return NewTexture;
     }
     else
     {
-        Log::Print("Texture ", a_path, " could not be loaded");
+        Log::Error("Could not open texture file: ", PathToFile);
 
         return {};
     }
@@ -47,5 +47,5 @@ SUBTRA::Texture SUBTRA::Texture::LoadFromFile (const std::string& a_path)
 
 void SUBTRA::Texture::Bind ()
 {
-    glBindTexture(GL_TEXTURE_2D, m_tex);
+    glBindTexture(GL_TEXTURE_2D, TextureID);
 }

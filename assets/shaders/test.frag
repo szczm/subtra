@@ -1,15 +1,15 @@
 #version 330 core
 
-in vec4 v_color;
-in vec2 v_coord;
+in vec4 InterpColor;
+in vec2 InterpUV;
 
-out vec4 o_color;
+out vec4 FinalColor;
 
-uniform sampler2D u_albedo;
+uniform sampler2D AlbedoTexture;
 
 void main()
 {
-    vec4 color = v_color * texture(u_albedo, v_coord);
+    vec4 TextureColor = texture(AlbedoTexture, InterpUV);
 
-    o_color = color;
+    FinalColor = TextureColor * InterpColor;
 }

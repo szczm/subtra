@@ -8,6 +8,6 @@ namespace SUBTRA
 {
     struct Settings
     {
-        static constexpr bool IS_PLAY_MODE = false;
+        static constexpr bool IsPlayMode = false;
     };
 }

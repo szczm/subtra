@@ -7,7 +7,7 @@
 #include "GLMCommon.hpp"
 #include "Log.hpp"
 
-// Objects
+// Tidbits
 #include "Component.hpp"
 #include "Mesh.hpp"
 #include "Object.hpp"
@@ -15,7 +15,7 @@
 #include "Transform.hpp"
 #include "Window.hpp"
 
-// Modules
+// Managers and systems
 #include "ComponentManager.hpp"
 #include "InputManager.hpp"
 #include "FileSystem.hpp"

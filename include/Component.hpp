@@ -10,17 +10,21 @@ namespace SUBTRA
 
     class Component
     {
-        public:
 
-        Component (Object& a_object);
+    public:
+
+        // Require an owning object for Component
+        Component (Object& Owner);
         Component () = delete;
+
         virtual ~Component () = 0;
 
-        virtual void Init () = 0;
+        virtual void Initialize () = 0;
         virtual void Update () = 0;
         virtual void UpdateIMGUI () = 0;
         virtual void Destroy () = 0;
 
-        Object& m_object;
+        Object* Owner = nullptr;
+        
     };
 }

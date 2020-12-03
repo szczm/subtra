@@ -9,11 +9,11 @@
 template<>
 bool SUBTRA::Parameter<float>::UpdateIMGUI ()
 {
-    return ImGui::DragFloat(m_label, &m_value, m_stepValue, m_minValue, m_maxValue, "%.3f");
+    return ImGui::DragFloat(Label, &Value, Step, Min, Max, "%.3f");
 }
 
 template<>
 bool SUBTRA::Parameter<SUBTRA::Color>::UpdateIMGUI ()
 {
-    return ImGui::ColorEdit4(m_label, static_cast<float*>(&m_value.red));
+    return ImGui::ColorEdit4(Label, static_cast<float*>(&Value.Red));
 }

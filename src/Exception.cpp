@@ -3,13 +3,16 @@
 
 #include "Exception.hpp"
 
-#include <stdexcept>
-
 #include "Log.hpp"
 
 
-SUBTRA::Exception::Exception (const char* a_what)
-: std::runtime_error(a_what)
+SUBTRA::Exception::Exception (const std::string& What)
+: std::runtime_error(What)
+{
+
+}
+SUBTRA::Exception::Exception (const char* What)
+: std::runtime_error(What)
 {
 
 }

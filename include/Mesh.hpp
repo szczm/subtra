@@ -11,12 +11,8 @@ namespace SUBTRA
 {
     class Mesh
     {
-        public:
 
-        // TODO: Implement move func. in case more data is added to class
-        static Mesh LoadFromFile (const std::string& a_path);
-
-        void Bind ();
+    public:
 
         enum VertexAttrib
         {
@@ -25,10 +21,15 @@ namespace SUBTRA
             TexCoord = 2
         };
 
+        // TODO: Implement move semantics in case more data is added to class
+        static Mesh LoadFromFile (const std::string& PathToFile);
 
-        private:
+        void Bind ();
 
-        GLuint m_vao = 0;
-        GLuint m_vbo = 0;
+
+    private:
+
+        GLuint VAO = 0;
+        GLuint VBO = 0;
     };
 }

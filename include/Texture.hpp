@@ -13,16 +13,16 @@ namespace SUBTRA
 {
     class Texture
     {
-        public:
+    
+    public:
 
-        // TODO: Implement move func. in case more data is added to class
-        static Texture LoadFromFile(const std::string& a_path);
+        // TODO: Implement move semantics in case more data is added to class
+        static Texture LoadFromFile(const std::string& PathToFile);
 
         void Bind ();
 
+    private:
 
-        private:
-
-        GLuint m_tex = 0;
+        GLuint TextureID = 0;
     };
 }

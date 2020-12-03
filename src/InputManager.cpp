@@ -6,21 +6,31 @@
 #include "imgui.h"
 #include "imgui_impl_sdl.h"
 
-void SUBTRA::InputManager::Init () {}
-
-void SUBTRA::InputManager::ProcessEvent (SDL_Event a_event)
+void SUBTRA::InputManager::Initialize ()
 {
-    // TODO: Check if ImGui was initialized
-    ImGui_ImplSDL2_ProcessEvent(&a_event);
 
-    auto& imGuiIO = ImGui::GetIO();
-
-    if (imGuiIO.WantCaptureKeyboard == false)
-        ProcessKeyboardEvent(a_event);
-
-    if (imGuiIO.WantCaptureMouse == false)
-        ProcessMouseEvent(a_event);
 }
 
-void SUBTRA::InputManager::ProcessKeyboardEvent (SDL_Event a_event) {}
-void SUBTRA::InputManager::ProcessMouseEvent (SDL_Event a_event) {}
+void SUBTRA::InputManager::ProcessEvent (SDL_Event Event)
+{
+    // TODO: Check if ImGui was initialized
+    ImGui_ImplSDL2_ProcessEvent(&Event);
+
+    auto& ImGuiIO = ImGui::GetIO();
+
+    if (ImGuiIO.WantCaptureKeyboard == false)
+        ProcessKeyboardEvent(Event);
+
+    if (ImGuiIO.WantCaptureMouse == false)
+        ProcessMouseEvent(Event);
+}
+
+void SUBTRA::InputManager::ProcessKeyboardEvent (SDL_Event Event)
+{
+
+}
+
+void SUBTRA::InputManager::ProcessMouseEvent (SDL_Event Event)
+{
+
+}

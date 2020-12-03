@@ -10,13 +10,12 @@ namespace SUBTRA
 
     struct Color final
     {
-        // Helper function used to make class more readable at call site
-        static Color FromByte (byte a_red, byte a_green, byte a_blue, byte a_alpha = 255);
-        static Color FromLinear (float a_red, float a_green, float a_blue, float a_alpha = 1.0f);
+        static Color FromByte (byte Red, byte Green, byte Blue, byte Alpha = 255);
+        static Color FromLinear (float Red, float Green, float Blue, float Alpha = 1.0f);
 
-        float red = 1.0f;
-        float green = 0.0f;
-        float blue = 1.0f;
-        float alpha = 1.0f;
+        float Red = 1.0f;
+        float Green = 0.0f;
+        float Blue = 1.0f;
+        float Alpha = 1.0f;
     };
 }

@@ -13,35 +13,32 @@ namespace SUBTRA
 {
     class Camera : public Component
     {
-        public:
 
-        Camera (Object& a_object);
+    public:
 
-        void Init () override;
+        Camera (Object& Owner);
+
+        void Initialize () override;
         void Update () override;
         void UpdateIMGUI () override;
         void Destroy () override;
 
-        void SetFieldOfView (float a_fieldOfView);
-        void SetAspectRatio (float a_aspectRatio);
-        void SetNear (float a_near);
-        void SetFar (float a_far);
+        void SetFieldOfView (float FieldOfView);
+        void SetAspectRatio (float AspectRatio);
+        void SetNear (float Near);
+        void SetFar (float Far);
 
         glm::mat4 GetProjectionMatrix ();
 
 
-        private:
+    private:
 
-        // Cache the projection matrix and update it only when needed
-        void UpdateMatrix ();
-        bool m_shouldUpdateMatrix = true;
+        glm::mat4 mProjectionMatrix = glm::mat4(1.0);
 
-        glm::mat4 m_projectionMatrix = glm::mat4(1.0);
+        Parameter<float> FieldOfView = Parameter {"FoV", 60.0f, 0.5f, 0.0f, 180.0f};
+        Parameter<float> Near = Parameter {"Near", 0.1f, 0.1f, 0.0f, 100000.0f};
+        Parameter<float> Far = Parameter {"Far", 10.0f, 0.1f, 0.0f, 100000.0f};
 
-        Parameter<float> m_fieldOfView = Parameter {"Field of view", 60.0f, 0.5f, 0.0f, 180.0f};
-        Parameter<float> m_near = Parameter {"Near", 0.1f, 0.1f, 0.0f, 100000.0f};
-        Parameter<float> m_far = Parameter {"Far", 10.0f, 0.1f, 0.0f, 100000.0f};
-
-        float m_aspectRatio = 1.0;
+        float AspectRatio = 16.0f / 9.0f;
     };
 }

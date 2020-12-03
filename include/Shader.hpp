@@ -9,17 +9,13 @@
 
 #include <string>
 
+
 namespace SUBTRA
 {
     class Shader
     {
-        public:
 
-        // TODO: Implement move func. in case more data is added to class
-        static Shader LoadFromFile(const std::string& a_vertexPath, const std::string& a_fragmentPath);
-
-        void Use ();
-
+    public:
 
         enum class ColorMode
         {
@@ -27,18 +23,24 @@ namespace SUBTRA
             RGBA
         };
 
-        void Send (const std::string& a_key, int a_value);
-        void Send (const std::string& a_key, float a_value);
-        void Send (const std::string& a_key, glm::mat4 a_value);
-        void Send (const std::string& a_key, Color a_value, ColorMode a_colorMode = ColorMode::RGBA);
+        // TODO: Implement move semantics in case more data is added to class
+        static Shader LoadFromFile(const std::string& PathToVertexShaderFile, const std::string& PathToFragmentShaderFile);
 
-        GLint GetUniformLocation (const std::string& a_uniformName);
+        void Use ();
+
+        // If a new uniform type is required, add an overload below
+        void Send (const std::string& Name, int Value);
+        void Send (const std::string& Name, float Value);
+        void Send (const std::string& Name, glm::mat4 Value);
+        void Send (const std::string& Name, Color Value, ColorMode ColorMode = ColorMode::RGBA);
+
+        GLint GetUniformLocation (const std::string& Name);
 
 
-        private:
+    private:
 
-        static void LogShaderErrors (GLuint a_shaderId);
+        static void LogShaderErrors (GLuint ShaderID);
 
-        GLuint m_programId = 0;
+        GLuint ProgramID = 0;
     };
 }

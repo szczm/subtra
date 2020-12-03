@@ -11,49 +11,40 @@ namespace SUBTRA
     
     class Transform final
     {
-        public:
+
+    public:
 
         // A Transform cannot exist without an Object, and vice versa
-        Transform (Object& a_object);
+        Transform (Object& Owner);
         Transform () = delete;
-        ~Transform () = default;
 
-        Transform& operator=(const Transform& a_other);
+        // Transform& operator=(const Transform& Victim);
 
-        // Below methods always return the currently used Transform, thus allowing chain calling
+        // Methods below return the current Transform to allowing chain calling
         Transform& Reset ();
-        // Transform& Reset (Transform& a_template);
+        // Transform& Reset (Transform& Victim);
+        Transform& SetLocalPosition (glm::vec3 LocalPosition);
+        Transform& SetLocalRotation (glm::vec3 LocalRotation);
+        Transform& SetLocalScale (glm::vec3 LocalScale);
+        Transform& SetLocalScale (float LocalUniformScale);
 
-        Transform& SetPosition (glm::vec3 a_position);
-        Transform& SetAngles (glm::vec3 a_angles);
-        Transform& SetScale (glm::vec3 a_scale);
-        Transform& SetScale (float a_uniformScale);
+        glm::vec3 GetLocalPosition () const;
+        glm::vec3 GetLocalAngles () const;
+        glm::vec3 GetLocalScale () const;
 
-        Transform& Translate (glm::vec3 a_translation);
-        Transform& Rotate (glm::vec3 a_rotationAxis, float a_degrees);
-        Transform& Scale (glm::vec3 a_scale);
-        Transform& Scale (float a_uniformScale);
-
-
-        glm::vec3 GetPosition () const;
-        glm::vec3 GetAngles () const;
-        glm::vec3 GetScale () const;
+        // TODO: implement World equivalents
 
         glm::mat4 GetWorldMatrix ();
 
 
-        Object& object;
+        Object* Owner = nullptr;
 
+    private:
 
-        private:
+        glm::mat4 WorldMatrix = glm::mat4(1.0);
 
-        void UpdateWorldMatrix ();
-        bool m_shouldUpdateWorldMatrix = true;
-
-        glm::mat4 m_worldMatrix = glm::mat4(1.0);
-
-        glm::vec3 m_localPosition {};
-        glm::vec3 m_localAngles {};
-        glm::vec3 m_localScale {1.0, 1.0, 1.0};
+        glm::vec3 LocalPosition = glm::vec3(0.0f);
+        glm::vec3 LocalRotation = glm::vec3(0.0f);
+        glm::vec3 LocalScale = glm::vec3(1.0f);
     };
 }

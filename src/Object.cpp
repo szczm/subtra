@@ -4,8 +4,21 @@
 #include "Object.hpp"
 
 
-SUBTRA::Object& SUBTRA::Object::operator= (const SUBTRA::Object& a_other)
+SUBTRA::Object& SUBTRA::Object::operator= (const SUBTRA::Object& Victim)
 {
-    m_components = a_other.m_components;
-    m_transform = a_other.m_transform;
+    if (&Victim == this)
+    {
+        return *this;
+    }
+
+    Components = Victim.Components;
+    for (auto Component : Components)
+    {
+        Component->Owner = this;
+    }
+
+    Transform = Victim.Transform;
+    Transform.Owner = this;
+
+    return *this;
 }

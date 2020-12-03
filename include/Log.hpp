@@ -8,22 +8,22 @@
 
 namespace SUBTRA
 {
-    // I never really liked C++ streams. I wanted to have a print("a", 1, new Object) function
-    // that is equivalent to "std::cout << "a" << 1 << new Object << std::endl", which is very
-    // easy to do with C++17 fold expressions! \o/
+    // Simple "logs what you throw at it" Log functions using C++17 fold expressions.
+    // Usage example:
+    //     Log::Error("Could not open vertex shader file: ", PathToVertexShaderFile);
     namespace Log
     {
         template<typename ...Args>
-        void Print (Args&&... args)
+        void Print (Args&&... Arguments)
         {
-            (std::cout << ... << args) << std::endl;
+            (std::cout << ... << Arguments) << std::endl;
         }
 
         template<typename ...Args>
-        void Error (Args&&... args)
+        void Error (Args&&... Arguments)
         {
             std::cerr << "ERROR: ";
-            (std::cerr << ... << args) << std::endl;
+            (std::cerr << ... << Arguments) << std::endl;
         }
     }
 }

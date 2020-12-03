@@ -15,21 +15,18 @@ namespace SUBTRA
 
     class FileSystem final
     {
-        private:
+
+    private:
 
         struct TextureData
         {
-            int width, height, channels;
-            std::shared_ptr<byte> data;
+            int Width, Height, Channels;
+            std::shared_ptr<byte> Data;
         };
-
         
-        public:
+    public:
 
-        FileSystem () = default;
-        ~FileSystem () = default;
-
-        std::optional<std::string> LoadText (const std::string& a_path);
-        std::optional<TextureData> LoadTexture (const std::string& a_path);
+        std::optional<std::string> LoadText (const std::string& PathToFile);
+        std::optional<TextureData> LoadTexture (const std::string& PathToFile);
     };
 }

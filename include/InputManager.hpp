@@ -9,19 +9,16 @@ namespace SUBTRA
 {
     class InputManager final
     {
-        public:
 
-        InputManager () = default;
-        ~InputManager () = default;
+    public:
 
-        void Init ();
+        void Initialize ();
 
-        void ProcessEvent (SDL_Event a_event);
+        void ProcessEvent (SDL_Event Event);
 
+    private:
 
-        private:
-
-        void ProcessKeyboardEvent (SDL_Event a_event);
-        void ProcessMouseEvent (SDL_Event a_event);
+        void ProcessKeyboardEvent (SDL_Event Event);
+        void ProcessMouseEvent (SDL_Event Event);
     };
 }

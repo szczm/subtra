@@ -3,129 +3,69 @@
 
 #include "Transform.hpp"
 
-SUBTRA::Transform::Transform (Object& a_object)
-: object(a_object)
+SUBTRA::Transform::Transform (Object& Owner)
+: Owner(&Owner)
 {
 
-}
-
-SUBTRA::Transform& SUBTRA::Transform::operator=(const SUBTRA::Transform& a_other)
-{
-    m_shouldUpdateWorldMatrix = a_other.m_shouldUpdateWorldMatrix;
-
-    m_worldMatrix = a_other.m_worldMatrix;
-
-    m_localPosition = a_other.m_localPosition;
-    m_localAngles = a_other.m_localAngles;
-    m_localScale = a_other.m_localScale;
 }
 
 SUBTRA::Transform& SUBTRA::Transform::Reset ()
 {
-    m_localPosition = m_localAngles = {};
-    m_localScale = {1.0, 1.0, 1.0};
+    LocalPosition = glm::vec3(0.0f);
+    LocalRotation = glm::vec3(0.0f);
+    LocalScale = glm::vec3(1.0f);
 
-    m_shouldUpdateWorldMatrix = true;
     return *this;
 }
 
-SUBTRA::Transform& SUBTRA::Transform::SetPosition (glm::vec3 a_position)
+SUBTRA::Transform& SUBTRA::Transform::SetLocalPosition (glm::vec3 LocalPosition)
 {
-    m_localPosition = a_position;
-
-    m_shouldUpdateWorldMatrix = true;
+    this->LocalPosition = LocalPosition;
     return *this;
 }
 
-SUBTRA::Transform& SUBTRA::Transform::SetAngles (glm::vec3 a_angles)
+SUBTRA::Transform& SUBTRA::Transform::SetLocalRotation (glm::vec3 LocalRotation)
 {
-    m_localAngles = a_angles;
-
-    m_shouldUpdateWorldMatrix = true;
+    this->LocalRotation = LocalRotation;
     return *this;
 }
 
-SUBTRA::Transform& SUBTRA::Transform::SetScale (glm::vec3 a_scale)
+SUBTRA::Transform& SUBTRA::Transform::SetLocalScale (glm::vec3 LocalScale)
 {
-    m_localScale = a_scale;
-
-    m_shouldUpdateWorldMatrix = true;
+    this->LocalScale = LocalScale;
     return *this;
 }
 
-SUBTRA::Transform& SUBTRA::Transform::SetScale (float a_uniformScale)
+SUBTRA::Transform& SUBTRA::Transform::SetLocalScale (float LocalUniformScale)
 {
-    return SetScale(glm::vec3(a_uniformScale));
+    return SetLocalScale(glm::vec3(LocalUniformScale));
 }
 
-SUBTRA::Transform& SUBTRA::Transform::Translate (glm::vec3 a_translation)
-{
-    m_localPosition += a_translation;
 
-    m_shouldUpdateWorldMatrix = true;
-    return *this;
+glm::vec3 SUBTRA::Transform::GetLocalPosition () const
+{
+    return LocalPosition;
 }
 
-SUBTRA::Transform& SUBTRA::Transform::Rotate (glm::vec3 a_rotationAxis, float a_degrees)
+glm::vec3 SUBTRA::Transform::GetLocalAngles () const
 {
-    // TODO: Implement after switching to quaternions
-    // m_localRotation *= glm::rotate();
-
-    m_shouldUpdateWorldMatrix = true;
-    return *this;
+    return LocalRotation;
 }
 
-SUBTRA::Transform& SUBTRA::Transform::Scale (glm::vec3 a_scale)
+glm::vec3 SUBTRA::Transform::GetLocalScale () const
 {
-    m_localScale *= a_scale;
-
-    m_shouldUpdateWorldMatrix = true;
-    return *this;
-}
-
-SUBTRA::Transform& SUBTRA::Transform::Scale (float a_uniformScale)
-{
-    m_localScale *= a_uniformScale;
-
-    m_shouldUpdateWorldMatrix = true;
-    return *this;
-}
-
-glm::vec3 SUBTRA::Transform::GetPosition () const
-{
-    return m_localPosition;
-}
-
-glm::vec3 SUBTRA::Transform::GetAngles () const
-{
-    return m_localAngles;
-}
-
-glm::vec3 SUBTRA::Transform::GetScale () const
-{
-    return m_localScale;
+    return LocalScale;
 }
 
 glm::mat4 SUBTRA::Transform::GetWorldMatrix ()
 {
-    if (m_shouldUpdateWorldMatrix)
-    {
-        UpdateWorldMatrix();
+    // TODO: cache?
+    // TODO: local world matrix?
+    glm::vec3 LocalAnglesRad = glm::radians(LocalRotation);
 
-        m_shouldUpdateWorldMatrix = false;
-    }
+    glm::mat4 ScaleMatrix = glm::scale(glm::mat4(1.0), LocalScale);
+    glm::mat4 RotateMatrix = glm::orientate4(LocalAnglesRad);
+    glm::mat4 TranslateMatrix = glm::translate(glm::mat4(1.0), LocalPosition);
 
-    return m_worldMatrix;
-}
-
-
-void SUBTRA::Transform::UpdateWorldMatrix ()
-{
-    glm::vec3 localAnglesInRadians = glm::radians(m_localAngles);
-
-    glm::mat4 scale = glm::scale(glm::mat4(1.0), m_localScale);
-    glm::mat4 rotate = glm::orientate4(localAnglesInRadians);
-    glm::mat4 translate = glm::translate(glm::mat4(1.0), m_localPosition);
-
-    m_worldMatrix = translate * rotate * scale;
+    return TranslateMatrix * RotateMatrix * ScaleMatrix;
 }

@@ -6,11 +6,11 @@
 #include <iostream>
 
 
-SUBTRA::Mesh SUBTRA::Mesh::LoadFromFile (const std::string& a_path)
+SUBTRA::Mesh SUBTRA::Mesh::LoadFromFile (const std::string& PathToFile)
 {
-    Mesh mesh;
+    Mesh NewMesh;
 
-    const GLfloat vertices[] =
+    const GLfloat Vertices[] =
     {
         // position --------   colours -----------   texcoords -
         -1.0f, -1.0f,  0.0f,   1.0f,  1.0f,  0.0f,   0.0f, 0.0f,
@@ -19,12 +19,12 @@ SUBTRA::Mesh SUBTRA::Mesh::LoadFromFile (const std::string& a_path)
     };
 
 
-    glGenVertexArrays(1, &mesh.m_vao);
-    glBindVertexArray(mesh.m_vao);
+    glGenVertexArrays(1, &NewMesh.VAO);
+    glBindVertexArray(NewMesh.VAO);
 
-    glGenBuffers(1, &mesh.m_vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, mesh.m_vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glGenBuffers(1, &NewMesh.VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, NewMesh.VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(VertexAttrib::Position);
     glEnableVertexAttribArray(VertexAttrib::Color);
@@ -36,10 +36,10 @@ SUBTRA::Mesh SUBTRA::Mesh::LoadFromFile (const std::string& a_path)
 
     glBindVertexArray(0);
 
-    return mesh;
+    return NewMesh;
 }
 
 void SUBTRA::Mesh::Bind ()
 {
-    glBindVertexArray(m_vao);
+    glBindVertexArray(VAO);
 }

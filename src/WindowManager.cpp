@@ -15,16 +15,16 @@ SUBTRA::WindowManager::~WindowManager ()
     Shutdown();
 }
 
-void SUBTRA::WindowManager::Init ()
+void SUBTRA::WindowManager::Initialize ()
 {
     InitOpenGL();
 
-    m_mainWindow = MainWindow::Open();
+    MainWindow = MainWindow::Open();
 
     InitGLAD();
     InitIMGUI();
 
-    m_mainWindow.LoadTestData();
+    MainWindow.LoadTestData();
 }
 
 void SUBTRA::WindowManager::Shutdown ()
@@ -34,9 +34,9 @@ void SUBTRA::WindowManager::Shutdown ()
     ImGui::DestroyContext();
 }
 
-void SUBTRA::WindowManager::ProcessEvent (SDL_Event a_event)
+void SUBTRA::WindowManager::ProcessEvent (SDL_Event Event)
 {
-    m_mainWindow.ProcessEvent(a_event);
+    MainWindow.ProcessEvent(Event);
 }
 
 void SUBTRA::WindowManager::Update ()
@@ -45,20 +45,20 @@ void SUBTRA::WindowManager::Update ()
 
     // TODO: allow multiple windows
     // TODO: improve below after decoupling context/window creation
-    if (auto window = m_mainWindow.GetSDLWindow().lock())
+    if (auto SDLWindow = MainWindow.GetSDLWindow().lock())
     {
-        ImGui_ImplSDL2_NewFrame(window.get());
+        ImGui_ImplSDL2_NewFrame(SDLWindow.get());
     }
     
     ImGui::NewFrame();
 
     // ImGui::ShowDemoWindow(static_cast<bool *>(0));
-    m_mainWindow.UpdateIMGUI();
+    MainWindow.UpdateIMGUI();
 
     ImGui::End();
     ImGui::Render();
 
-    m_mainWindow.Render();
+    MainWindow.Render();
 }
 
 void SUBTRA::WindowManager::InitOpenGL ()
@@ -85,7 +85,7 @@ void SUBTRA::WindowManager::InitGLAD ()
 {
     if (!gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress))
     {
-        throw SUBTRA::Exception {"Could not initialize GLAD. Does your computer support OpenGL 3.3?"};
+        throw SUBTRA::Exception("Could not initialize GLAD. Does your computer support OpenGL 3.3?");
     }
 }
 
@@ -98,10 +98,10 @@ void SUBTRA::WindowManager::InitIMGUI ()
     ImGui::StyleColorsDark();
 
     // TODO: improve below after decoupling context/window creation
-    if (auto window = m_mainWindow.GetSDLWindow().lock())
-    if (auto context = m_mainWindow.GetContext().lock())
+    if (auto Window = MainWindow.GetSDLWindow().lock())
+    if (auto Context = MainWindow.GetContext().lock())
     {
-        ImGui_ImplSDL2_InitForOpenGL(window.get(), context.get());
+        ImGui_ImplSDL2_InitForOpenGL(Window.get(), Context.get());
     }
 
     // TODO: the hell is this
