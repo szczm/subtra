@@ -59,8 +59,7 @@ glm::vec3 SUBTRA::Transform::GetLocalScale () const
 
 glm::mat4 SUBTRA::Transform::GetWorldMatrix ()
 {
-    // TODO: cache?
-    // TODO: local world matrix?
+    // NOTE: for now, assuming flat hierarchy. Adapt below if changed.
     glm::vec3 LocalAnglesRad = glm::radians(LocalRotation);
 
     glm::mat4 ScaleMatrix = glm::scale(glm::mat4(1.0), LocalScale);

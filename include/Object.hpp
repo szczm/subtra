@@ -19,7 +19,6 @@ namespace SUBTRA
     
     public:
 
-        // TODO?: Delete for now, have to reassign parents properly
         Object& operator= (const Object& Victim);
 
         template <class ComponentType>
@@ -33,6 +32,7 @@ namespace SUBTRA
             return Component;
         }
 
+        // NOTE: for now, assuming flat hierarchy. Add *World methods to Transform if changed.
         SUBTRA::Transform Transform {*this};
 
     private:

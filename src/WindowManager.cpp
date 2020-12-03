@@ -9,6 +9,7 @@
 
 #include "Exception.hpp"
 
+#include "Log.hpp"
 
 SUBTRA::WindowManager::~WindowManager ()
 {
@@ -18,12 +19,12 @@ SUBTRA::WindowManager::~WindowManager ()
 void SUBTRA::WindowManager::Initialize ()
 {
     InitOpenGL();
-
-    MainWindow = MainWindow::Open();
-
-    InitGLAD();
     InitIMGUI();
 
+    // InitGLAD();
+    // InitIMGUI();
+
+    MainWindow = MainWindow::Open();
     MainWindow.LoadTestData();
 }
 
@@ -41,24 +42,19 @@ void SUBTRA::WindowManager::ProcessEvent (SDL_Event Event)
 
 void SUBTRA::WindowManager::Update ()
 {
-    ImGui_ImplOpenGL3_NewFrame();
+    // foreach Window:
 
-    // TODO: allow multiple windows
-    // TODO: improve below after decoupling context/window creation
-    if (auto SDLWindow = MainWindow.GetSDLWindow().lock())
-    {
-        ImGui_ImplSDL2_NewFrame(SDLWindow.get());
-    }
-    
-    ImGui::NewFrame();
+    MainWindow.BeginIMGUI();
 
-    // ImGui::ShowDemoWindow(static_cast<bool *>(0));
     MainWindow.UpdateIMGUI();
+    MainWindow.Update();
 
-    ImGui::End();
-    ImGui::Render();
+    MainWindow.Clear();
 
     MainWindow.Render();
+    MainWindow.DrawIMGUI();
+
+    MainWindow.SwapBuffers();
 }
 
 void SUBTRA::WindowManager::InitOpenGL ()
@@ -81,14 +77,6 @@ void SUBTRA::WindowManager::InitOpenGL ()
     }
 }
 
-void SUBTRA::WindowManager::InitGLAD ()
-{
-    if (!gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress))
-    {
-        throw SUBTRA::Exception("Could not initialize GLAD. Does your computer support OpenGL 3.3?");
-    }
-}
-
 void SUBTRA::WindowManager::InitIMGUI ()
 {
     IMGUI_CHECKVERSION();
@@ -96,14 +84,4 @@ void SUBTRA::WindowManager::InitIMGUI ()
 
     // antisocial energy saving club
     ImGui::StyleColorsDark();
-
-    // TODO: improve below after decoupling context/window creation
-    if (auto Window = MainWindow.GetSDLWindow().lock())
-    if (auto Context = MainWindow.GetContext().lock())
-    {
-        ImGui_ImplSDL2_InitForOpenGL(Window.get(), Context.get());
-    }
-
-    // TODO: the hell is this
-    ImGui_ImplOpenGL3_Init("#version 330 core");
 }

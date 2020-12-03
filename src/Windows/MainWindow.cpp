@@ -14,17 +14,51 @@
 #include "Log.hpp"
 
 
-// TODO: what is this, why is this, why isn't it static, what why
 SUBTRA::MainWindow SUBTRA::MainWindow::Open ()
 {
     MainWindow NewMainWindow;
-    Window NewWindow = Window::Open("SUBTRA", 800, 600);    
+    NewMainWindow = Window::Open("SUBTRA", 800, 600);   
 
-    NewMainWindow.SDLContext = NewWindow.SDLContext;
-    NewMainWindow.SDLWindow = NewWindow.SDLWindow;
     NewMainWindow.Maximize();
 
     return NewMainWindow;
+}
+
+SUBTRA::MainWindow& SUBTRA::MainWindow::operator= (SUBTRA::MainWindow&& Victim)
+{
+    SDLWindow = Victim.SDLWindow;
+    SDLContext = Victim.SDLContext;
+    Width = Victim.Width;
+    Height = Victim.Height;
+
+    Victim.SDLWindow = nullptr;
+    Victim.SDLContext = nullptr;
+
+    return *this;
+}
+
+SUBTRA::MainWindow::MainWindow (SUBTRA::MainWindow&& Victim)
+{
+    SDLWindow = Victim.SDLWindow;
+    SDLContext = Victim.SDLContext;
+    Width = Victim.Width;
+    Height = Victim.Height;
+
+    Victim.SDLWindow = nullptr;
+    Victim.SDLContext = nullptr;
+}
+
+SUBTRA::MainWindow& SUBTRA::MainWindow::operator= (SUBTRA::Window&& Victim)
+{
+    SDLWindow = Victim.SDLWindow;
+    SDLContext = Victim.SDLContext;
+    Width = Victim.Width;
+    Height = Victim.Height;
+
+    Victim.SDLWindow = nullptr;
+    Victim.SDLContext = nullptr;
+
+    return *this;
 }
 
 void SUBTRA::MainWindow::LoadTestData ()
@@ -60,29 +94,31 @@ void SUBTRA::MainWindow::UpdateIMGUI ()
     ImGui::DragFloat("Yaw", &TestAngles.z, 1.0f, -180.0f, 180.0f);
     ImGui::DragFloat("Scale", &TestScale, 0.02f, -2.0f, 2.0f);
 
+    // TODO: rigid UpdateIMGUI calling, not "foreach"
     for (Component& Component : ComponentManager::GetComponents())
     {
         Component.UpdateIMGUI();
     }
 }
 
-void SUBTRA::MainWindow::Render ()
+void SUBTRA::MainWindow::Update ()
 {
-    // TODO: extract update from render
     for (Component& Component : ComponentManager::GetComponents())
     {
         Component.Update();
     }
 
-    // TODO: separate camera update? why?
-    for (Camera& Camera : ComponentManager::GetComponents<Camera>())
-    {
-        Camera.Update();
-    }
-
+    // for (Camera& Camera : ComponentManager::GetComponents<Camera>())
+    // {
+    //     Camera.Update();
+    // }
+    
     TestObject.Transform.SetLocalPosition(glm::vec3(1.0, 0.5, -3.0)).SetLocalRotation(TestAngles).SetLocalScale(TestScale);
+}
 
-    Clear();
+void SUBTRA::MainWindow::Render ()
+{
+    // TODO: Component.Draw()
 
     TestShader.Use();
     TestMesh.Bind();
@@ -96,8 +132,4 @@ void SUBTRA::MainWindow::Render ()
     TestShader.Send("Tint", TestColor.Value);
     
     glDrawArrays(GL_TRIANGLES, 0, 3);
-
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-    SwapBuffers();
 }

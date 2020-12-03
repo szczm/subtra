@@ -60,6 +60,5 @@ namespace SUBTRA
     private:
 
         inline static std::vector<std::weak_ptr<Component>> AllComponents {};
-
     };
 }

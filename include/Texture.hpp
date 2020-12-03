@@ -16,7 +16,6 @@ namespace SUBTRA
     
     public:
 
-        // TODO: Implement move semantics in case more data is added to class
         static Texture LoadFromFile(const std::string& PathToFile);
 
         void Bind ();
@@ -24,5 +23,9 @@ namespace SUBTRA
     private:
 
         GLuint TextureID = 0;
+
+        int Width = 0;
+        int Height = 0;
+        int Channels = 0;
     };
 }

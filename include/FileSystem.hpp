@@ -11,22 +11,11 @@
 
 namespace SUBTRA
 {
-    using byte = unsigned char;
-
     class FileSystem final
     {
-
-    private:
-
-        struct TextureData
-        {
-            int Width, Height, Channels;
-            std::shared_ptr<byte> Data;
-        };
         
     public:
 
         std::optional<std::string> LoadText (const std::string& PathToFile);
-        std::optional<TextureData> LoadTexture (const std::string& PathToFile);
     };
 }

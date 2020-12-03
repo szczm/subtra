@@ -21,7 +21,6 @@ namespace SUBTRA
             TexCoord = 2
         };
 
-        // TODO: Implement move semantics in case more data is added to class
         static Mesh LoadFromFile (const std::string& PathToFile);
 
         void Bind ();

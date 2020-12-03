@@ -13,40 +13,49 @@
 
 namespace SUBTRA
 {
-    using SDL_GLContext = std::remove_pointer<SDL_GLContext>::type;
-
     class Window
     {
 
     public:
 
-        // TODO: Implement move semantics in case more data is added to class
         static Window Open (const std::string& Title, uint Width, uint Height);
+
+        Window () = default;
+        virtual ~Window ();
+        // and the Four Horsemen of Apocalypse
+        Window (Window&) = delete;
+        Window (Window&&); 
+        Window& operator= (Window&) = delete;
+        Window& operator= (Window&&);
 
         void Maximize () const;
         void Clear () const;
         void SwapBuffers () const;
         void Resize (uint Width, uint Height);
 
-        std::weak_ptr<SDL_Window> GetSDLWindow () const;
-        std::weak_ptr<SDL_GLContext> GetContext () const;
-
         virtual void ProcessEvent (SDL_Event Event);
-        virtual void UpdateIMGUI ();
+        virtual void Update ();
         virtual void Render ();
+
+        // You should probably never implement the Begin/Draw functions, but they are virtual just in case.
+        virtual void BeginIMGUI ();
+        virtual void UpdateIMGUI ();
+        virtual void DrawIMGUI ();
 
 
     protected:
         
         void ResizeViewport (uint Width, uint Height);
 
-        std::shared_ptr<SDL_Window> SDLWindow {};
-        std::shared_ptr<SDL_GLContext> SDLContext {};
+public:
+        SDL_Window* SDLWindow = nullptr;
+        SDL_GLContext SDLContext = nullptr;
+        protected:
 
         uint Width = 0;
         uint Height = 0;
 
-        // TODO: get rid of it? required for MainWindow::Open
+        // TODO?: get rid of it? required for MainWindow::Open
         friend class MainWindow;
     };
 }

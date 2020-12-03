@@ -23,7 +23,6 @@ namespace SUBTRA
             RGBA
         };
 
-        // TODO: Implement move semantics in case more data is added to class
         static Shader LoadFromFile(const std::string& PathToVertexShaderFile, const std::string& PathToFragmentShaderFile);
 
         void Use ();

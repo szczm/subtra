@@ -32,8 +32,6 @@ namespace SUBTRA
         glm::vec3 GetLocalAngles () const;
         glm::vec3 GetLocalScale () const;
 
-        // TODO: implement World equivalents
-
         glm::mat4 GetWorldMatrix ();
 
 

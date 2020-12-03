@@ -28,20 +28,25 @@ namespace SUBTRA
 
     public:
 
-        // TODO: Implement move semantics if more data is added to class
         static MainWindow Open ();
 
-        // TODO: regain lost respect
+        MainWindow () = default;
+        MainWindow& operator= (MainWindow&&);
+        MainWindow (MainWindow&&);
+        MainWindow (MainWindow&) = delete;
+
+        MainWindow& operator= (Window&&);
+
         void LoadTestData ();
 
         void ProcessEvent (SDL_Event Event) override;
         void UpdateIMGUI () override;
+        void Update () override;
         void Render () override;
 
 
     private:
 
-        // TODO: clean up this mess
         Mesh TestMesh {};
         Shader TestShader {};
         Texture TestTexture {};
