@@ -4,6 +4,14 @@
 #include "Object.hpp"
 
 
+SUBTRA::Object::~Object ()
+{
+    for (auto* Component : Components)
+    {
+        delete Component;
+    }
+}
+
 SUBTRA::Object& SUBTRA::Object::operator= (const SUBTRA::Object& Victim)
 {
     if (&Victim == this)
@@ -12,7 +20,7 @@ SUBTRA::Object& SUBTRA::Object::operator= (const SUBTRA::Object& Victim)
     }
 
     Components = Victim.Components;
-    for (auto Component : Components)
+    for (auto* Component : Components)
     {
         Component->Owner = this;
     }
@@ -22,3 +30,4 @@ SUBTRA::Object& SUBTRA::Object::operator= (const SUBTRA::Object& Victim)
 
     return *this;
 }
+

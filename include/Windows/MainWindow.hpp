@@ -52,7 +52,7 @@ namespace SUBTRA
         Texture TestTexture {};
         Object TestObject {};
         glm::vec3 TestAngles {};
-        std::shared_ptr<Camera> TestCamera {};
+        Camera* TestCamera = nullptr;
         float TestScale = 0.5f;
         Parameter<Color> TestColor {"Color"};
    };

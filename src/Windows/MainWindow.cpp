@@ -76,7 +76,10 @@ void SUBTRA::MainWindow::ProcessEvent(SDL_Event Event)
 
     if (Event.type == SDL_WINDOWEVENT && Event.window.event == SDL_WINDOWEVENT_RESIZED)
     {
-        TestCamera.get()->SetAspectRatio(static_cast<float>(Width) / static_cast<float>(Height));
+        if (TestCamera != nullptr)
+        {
+            TestCamera->SetAspectRatio(static_cast<float>(Width) / static_cast<float>(Height));
+        }
     }
 }
 
@@ -95,17 +98,17 @@ void SUBTRA::MainWindow::UpdateIMGUI ()
     ImGui::DragFloat("Scale", &TestScale, 0.02f, -2.0f, 2.0f);
 
     // TODO: rigid UpdateIMGUI calling, not "foreach"
-    for (Component& Component : ComponentManager::GetComponents())
+    for (Component* Component : ComponentManager::GetComponents())
     {
-        Component.UpdateIMGUI();
+        Component->UpdateIMGUI();
     }
 }
 
 void SUBTRA::MainWindow::Update ()
 {
-    for (Component& Component : ComponentManager::GetComponents())
+    for (Component* Component : ComponentManager::GetComponents())
     {
-        Component.Update();
+        Component->Update();
     }
 
     // for (Camera& Camera : ComponentManager::GetComponents<Camera>())

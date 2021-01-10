@@ -13,52 +13,52 @@ namespace SUBTRA
 {
     class ComponentManager final
     {
+        // TODO?: better lifetime management, if it becomes necessary
 
     public:
 
-        inline static void AddComponent (std::weak_ptr<Component> Component)
+        inline static void AddComponent (Component* Component)
         {
             AllComponents.push_back(Component);
         }
 
-        // Ugly on the inside, beautiful on the outside. Usage example:
-        // for (Camera& camera : ComponentManager::GetComponents<Camera>())
-        template <typename ReturnType>
-        static std::vector<std::reference_wrapper<ReturnType>> GetComponents ()
+        template <typename ComponentType>
+        static std::vector<ComponentType*> GetComponents ()
         {
-            std::vector<std::reference_wrapper<ReturnType>> ComponentRefs;
+            std::vector<ComponentType*> Components;
 
-            for (auto Iterator = AllComponents.begin(); Iterator != AllComponents.end(); /**/)
+            for (auto ComponentIt = AllComponents.begin(); ComponentIt != AllComponents.end(); /**/)
             {
-                if (auto Component = Iterator->lock())
+                if (auto* CastComponent = dynamic_cast<ComponentType*>(*ComponentIt))
                 {
-                    if (auto* CastComponent = dynamic_cast<ReturnType*>(Component.get()))
-                    {
-                        ComponentRefs.push_back(*CastComponent);
-                    }
+                    Components.push_back(CastComponent);
+                }
 
-                    ++Iterator;
-                }
-                else
-                {
-                    // Delete component if the reference to Iterator is no longer valid
-                    Iterator = AllComponents.erase(Iterator);
-                }
-                
+                ++ComponentIt;
             }
 
-            return ComponentRefs;
+            return Components;
         }
 
         // Alias for getting all components
-        inline static std::vector<std::reference_wrapper<Component>> GetComponents ()
+        inline static std::vector<Component*> GetComponents ()
         {
             return GetComponents<Component>();
+        }
+
+        inline static void RemoveComponent (Component* Component)
+        {
+            auto Position = std::find(AllComponents.begin(), AllComponents.end(), Component);
+
+            if (Position != AllComponents.end())
+            {
+                AllComponents.erase(Position);
+            }
         }
 
 
     private:
 
-        inline static std::vector<std::weak_ptr<Component>> AllComponents {};
+        inline static std::vector<Component*> AllComponents {};
     };
 }

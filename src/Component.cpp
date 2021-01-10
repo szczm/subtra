@@ -3,16 +3,16 @@
 
 #include "Component.hpp"
 
-// #include "ComponentManager.hpp"
+#include "ComponentManager.hpp"
 
 
 SUBTRA::Component::Component (Object& Owner)
 : Owner(&Owner)
 {
-    // ComponentManager::AddComponent(ComponentPointer(this));
+    ComponentManager::AddComponent(this);
 }
 
 SUBTRA::Component::~Component ()
 {
-    // ComponentManager::RemoveComponent(ComponentPointer(this));
+    ComponentManager::RemoveComponent(this);
 }

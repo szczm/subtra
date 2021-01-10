@@ -9,7 +9,6 @@
 #include "Transform.hpp"
 
 #include "Component.hpp"
-#include "ComponentManager.hpp"
 
 
 namespace SUBTRA
@@ -19,24 +18,26 @@ namespace SUBTRA
     
     public:
 
+        ~Object ();
+
         Object& operator= (const Object& Victim);
 
+        // TODO?: better lifetime management, if it becomes necessary
         template <class ComponentType>
-        std::shared_ptr<ComponentType> AddComponent ()
+        ComponentType* AddComponent ()
         {
-            auto Component = std::make_shared<ComponentType>(*this);
-
+            ComponentType* Component = new ComponentType {*this};
+            
             Components.push_back(Component);
-            ComponentManager::AddComponent(Component);
 
             return Component;
         }
 
-        // NOTE: for now, assuming flat hierarchy. Add *World methods to Transform if changed.
+        // NOTE: for now, assuming a flat hierarchy. Add *World methods to Transform if changed.
         SUBTRA::Transform Transform {*this};
 
     private:
     
-        std::vector<std::shared_ptr<Component>> Components {};
+        std::vector<Component*> Components {};
     };
 }
